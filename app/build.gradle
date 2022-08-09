@@ -26,8 +26,7 @@ dependencies {
 
 	implementation libraries.androidxCoreKtx
 	implementation libraries.material
-	testImplementation libraries.junitJupiterApi
-	testImplementation libraries.junitJupiterEngine
+	testImplementation libraries.junitJupiter
 	androidTestImplementation libraries.androidxTestJunit
 	androidTestImplementation libraries.espresso
 }

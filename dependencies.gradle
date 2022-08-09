@@ -19,8 +19,7 @@ ext {
 		"material": "com.google.android.material:material:$versions.material",
 		"androidxCoreKtx" : "androidx.core:core-ktx:$versions.androidxCoreKtx",
 		"androidxFragmentKtx": "androidx.fragment:fragment-ktx:$versions.androidxFragmentKtx",
-	    "junitJupiterApi": "org.junit.jupiter:junit-jupiter-api:$versions.junitJupiter",
-	    "junitJupiterEngine": "org.junit.jupiter:junit-jupiter-engine:$versions.junitJupiter",
+		"junitJupiter": "org.junit.jupiter:junit-jupiter:$versions.junitJupiter",
 	    "androidxTestJunit": "androidx.test.ext:junit:$versions.androidxTestJunit",
 	    "espresso": "androidx.test.espresso:espresso-core:$versions.espresso",
 	]
