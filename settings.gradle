@@ -10,6 +10,7 @@ rootProject.name = "KinoGuru"
 
 def modules = [
 	':app': 'app',
+	':core-di': 'core/di',
 	':feature-splash': 'feature/splash',
 ]
 
