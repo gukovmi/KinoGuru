@@ -22,11 +22,16 @@ android {
 }
 
 dependencies {
+	implementation project(":core-di")
 	implementation project(":feature-splash")
 
 	implementation libraries.androidxCoreKtx
 	implementation libraries.material
 	implementation libraries.cicerone
+	implementation libraries.dagger
+	implementation libraries.daggerAndroid
+	kapt libraries.daggerAndroidProcessor
+	kapt libraries.daggerCompiler
 
 	testImplementation libraries.junitJupiter
 	androidTestImplementation libraries.androidxTestJunit
