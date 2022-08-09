@@ -3,6 +3,7 @@ ext {
         "material": "1.6.1",
 		"androidxCoreKtx": "1.8.0",
 		"androidxFragmentKtx": "1.5.1",
+		"kotlinx": "1.6.1",
 		"gradle": "7.2.0",
 		"kotlin": "1.6.21",
 		"junitJupiter": "5.8.2",
@@ -19,7 +20,9 @@ ext {
 		"material": "com.google.android.material:material:$versions.material",
 		"androidxCoreKtx" : "androidx.core:core-ktx:$versions.androidxCoreKtx",
 		"androidxFragmentKtx": "androidx.fragment:fragment-ktx:$versions.androidxFragmentKtx",
-		"junitJupiter": "org.junit.jupiter:junit-jupiter:$versions.junitJupiter",
+		"kotlinxCoroutines": "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlinx",
+	    "junitJupiter": "org.junit.jupiter:junit-jupiter:$versions.junitJupiter",
+	    "kotlinxCoroutinesTest": "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinx",
 	    "androidxTestJunit": "androidx.test.ext:junit:$versions.androidxTestJunit",
 	    "espresso": "androidx.test.espresso:espresso-core:$versions.espresso",
 	]
