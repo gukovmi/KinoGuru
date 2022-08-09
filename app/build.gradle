@@ -1,0 +1,31 @@
+apply from: "$rootDir/dependencies.gradle"
+apply from: "$rootDir/application.gradle"
+
+android {
+	defaultConfig {
+		compileSdk compileSdkVer
+		applicationId "com.shellwoo.kinoguru"
+		minSdk minSdkVer
+		targetSdk targetSdkVer
+		versionCode 1
+		versionName "1.0"
+
+		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+	}
+
+	buildTypes {
+		release {
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+		}
+	}
+}
+
+dependencies {
+	implementation libraries.androidxCoreKtx
+	implementation libraries.material
+	testImplementation libraries.junitJupiterApi
+	testImplementation libraries.junitJupiterEngine
+	androidTestImplementation libraries.androidxTestJunit
+	androidTestImplementation libraries.espresso
+}

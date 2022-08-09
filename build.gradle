@@ -1,0 +1,21 @@
+buildscript {
+	apply from: "dependencies.gradle"
+
+	repositories {
+		gradlePluginPortal()
+		google()
+		mavenCentral()
+	}
+
+	dependencies {
+		classpath(classpaths.androidGradlePlugin)
+		classpath(classpaths.kotlinGradlePlugin)
+	}
+}
+
+subprojects {
+	apply plugin: "com.android.application"
+	apply plugin: "kotlin-android"
+	apply plugin: "kotlin-android-extensions"
+	apply plugin: "kotlin-kapt"
+}
