@@ -1,7 +1,8 @@
-package com.shellwoo.kinoguru
+package com.shellwoo.kinoguru.app.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.shellwoo.kinoguru.R
 import com.shellwoo.kinoguru.feature.splash.ui.SplashFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
