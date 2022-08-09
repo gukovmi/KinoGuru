@@ -26,6 +26,8 @@ dependencies {
 
 	implementation libraries.androidxCoreKtx
 	implementation libraries.material
+	implementation libraries.cicerone
+
 	testImplementation libraries.junitJupiter
 	androidTestImplementation libraries.androidxTestJunit
 	androidTestImplementation libraries.espresso
