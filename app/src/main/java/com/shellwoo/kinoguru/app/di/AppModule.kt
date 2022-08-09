@@ -1,6 +1,12 @@
 package com.shellwoo.kinoguru.app.di
 
+import com.shellwoo.kinoguru.core.navigation.di.NavigationModule
 import dagger.Module
 
-@Module
+@Module(
+    includes = [
+        ActivityModule::class,
+        NavigationModule::class,
+    ]
+)
 interface AppModule

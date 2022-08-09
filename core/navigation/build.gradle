@@ -1,0 +1,9 @@
+apply from: "$rootDir/dependencies.gradle"
+
+dependencies {
+    implementation project(":core-di")
+
+    implementation libraries.cicerone
+    implementation libraries.dagger
+    kapt libraries.daggerCompiler
+}

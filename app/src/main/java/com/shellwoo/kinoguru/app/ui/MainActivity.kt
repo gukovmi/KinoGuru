@@ -2,24 +2,36 @@ package com.shellwoo.kinoguru.app.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.shellwoo.kinoguru.R
 import com.shellwoo.kinoguru.feature.splash.SplashDestination
-import kotlinx.android.synthetic.main.activity_main.*
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main), HasAndroidInjector {
 
-    private val cicerone = Cicerone.create()
-    private val navigatorHolder: NavigatorHolder = cicerone.getNavigatorHolder()
-    private val router: Router = cicerone.router
+    @Inject
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+
+    @Inject
+    lateinit var navigatorHolder: NavigatorHolder
+
+    @Inject
+    lateinit var router: Router
+
     private val navigator = AppNavigator(this, R.id.container)
 
+    override fun androidInjector(): AndroidInjector<Any> =
+        androidInjector
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
             openSplashFragment()

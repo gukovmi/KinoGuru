@@ -23,6 +23,7 @@ android {
 
 dependencies {
 	implementation project(":core-di")
+	implementation project(":core-navigation")
 	implementation project(":feature-splash")
 
 	implementation libraries.androidxCoreKtx
