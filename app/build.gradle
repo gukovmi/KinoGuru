@@ -22,6 +22,8 @@ android {
 }
 
 dependencies {
+	implementation project(":feature-splash")
+
 	implementation libraries.androidxCoreKtx
 	implementation libraries.material
 	testImplementation libraries.junitJupiterApi
