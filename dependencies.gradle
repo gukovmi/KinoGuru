@@ -2,14 +2,16 @@ ext {
 	versions = [
         "material": "1.6.1",
 		"androidxCoreKtx": "1.8.0",
-		"androidxFragmentKtx": "1.5.1",
+		"androidxKtx": "1.5.1",
 		"androidxLifecycleViewModelKtx": "2.5.1",
 		"cicerone": "7.1",
 		"kotlinx": "1.6.1",
 		"gradle": "7.2.0",
 		"kotlin": "1.6.21",
 		"dagger": "2.42",
+
 		"junitJupiter": "5.8.2",
+		"mockitoKotlin": "4.0.0",
 		"androidxTestJunit": "1.1.3",
 		"espresso": "3.4.0",
 	]
@@ -22,7 +24,8 @@ ext {
 	libraries = [
 		"material": "com.google.android.material:material:$versions.material",
 		"androidxCoreKtx" : "androidx.core:core-ktx:$versions.androidxCoreKtx",
-		"androidxFragmentKtx": "androidx.fragment:fragment-ktx:$versions.androidxFragmentKtx",
+		"androidxActivityKtx": "androidx.activity:activity-ktx:$versions.androidxKtx",
+		"androidxFragmentKtx": "androidx.fragment:fragment-ktx:$versions.androidxKtx",
 		"androidxLifecycleViewModelKtx": "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidxLifecycleViewModelKtx",
 		"cicerone": "com.github.terrakok:cicerone:$versions.cicerone",
 		"kotlinxCoroutines": "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlinx",
@@ -32,6 +35,7 @@ ext {
 		"daggerCompiler": "com.google.dagger:dagger-compiler:$versions.dagger",
 
 	    "junitJupiter": "org.junit.jupiter:junit-jupiter:$versions.junitJupiter",
+	    "mockitoKotlin": "org.mockito.kotlin:mockito-kotlin:$versions.mockitoKotlin",
 	    "kotlinxCoroutinesTest": "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinx",
 	    "androidxTestJunit": "androidx.test.ext:junit:$versions.androidxTestJunit",
 	    "espresso": "androidx.test.espresso:espresso-core:$versions.espresso",

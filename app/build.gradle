@@ -24,8 +24,10 @@ android {
 dependencies {
 	implementation project(":core-di")
 	implementation project(":core-navigation")
+	implementation project(":core-viewmodel")
 	implementation project(":feature-splash")
 
+	implementation libraries.androidxActivityKtx
 	implementation libraries.androidxCoreKtx
 	implementation libraries.material
 	implementation libraries.cicerone
@@ -35,6 +37,7 @@ dependencies {
 	kapt libraries.daggerCompiler
 
 	testImplementation libraries.junitJupiter
+	testImplementation libraries.mockitoKotlin
 	androidTestImplementation libraries.androidxTestJunit
 	androidTestImplementation libraries.espresso
 }

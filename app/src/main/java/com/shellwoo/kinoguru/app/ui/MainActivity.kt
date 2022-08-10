@@ -1,12 +1,13 @@
 package com.shellwoo.kinoguru.app.ui
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.github.terrakok.cicerone.NavigatorHolder
-import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.shellwoo.kinoguru.R
-import com.shellwoo.kinoguru.feature.splash.SplashDestination
+import com.shellwoo.kinoguru.app.presentation.MainViewModel
+import com.shellwoo.kinoguru.core.viewmodel.ViewModelFactory
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -19,10 +20,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), HasAndroidInject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     @Inject
-    lateinit var navigatorHolder: NavigatorHolder
+    lateinit var viewModelFactory: ViewModelFactory
 
     @Inject
-    lateinit var router: Router
+    lateinit var navigatorHolder: NavigatorHolder
+
+    private val viewModel: MainViewModel by viewModels(factoryProducer = ::viewModelFactory)
 
     private val navigator = AppNavigator(this, R.id.container)
 
@@ -34,12 +37,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), HasAndroidInject
         super.onCreate(savedInstanceState)
 
         if (savedInstanceState == null) {
-            openSplashFragment()
+            viewModel.openSplashScreen()
         }
-    }
-
-    private fun openSplashFragment() {
-        router.newRootScreen(SplashDestination)
     }
 
     override fun onResumeFragments() {
