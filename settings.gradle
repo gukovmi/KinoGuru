@@ -12,6 +12,7 @@ def modules = [
 	':app': 'app',
 	':core-di': 'core/di',
 	':core-navigation': 'core/navigation',
+	':core-viewmodel': 'core/viewmodel',
 	':feature-splash': 'feature/splash',
 ]
 
