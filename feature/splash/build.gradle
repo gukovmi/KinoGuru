@@ -1,6 +1,13 @@
 apply from: "$rootDir/dependencies.gradle"
 
 dependencies {
+    implementation project(":core-di")
+    implementation project(":core-viewmodel")
+
     implementation libraries.androidxFragmentKtx
     implementation libraries.cicerone
+    implementation libraries.dagger
+    implementation libraries.daggerAndroid
+    kapt libraries.daggerAndroidProcessor
+    kapt libraries.daggerCompiler
 }
