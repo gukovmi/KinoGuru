@@ -1,0 +1,7 @@
+apply from: "$rootDir/dependencies.gradle"
+
+dependencies {
+    implementation project(":core-viewmodel")
+
+    implementation libraries.daggerAndroid
+}
