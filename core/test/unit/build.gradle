@@ -1,0 +1,7 @@
+apply from: "$rootDir/dependencies.gradle"
+
+dependencies {
+    implementation libraries.androidxArchCoreRuntime
+    implementation libraries.junitJupiter
+    implementation libraries.kotlinxCoroutinesTest
+}
