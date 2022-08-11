@@ -5,7 +5,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.shellwoo.kinoguru.core.ui.animateOfIncreaseAndDecrease
-import com.shellwoo.kinoguru.core.ui.base.BaseFragment
+import com.shellwoo.kinoguru.core.ui.component.BaseFragment
 import com.shellwoo.kinoguru.feature.splash.R
 import com.shellwoo.kinoguru.feature.splash.presentation.SplashState
 import com.shellwoo.kinoguru.feature.splash.presentation.SplashViewModel

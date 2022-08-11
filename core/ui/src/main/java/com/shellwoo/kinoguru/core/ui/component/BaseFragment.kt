@@ -1,4 +1,4 @@
-package com.shellwoo.kinoguru.core.ui.base
+package com.shellwoo.kinoguru.core.ui.component
 
 import androidx.annotation.LayoutRes
 import com.shellwoo.kinoguru.core.viewmodel.ViewModelFactory

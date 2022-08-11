@@ -1,4 +1,4 @@
-package com.shellwoo.kinoguru.core.ui.base
+package com.shellwoo.kinoguru.core.ui.component
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
