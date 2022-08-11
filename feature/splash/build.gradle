@@ -11,4 +11,9 @@ dependencies {
     implementation libraries.daggerAndroid
     kapt libraries.daggerAndroidProcessor
     kapt libraries.daggerCompiler
+
+    testImplementation project(":core-test-unit")
+
+    testImplementation libraries.junitJupiter
+    testImplementation libraries.kotlinxCoroutinesTest
 }

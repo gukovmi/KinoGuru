@@ -1,30 +1,32 @@
 package com.shellwoo.kinoguru.feature.splash.presentation
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.resetMain
+import androidx.lifecycle.Observer
+import com.shellwoo.kinoguru.core.test.unit.InstantTaskExecutorExtension
+import com.shellwoo.kinoguru.core.test.unit.TestCoroutineExtension
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
+@ExtendWith(InstantTaskExecutorExtension::class, TestCoroutineExtension::class)
 class SplashViewModelTest {
 
-    @BeforeEach
-    fun beforeEach() {
-        Dispatchers.setMain(UnconfinedTestDispatcher())
-    }
+    private val viewModel = SplashViewModel()
 
-    @AfterEach
-    fun afterEach() {
-        Dispatchers.resetMain()
-    }
-
-    private val viewModel: SplashViewModel by lazy { SplashViewModel() }
+    private val stateObserver = Observer<SplashState> {}
 
     @Test
-    fun `delay EXPECT complete delay`() = runTest {
-        viewModel.delay()
+    fun `init EXPECT change state to initial`() = runTest {
+        viewModel.state.observeForever(stateObserver)
+
+        stateObserver.onChanged(SplashState.Initial)
+    }
+
+    @Test
+    fun `start EXPECT change state to content`() = runTest {
+        viewModel.state.observeForever(stateObserver)
+
+        viewModel.start()
+
+        stateObserver.onChanged(SplashState.Content)
     }
 }
