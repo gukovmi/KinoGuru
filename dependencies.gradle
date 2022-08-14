@@ -8,7 +8,10 @@ ext {
 		"cicerone": "7.1",
 		"kotlinx": "1.6.1",
 		"gradle": "7.2.0",
+		"googleServicesPlugin": "4.3.13",
+		"firebaseBom": "30.3.1",
 		"kotlin": "1.6.21",
+		"playServices": "20.2.0",
 		"dagger": "2.42",
 
 		"junitJupiter": "5.8.2",
@@ -19,6 +22,7 @@ ext {
 
 	classpaths = [
 		"androidGradlePlugin": "com.android.tools.build:gradle:$versions.gradle",
+		"googleServicesPlugin": "com.google.gms:google-services:$versions.googleServicesPlugin",
 		"kotlinGradlePlugin": "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
 	]
 
@@ -30,7 +34,10 @@ ext {
 		"androidxFragmentKtx": "androidx.fragment:fragment-ktx:$versions.androidxKtx",
 		"androidxLifecycleViewModelKtx": "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidxLifecycleViewModelKtx",
 		"cicerone": "com.github.terrakok:cicerone:$versions.cicerone",
+		"firebaseAuthKtx": "com.google.firebase:firebase-auth-ktx",
+		"firebaseBom": "com.google.firebase:firebase-bom:$versions.firebaseBom",
 		"kotlinxCoroutines": "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlinx",
+		"playServicesAuth": "com.google.android.gms:play-services-auth:$versions.playServices",
 		"dagger": "com.google.dagger:dagger:$versions.dagger",
 		"daggerAndroid": "com.google.dagger:dagger-android-support:$versions.dagger",
 		"daggerAndroidProcessor": "com.google.dagger:dagger-android-processor:$versions.dagger",

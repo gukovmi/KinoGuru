@@ -11,6 +11,7 @@ buildscript {
 
     dependencies {
         classpath(classpaths.androidGradlePlugin)
+        classpath(classpaths.googleServicesPlugin)
         classpath(classpaths.kotlinGradlePlugin)
     }
 }
@@ -18,6 +19,7 @@ buildscript {
 subprojects {
     if (project.name == "app") {
         apply plugin: "com.android.application"
+        apply plugin: "com.google.gms.google-services"
     } else {
         apply plugin: "com.android.library"
 
@@ -26,6 +28,7 @@ subprojects {
                 compileSdk compileSdkVer
                 minSdk minSdkVer
                 targetSdk targetSdkVer
+                buildConfigField "String" , "FIREBASE_SERVER_CLIENT_ID",  KINO_GURU_SERVER_CLIENT_ID
             }
         }
     }

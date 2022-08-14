@@ -29,8 +29,10 @@ dependencies {
 	implementation project(":feature-splash")
 	implementation libraries.androidxActivityKtx
 	implementation libraries.androidxCoreKtx
+	implementation libraries.firebaseAuthKtx
 	implementation libraries.material
 	implementation libraries.cicerone
+	implementation libraries.playServicesAuth
 	implementation libraries.dagger
 	implementation libraries.daggerAndroid
 	kapt libraries.daggerAndroidProcessor
