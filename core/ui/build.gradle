@@ -2,6 +2,6 @@ apply from: "$rootDir/dependencies.gradle"
 
 dependencies {
     implementation project(":core-di")
-    implementation project(":core-viewmodel")
+    implementation project(":core-presentation")
     implementation libraries.daggerAndroid
 }

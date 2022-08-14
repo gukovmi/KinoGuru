@@ -7,7 +7,7 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.shellwoo.kinoguru.R
 import com.shellwoo.kinoguru.app.presentation.MainViewModel
-import com.shellwoo.kinoguru.core.viewmodel.ViewModelFactory
+import com.shellwoo.kinoguru.core.presentation.ViewModelFactory
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector

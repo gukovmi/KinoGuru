@@ -14,7 +14,7 @@ def modules = [
 	':core-navigation': 'core/navigation',
 	':core-test-unit': 'core/test/unit',
 	':core-ui': 'core/ui',
-	':core-viewmodel': 'core/viewmodel',
+	':core-presentation': 'core/presentation',
 	':feature-splash': 'feature/splash',
 ]
 
