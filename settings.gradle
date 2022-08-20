@@ -15,6 +15,7 @@ def modules = [
 	':core-test-unit': 'core/test/unit',
 	':core-ui': 'core/ui',
 	':core-presentation': 'core/presentation',
+	':feature-login': 'feature/login',
 	':feature-splash': 'feature/splash',
 ]
 
