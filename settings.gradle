@@ -17,6 +17,7 @@ def modules = [
 	':core-presentation': 'core/presentation',
 	':feature-login': 'feature/login',
 	':feature-splash': 'feature/splash',
+	':shared-user': 'shared/user',
 ]
 
 modules.forEach { name, path ->
