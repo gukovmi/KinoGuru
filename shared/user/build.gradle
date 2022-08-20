@@ -1,0 +1,11 @@
+apply from: "$rootDir/dependencies.gradle"
+
+dependencies {
+    implementation libraries.firebaseAuthKtx
+    implementation platform(libraries.firebaseBom)
+    implementation libraries.playServicesAuth
+    implementation libraries.dagger
+    implementation libraries.daggerAndroid
+    kapt libraries.daggerAndroidProcessor
+    kapt libraries.daggerCompiler
+}
