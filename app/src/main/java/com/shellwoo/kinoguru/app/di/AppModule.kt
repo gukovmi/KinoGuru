@@ -7,6 +7,7 @@ import dagger.Module
     includes = [
         ActivityModule::class,
         NavigationModule::class,
+        NavigationBindsModule::class,
         DataModule::class,
     ]
 )

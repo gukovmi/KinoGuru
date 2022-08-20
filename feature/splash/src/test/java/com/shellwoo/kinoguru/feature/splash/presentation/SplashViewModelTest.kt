@@ -3,14 +3,27 @@ package com.shellwoo.kinoguru.feature.splash.presentation
 import androidx.lifecycle.Observer
 import com.shellwoo.kinoguru.core.test.unit.InstantTaskExecutorExtension
 import com.shellwoo.kinoguru.core.test.unit.TestCoroutineExtension
+import com.shellwoo.kinoguru.shared.user.domain.usecase.GetCurrentUserUseCase
+import kotlinx.coroutines.test.advanceTimeBy
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 @ExtendWith(InstantTaskExecutorExtension::class, TestCoroutineExtension::class)
 class SplashViewModelTest {
 
-    private val viewModel = SplashViewModel()
+    private companion object {
+
+        const val DELAY = 2000L
+    }
+
+    private val getCurrentUserUseCase: GetCurrentUserUseCase = mock()
+    private val router: SplashRouter = mock()
+    private val viewModel = SplashViewModel(getCurrentUserUseCase, router)
 
     private val stateObserver = Observer<SplashState> {}
 
@@ -28,5 +41,16 @@ class SplashViewModelTest {
         viewModel.start()
 
         stateObserver.onChanged(SplashState.Content)
+    }
+
+    @Test
+    fun `start, wait delay current user is not exist EXPECT router open login screen`() = runTest {
+        whenever(getCurrentUserUseCase.invoke()).thenReturn(null)
+
+        viewModel.start()
+        advanceTimeBy(DELAY)
+        runCurrent()
+
+        verify(router).openLoginScreen()
     }
 }

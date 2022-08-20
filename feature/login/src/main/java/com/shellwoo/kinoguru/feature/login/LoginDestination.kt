@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentFactory
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.shellwoo.kinoguru.feature.login.ui.LoginFragment
 
-class LoginDestination : FragmentScreen {
+object LoginDestination : FragmentScreen {
 
     override fun createFragment(factory: FragmentFactory): Fragment =
         LoginFragment()
