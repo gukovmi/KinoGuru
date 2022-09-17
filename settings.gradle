@@ -10,6 +10,7 @@ rootProject.name = "KinoGuru"
 
 def modules = [
 	':app': 'app',
+	':core-coroutines': 'core/coroutines',
 	':core-di': 'core/di',
 	':core-navigation': 'core/navigation',
 	':core-test-unit': 'core/test/unit',
