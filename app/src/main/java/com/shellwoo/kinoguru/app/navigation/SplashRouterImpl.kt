@@ -1,6 +1,8 @@
-package com.shellwoo.kinoguru.app.router
+package com.shellwoo.kinoguru.app.navigation
+
 
 import com.github.terrakok.cicerone.Router
+import com.shellwoo.kinoguru.core.navigation.navigateToWithNavBarVisibility
 import com.shellwoo.kinoguru.feature.login.LoginDestination
 import com.shellwoo.kinoguru.feature.splash.presentation.SplashRouter
 import javax.inject.Inject
@@ -10,6 +12,6 @@ class SplashRouterImpl @Inject constructor(
 ) : SplashRouter {
 
     override fun openLoginScreen() {
-        appRouter.navigateTo(LoginDestination)
+        appRouter.navigateToWithNavBarVisibility(LoginDestination, navBarVisibility = false)
     }
 }
