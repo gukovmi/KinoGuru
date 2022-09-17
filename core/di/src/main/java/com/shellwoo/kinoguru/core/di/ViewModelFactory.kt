@@ -1,4 +1,4 @@
-package com.shellwoo.kinoguru.core.presentation
+package com.shellwoo.kinoguru.core.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
