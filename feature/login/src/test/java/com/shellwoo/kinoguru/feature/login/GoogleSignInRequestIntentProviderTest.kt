@@ -1,4 +1,4 @@
-package com.shellwoo.kinoguru.feature.login.data.repository
+package com.shellwoo.kinoguru.feature.login
 
 import android.app.Activity
 import android.app.PendingIntent
@@ -7,9 +7,8 @@ import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
-import com.shellwoo.kinoguru.feature.login.domain.entity.GoogleAuthVariant
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.mockito.kotlin.any
@@ -18,10 +17,10 @@ import org.mockito.kotlin.whenever
 import java.io.IOException
 import java.util.concurrent.Executor
 
-class GoogleSignInIntentRepositoryImplTest {
+class GoogleSignInRequestIntentProviderTest {
 
     private val signInClient: SignInClient = mock()
-    private val repository = GoogleSignInIntentRepositoryImpl(signInClient)
+    private val provider = GoogleSignInRequestIntentProvider(signInClient)
 
     private val signInIntent: PendingIntent = mock()
     private val successPendingIntentTask = object : Task<PendingIntent>() {
@@ -171,34 +170,34 @@ class GoogleSignInIntentRepositoryImplTest {
     }
 
     @Test
-    fun `get with standard variant success EXPECT sign in intent`() = runTest {
+    fun `get with standard variant, success EXPECT sign in intent`() = runTest {
         whenever(signInClient.getSignInIntent(any())).thenReturn(successPendingIntentTask)
-        val actual = repository.get(GoogleAuthVariant.STANDARD)
+        val actual = provider.get(GoogleAuthVariant.STANDARD)
 
-        assertEquals(signInIntent, actual)
+        Assertions.assertEquals(signInIntent, actual)
     }
 
     @Test
-    fun `get with standard variant failure EXPECT error`() = runTest {
+    fun `get with standard variant, failure EXPECT error`() = runTest {
         whenever(signInClient.getSignInIntent(any())).thenReturn(failurePendingIntentTask)
 
-        assertThrows<IOException> { repository.get(GoogleAuthVariant.STANDARD) }
+        assertThrows<IOException> { provider.get(GoogleAuthVariant.STANDARD) }
     }
 
     @Test
-    fun `get with one tap variant success EXPECT sign in intent`() = runTest {
+    fun `get with one tap variant, success EXPECT sign in intent`() = runTest {
         whenever(signInClient.beginSignIn(any())).thenReturn(successBeginSignInResultTask)
         whenever(beginSignInResult.pendingIntent).thenReturn(signInIntent)
 
-        val actual = repository.get(GoogleAuthVariant.ONE_TAP)
+        val actual = provider.get(GoogleAuthVariant.ONE_TAP)
 
-        assertEquals(signInIntent, actual)
+        Assertions.assertEquals(signInIntent, actual)
     }
 
     @Test
-    fun `get with one tap variant failure EXPECT error`() = runTest {
+    fun `get with one tap variant, failure EXPECT error`() = runTest {
         whenever(signInClient.beginSignIn(any())).thenReturn(failureBeginSignInResultTask)
 
-        assertThrows<IOException> { repository.get(GoogleAuthVariant.ONE_TAP) }
+        assertThrows<IOException> { provider.get(GoogleAuthVariant.ONE_TAP) }
     }
 }

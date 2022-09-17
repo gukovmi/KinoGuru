@@ -1,4 +1,4 @@
-package com.shellwoo.kinoguru.feature.login.domain.entity
+package com.shellwoo.kinoguru.feature.login
 
 enum class GoogleAuthVariant {
 

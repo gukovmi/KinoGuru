@@ -1,18 +1,15 @@
-package com.shellwoo.kinoguru.feature.login.data.repository
+package com.shellwoo.kinoguru.feature.login
 
 import android.app.PendingIntent
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.GetSignInIntentRequest
 import com.google.android.gms.auth.api.identity.SignInClient
-import com.shellwoo.kinoguru.feature.login.BuildConfig
-import com.shellwoo.kinoguru.feature.login.domain.entity.GoogleAuthVariant
-import com.shellwoo.kinoguru.feature.login.domain.repository.GoogleSignInIntentRepository
 import kotlinx.coroutines.suspendCancellableCoroutine
 import javax.inject.Inject
 
-class GoogleSignInIntentRepositoryImpl @Inject constructor(
+class GoogleSignInRequestIntentProvider @Inject constructor(
     private val signInClient: SignInClient,
-) : GoogleSignInIntentRepository {
+) {
 
     private companion object {
         val STANDARD_REQUEST = GetSignInIntentRequest.builder()
@@ -29,7 +26,7 @@ class GoogleSignInIntentRepositoryImpl @Inject constructor(
             .build()
     }
 
-    override suspend fun get(variant: GoogleAuthVariant): PendingIntent =
+    suspend fun get(variant: GoogleAuthVariant): PendingIntent =
         when (variant) {
             GoogleAuthVariant.STANDARD -> getStandard()
             GoogleAuthVariant.ONE_TAP -> getOneTap()
