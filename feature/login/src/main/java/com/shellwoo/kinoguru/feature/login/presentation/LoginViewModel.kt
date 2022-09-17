@@ -13,11 +13,18 @@ class LoginViewModel @Inject constructor() : ViewModel() {
     private val _requestGoogleStandardSignInEvent = SingleLiveEvent<Unit>()
     val requestGoogleStandardSignInEvent: LiveData<Unit> = _requestGoogleStandardSignInEvent
 
+    private val _signInErrorEvent = SingleLiveEvent<Unit>()
+    val signInErrorEvent: LiveData<Unit> = _signInErrorEvent
+
     fun requestGoogleOneTapSignIn() {
         _requestGoogleOneTapSignInEvent(Unit)
     }
 
     fun requestGoogleStandardSignIn() {
         _requestGoogleStandardSignInEvent(Unit)
+    }
+
+    fun handleSignInError() {
+        _signInErrorEvent(Unit)
     }
 }

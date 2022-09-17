@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_sign_in_error">There was an error during authorization! Try another method or try again later</string>
+</resources>
