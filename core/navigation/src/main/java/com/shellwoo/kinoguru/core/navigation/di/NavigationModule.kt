@@ -11,15 +11,34 @@ import dagger.Provides
 class NavigationModule {
 
     @AppScope
+    @AppNavigation
     @Provides
-    fun provideCicerone(): Cicerone<Router> =
+    fun provideAppCicerone(): Cicerone<Router> =
         Cicerone.create()
 
+    @AppNavigation
     @Provides
-    fun provideNavigatorHolder(cicerone: Cicerone<Router>): NavigatorHolder =
+    fun provideAppNavigatorHolder(@AppNavigation cicerone: Cicerone<Router>): NavigatorHolder =
         cicerone.getNavigatorHolder()
 
+    @AppNavigation
     @Provides
-    fun provideRouter(cicerone: Cicerone<Router>): Router =
+    fun provideAppRouter(@AppNavigation cicerone: Cicerone<Router>): Router =
+        cicerone.router
+
+    @AppScope
+    @MainNavigation
+    @Provides
+    fun provideMainCicerone(): Cicerone<Router> =
+        Cicerone.create()
+
+    @MainNavigation
+    @Provides
+    fun provideMainNavigatorHolder(@MainNavigation cicerone: Cicerone<Router>): NavigatorHolder =
+        cicerone.getNavigatorHolder()
+
+    @MainNavigation
+    @Provides
+    fun provideMainRouter(@MainNavigation cicerone: Cicerone<Router>): Router =
         cicerone.router
 }

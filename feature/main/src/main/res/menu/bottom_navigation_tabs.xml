@@ -10,5 +10,4 @@
         android:id="@+id/profile"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/profile_navigation_tab" />
-
 </menu>

@@ -1,5 +1,19 @@
 apply from: "$rootDir/dependencies.gradle"
 
 dependencies {
+    implementation project(":core-di")
+    implementation project(":core-navigation")
+    implementation project(":core-ui")
+    implementation libraries.androidxFragmentKtx
+    implementation libraries.cicerone
+    implementation libraries.material
+    implementation libraries.dagger
+    implementation libraries.daggerAndroid
+    kapt libraries.daggerAndroidProcessor
+    kapt libraries.daggerCompiler
 
+    testImplementation project(":core-test-unit")
+    testImplementation libraries.junitJupiter
+    testImplementation libraries.mockitoKotlin
+    testImplementation libraries.mockitoJunit
 }

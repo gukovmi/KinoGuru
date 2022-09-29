@@ -16,6 +16,7 @@ ext {
 
 		"junitJupiter": "5.8.2",
 		"mockitoKotlin": "4.0.0",
+		"mockitoJupiter": "4.8.0",
 		"androidxTestJunit": "1.1.3",
 		"espresso": "3.4.0",
 	]
@@ -46,6 +47,7 @@ ext {
 
 	    "junitJupiter": "org.junit.jupiter:junit-jupiter:$versions.junitJupiter",
 	    "mockitoKotlin": "org.mockito.kotlin:mockito-kotlin:$versions.mockitoKotlin",
+	    "mockitoJunit": "org.mockito:mockito-junit-jupiter:$versions.mockitoJupiter",
 	    "kotlinxCoroutinesTest": "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinx",
 	    "androidxTestJunit": "androidx.test.ext:junit:$versions.androidxTestJunit",
 	    "espresso": "androidx.test.espresso:espresso-core:$versions.espresso",

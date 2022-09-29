@@ -3,17 +3,16 @@ package com.shellwoo.kinoguru.app.ui
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.shellwoo.kinoguru.R
 import com.shellwoo.kinoguru.app.presentation.MainViewModel
 import com.shellwoo.kinoguru.core.di.ViewModelFactory
+import com.shellwoo.kinoguru.core.navigation.di.AppNavigation
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(R.layout.activity_main), HasAndroidInjector {
@@ -24,6 +23,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), HasAndroidInject
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
+    @AppNavigation
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
@@ -38,16 +38,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), HasAndroidInject
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
-        viewModel.setNavBarVisibilityListener(::handleNavBarVisibility)
-
         if (savedInstanceState == null) {
             viewModel.openSplashScreen()
         }
-    }
-
-    private fun handleNavBarVisibility(visible: Any) {
-        if (visible !is Boolean) return
-        bottomNavigationBar.isVisible = visible
     }
 
     override fun onResumeFragments() {
