@@ -4,4 +4,6 @@ dependencies {
     implementation project(":core-di")
     implementation project(":core-presentation")
     implementation libraries.daggerAndroid
+    kapt libraries.daggerAndroidProcessor
+    kapt libraries.daggerCompiler
 }
