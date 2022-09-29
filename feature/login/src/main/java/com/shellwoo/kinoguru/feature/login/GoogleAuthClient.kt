@@ -18,7 +18,7 @@ class GoogleAuthClient @Inject constructor(
         val authCredential = GoogleAuthProvider.getCredential(googleIdToken, null)
 
         firebaseAuth.signInWithCredential(authCredential)
-            .addOnSuccessListener { authResult ->
+            .addOnSuccessListener {
                 continuation.resumeWith(Result.success(Unit))
             }
             .addOnFailureListener { exception ->
