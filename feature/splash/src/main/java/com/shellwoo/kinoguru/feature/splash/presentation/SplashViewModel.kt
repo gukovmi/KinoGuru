@@ -34,6 +34,8 @@ class SplashViewModel @Inject constructor(
         val currentUser = getCurrentUserUseCase()
         if (currentUser == null) {
             router.openLoginScreen()
+        } else {
+            router.openMainScreen()
         }
     }
 }

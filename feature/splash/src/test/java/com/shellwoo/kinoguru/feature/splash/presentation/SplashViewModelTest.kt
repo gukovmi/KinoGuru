@@ -3,6 +3,7 @@ package com.shellwoo.kinoguru.feature.splash.presentation
 import androidx.lifecycle.Observer
 import com.shellwoo.kinoguru.core.test.unit.InstantTaskExecutorExtension
 import com.shellwoo.kinoguru.core.test.unit.TestCoroutineExtension
+import com.shellwoo.kinoguru.shared.user.domain.entity.User
 import com.shellwoo.kinoguru.shared.user.domain.usecase.GetCurrentUserUseCase
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runCurrent
@@ -44,7 +45,7 @@ class SplashViewModelTest {
     }
 
     @Test
-    fun `start, wait delay current user is not exist EXPECT router open login screen`() = runTest {
+    fun `start, wait delay, current user not exist EXPECT router open login screen`() = runTest {
         whenever(getCurrentUserUseCase.invoke()).thenReturn(null)
 
         viewModel.start()
@@ -52,5 +53,17 @@ class SplashViewModelTest {
         runCurrent()
 
         verify(router).openLoginScreen()
+    }
+
+    @Test
+    fun `start, wait delay, current user exist EXPECT router open main screen`() = runTest {
+        val user = User("Max", "123@gmail.com")
+        whenever(getCurrentUserUseCase.invoke()).thenReturn(user)
+
+        viewModel.start()
+        advanceTimeBy(DELAY)
+        runCurrent()
+
+        verify(router).openMainScreen()
     }
 }
