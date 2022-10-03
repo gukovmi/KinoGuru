@@ -19,4 +19,5 @@ dependencies {
     testImplementation libraries.junitJupiter
     testImplementation libraries.kotlinxCoroutinesTest
     testImplementation libraries.mockitoKotlin
+    testImplementation libraries.mockitoJunit
 }

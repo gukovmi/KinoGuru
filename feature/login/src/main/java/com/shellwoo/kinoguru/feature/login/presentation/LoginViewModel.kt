@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import com.shellwoo.kinoguru.core.presentation.SingleLiveEvent
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor() : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val router: LoginRouter,
+) : ViewModel() {
 
     private val _requestGoogleOneTapSignInEvent = SingleLiveEvent<Unit>()
     val requestGoogleOneTapSignInEvent: LiveData<Unit> = _requestGoogleOneTapSignInEvent
@@ -26,5 +28,9 @@ class LoginViewModel @Inject constructor() : ViewModel() {
 
     fun handleSignInError() {
         _signInErrorEvent(Unit)
+    }
+
+    fun openMainScreen() {
+        router.openMainScreen()
     }
 }

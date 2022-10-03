@@ -5,11 +5,16 @@ import com.shellwoo.kinoguru.core.test.unit.InstantTaskExecutorExtension
 import com.shellwoo.kinoguru.core.test.unit.TestCoroutineExtension
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
-@ExtendWith(InstantTaskExecutorExtension::class, TestCoroutineExtension::class)
+@ExtendWith(MockitoExtension::class, InstantTaskExecutorExtension::class, TestCoroutineExtension::class)
 class LoginViewModelTest {
 
-    private val viewModel = LoginViewModel()
+    private val router: LoginRouter = mock()
+
+    private val viewModel = LoginViewModel(router)
 
     private val unitObserver = Observer<Unit> {}
 
@@ -38,5 +43,12 @@ class LoginViewModelTest {
         viewModel.handleSignInError()
 
         unitObserver.onChanged(Unit)
+    }
+
+    @Test
+    fun `open main screen EXPECT router open main screen`() {
+        viewModel.openMainScreen()
+
+        verify(router).openMainScreen()
     }
 }

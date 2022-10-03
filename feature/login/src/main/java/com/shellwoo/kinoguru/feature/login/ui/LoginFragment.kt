@@ -1,6 +1,5 @@
 package com.shellwoo.kinoguru.feature.login.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.IntentSenderRequest
@@ -29,13 +28,14 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     private val viewModel: LoginViewModel by viewModels(factoryProducer = ::viewModelFactory)
 
     private val requestSignInLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { activityResult ->
-        googleSignIn(activityResult.data)
-    }
-
-    private fun googleSignIn(data: Intent?) {
         viewLifecycleOwner.lifecycleScope.launchTrying(
-            errorHandler = { viewModel.handleSignInError() },
-            block = { googleAuthClient.signIn(data) },
+            errorHandler = {
+                viewModel.handleSignInError()
+            },
+            block = {
+                googleAuthClient.signIn(activityResult.data)
+                viewModel.openMainScreen()
+            },
         )
     }
 
