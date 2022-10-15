@@ -20,6 +20,7 @@ def modules = [
 	':feature-login': 'feature/login',
 	':feature-profile': 'feature/profile',
 	':feature-splash': 'feature/splash',
+	':feature-search': 'feature/search',
 	':shared-user': 'shared/user',
 ]
 
