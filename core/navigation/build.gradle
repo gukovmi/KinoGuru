@@ -2,6 +2,8 @@ apply from: "$rootDir/dependencies.gradle"
 
 dependencies {
     implementation project(":core-di")
+    implementation project(":core-ui")
+    implementation libraries.androidxFragmentKtx
     implementation libraries.cicerone
     implementation libraries.dagger
     kapt libraries.daggerCompiler
