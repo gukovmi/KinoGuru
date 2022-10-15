@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.github.terrakok.cicerone.NavigatorHolder
-import com.github.terrakok.cicerone.androidx.AppNavigator
+import com.shellwoo.kinoguru.core.navigation.NavigatorFactory
 import com.shellwoo.kinoguru.core.navigation.di.MainNavigation
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
 import com.shellwoo.kinoguru.feature.main.R
@@ -17,14 +17,15 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
+    @Inject
+    lateinit var navigatorFactory: NavigatorFactory
+
     private val viewModel: MainViewModel by viewModels(factoryProducer = ::viewModelFactory)
 
-    lateinit var navigator: AppNavigator
+    private val navigator by lazy { navigatorFactory.create(requireActivity(), R.id.container, childFragmentManager) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navigator = AppNavigator(requireActivity(), R.id.container, childFragmentManager)
-        navigatorHolder.setNavigator(navigator)
 
         viewModel.openProfileScreen()
     }

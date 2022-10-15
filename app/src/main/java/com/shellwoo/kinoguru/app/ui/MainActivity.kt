@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.github.terrakok.cicerone.NavigatorHolder
-import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.shellwoo.kinoguru.R
 import com.shellwoo.kinoguru.app.presentation.MainViewModel
 import com.shellwoo.kinoguru.core.di.ViewModelFactory
+import com.shellwoo.kinoguru.core.navigation.NavigatorFactory
 import com.shellwoo.kinoguru.core.navigation.di.AppNavigation
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -27,9 +27,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), HasAndroidInject
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
+    @Inject
+    lateinit var navigatorFactory: NavigatorFactory
+
     private val viewModel: MainViewModel by viewModels(factoryProducer = ::viewModelFactory)
 
-    private val navigator = AppNavigator(this, R.id.container)
+    private val navigator by lazy { navigatorFactory.create(this, R.id.container) }
 
     override fun androidInjector(): AndroidInjector<Any> =
         androidInjector
