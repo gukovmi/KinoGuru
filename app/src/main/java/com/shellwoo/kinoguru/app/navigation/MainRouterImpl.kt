@@ -4,6 +4,7 @@ import com.github.terrakok.cicerone.Router
 import com.shellwoo.kinoguru.core.navigation.di.MainNavigation
 import com.shellwoo.kinoguru.feature.main.presentation.MainRouter
 import com.shellwoo.kinoguru.feature.profile.ProfileDestination
+import com.shellwoo.kinoguru.feature.search.SearchDestination
 import javax.inject.Inject
 
 class MainRouterImpl @Inject constructor(
@@ -12,5 +13,9 @@ class MainRouterImpl @Inject constructor(
 
     override fun openProfileScreen() {
         mainRouter.newRootScreen(ProfileDestination())
+    }
+
+    override fun openSearchScreen() {
+        mainRouter.newRootScreen(SearchDestination())
     }
 }

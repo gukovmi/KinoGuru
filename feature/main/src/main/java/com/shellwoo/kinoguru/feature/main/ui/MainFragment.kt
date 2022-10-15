@@ -31,7 +31,7 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
 
         initListeners()
 
-        bottomNavigationBar.selectedItemId = R.id.profile
+        bottomNavigationBar.selectedItemId = R.id.search
     }
 
     private fun initListeners() {
@@ -44,6 +44,7 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
 
         when (menuItem.itemId) {
             R.id.profile -> viewModel.openProfileScreen()
+            R.id.search -> viewModel.openSearchScreen()
         }
         return true
     }

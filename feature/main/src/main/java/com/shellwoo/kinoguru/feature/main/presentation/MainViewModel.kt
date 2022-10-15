@@ -10,4 +10,8 @@ class MainViewModel @Inject constructor(
     fun openProfileScreen() {
         router.openProfileScreen()
     }
+
+    fun openSearchScreen() {
+        router.openSearchScreen()
+    }
 }

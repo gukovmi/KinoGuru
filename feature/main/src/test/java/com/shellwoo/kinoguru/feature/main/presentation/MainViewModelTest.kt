@@ -19,4 +19,11 @@ class MainViewModelTest {
 
         verify(router).openProfileScreen()
     }
+
+    @Test
+    fun `open search screen EXPECT router open search screen`() {
+        viewModel.openSearchScreen()
+
+        verify(router).openSearchScreen()
+    }
 }
