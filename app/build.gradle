@@ -29,6 +29,7 @@ dependencies {
 	implementation project(":feature-login")
 	implementation project(":feature-main")
 	implementation project(":feature-profile")
+	implementation project(":feature-search")
 	implementation project(":feature-splash")
 	implementation project(":shared-user")
 	implementation libraries.androidxActivityKtx
