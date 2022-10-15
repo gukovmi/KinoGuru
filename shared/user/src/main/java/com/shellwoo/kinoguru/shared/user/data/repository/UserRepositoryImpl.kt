@@ -14,6 +14,7 @@ class UserRepositoryImpl @Inject constructor(private val firebaseAuth: FirebaseA
             User(
                 name = firebaseUser.displayName,
                 email = firebaseUser.email,
+                photoUrl = firebaseUser.photoUrl?.toString(),
             )
         } else {
             null

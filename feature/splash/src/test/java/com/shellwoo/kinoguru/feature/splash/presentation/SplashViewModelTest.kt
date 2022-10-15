@@ -57,7 +57,7 @@ class SplashViewModelTest {
 
     @Test
     fun `start, wait delay, current user exist EXPECT router open main screen`() = runTest {
-        val user = User("Max", "123@gmail.com")
+        val user = User("Max", "123@gmail.com", "google.com/image")
         whenever(getCurrentUserUseCase.invoke()).thenReturn(user)
 
         viewModel.start()
