@@ -3,7 +3,9 @@ apply from: "$rootDir/dependencies.gradle"
 dependencies {
     implementation project(":core-di")
     implementation project(":core-presentation")
+    implementation libraries.androidxFragmentKtx
     implementation libraries.daggerAndroid
     kapt libraries.daggerAndroidProcessor
     kapt libraries.daggerCompiler
+    implementation libraries.material
 }

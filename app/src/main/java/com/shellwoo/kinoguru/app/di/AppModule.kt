@@ -6,6 +6,7 @@ import dagger.Module
 @Module(
     includes = [
         ActivityModule::class,
+        AnimationModule::class,
         NavigationModule::class,
         NavigationBindsModule::class,
         DataModule::class,
