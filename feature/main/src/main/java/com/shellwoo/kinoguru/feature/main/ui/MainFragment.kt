@@ -31,7 +31,9 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
 
         initListeners()
 
-        bottomNavigationBar.selectedItemId = R.id.search
+        if (savedInstanceState == null) {
+            bottomNavigationBar.selectedItemId = R.id.search
+        }
     }
 
     private fun initListeners() {
