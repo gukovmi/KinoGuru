@@ -1,5 +1,6 @@
 apply from: "$rootDir/dependencies.gradle"
 
 dependencies {
-
+    implementation project(":core-ui")
+    implementation libraries.material
 }
