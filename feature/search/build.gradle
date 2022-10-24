@@ -2,7 +2,9 @@ apply from: "$rootDir/dependencies.gradle"
 
 dependencies {
     implementation project(":core-di")
+    implementation project(":core-presentation")
     implementation project(":core-ui")
+    implementation project(":shared-onboarding")
     implementation libraries.androidxFragmentKtx
     implementation libraries.cicerone
     implementation libraries.dagger

@@ -14,6 +14,7 @@ class SearchViewModelTest {
     private val viewModel = SearchViewModel()
 
     private val stateObserver: Observer<SearchState> = mock()
+    private val onboardingEventObserver: Observer<Unit> = mock()
 
     @Test
     fun `init EXPECT initial state`() {
@@ -29,5 +30,14 @@ class SearchViewModelTest {
         viewModel.start()
 
         verify(stateObserver).onChanged(SearchState.Content)
+    }
+
+    @Test
+    fun `start EXPECT onboarding event`() {
+        viewModel.onboardingEvent.observeForever(onboardingEventObserver)
+
+        viewModel.start()
+
+        verify(onboardingEventObserver).onChanged(Unit)
     }
 }
