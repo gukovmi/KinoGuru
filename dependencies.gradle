@@ -13,6 +13,7 @@ ext {
 		"firebaseBom": "30.3.1",
 		"kotlin": "1.6.21",
 		"playServices": "20.2.0",
+		"retrofit": "2.9.0",
 		"dagger": "2.42",
 
 		"junitJupiter": "5.8.2",
@@ -43,6 +44,7 @@ ext {
 		"firebaseBom": "com.google.firebase:firebase-bom:$versions.firebaseBom",
 		"kotlinxCoroutines": "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlinx",
 		"playServicesAuth": "com.google.android.gms:play-services-auth:$versions.playServices",
+		"retrofit": "com.squareup.retrofit2:retrofit:$versions.retrofit",
 		"dagger": "com.google.dagger:dagger:$versions.dagger",
 		"daggerAndroid": "com.google.dagger:dagger-android-support:$versions.dagger",
 		"daggerAndroidProcessor": "com.google.dagger:dagger-android-processor:$versions.dagger",
