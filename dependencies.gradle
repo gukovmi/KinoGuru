@@ -56,6 +56,7 @@ ext {
 	    "mockitoKotlin": "org.mockito.kotlin:mockito-kotlin:$versions.mockitoKotlin",
 	    "mockitoJunit": "org.mockito:mockito-junit-jupiter:$versions.mockitoJupiter",
 	    "kotlinxCoroutinesTest": "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinx",
+		"mockitoInline": "org.mockito:mockito-inline:$versions.mockitoJupiter",
 	    "androidxTestJunit": "androidx.test.ext:junit:$versions.androidxTestJunit",
 	    "espresso": "androidx.test.espresso:espresso-core:$versions.espresso",
 	]
