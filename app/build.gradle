@@ -31,12 +31,14 @@ dependencies {
 	implementation project(":feature-profile")
 	implementation project(":feature-search")
 	implementation project(":feature-splash")
+	implementation project(":shared-onboarding")
 	implementation project(":shared-user")
 	implementation libraries.androidxActivityKtx
 	implementation libraries.androidxCoreKtx
 	implementation libraries.firebaseAuthKtx
 	implementation libraries.material
 	implementation libraries.cicerone
+	implementation libraries.datastorePreferences
 	implementation libraries.playServicesAuth
 	implementation libraries.dagger
 	implementation libraries.daggerAndroid

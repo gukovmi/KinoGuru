@@ -9,6 +9,9 @@ import dagger.android.ContributesAndroidInjector
 interface SearchFragmentModule {
 
     @FragmentScope
-    @ContributesAndroidInjector(modules = [SearchPresentationModule::class])
+    @ContributesAndroidInjector(modules = [
+        SearchDataModule::class,
+        SearchPresentationModule::class,
+    ])
     fun injectSearchFragment(): SearchFragment
 }
