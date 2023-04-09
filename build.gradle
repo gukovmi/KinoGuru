@@ -28,7 +28,8 @@ subprojects {
                 compileSdk compileSdkVer
                 minSdk minSdkVer
                 targetSdk targetSdkVer
-                buildConfigField "String" , "FIREBASE_SERVER_CLIENT_ID",  KINO_GURU_SERVER_CLIENT_ID
+                buildConfigField "String", "FIREBASE_SERVER_CLIENT_ID", KINO_GURU_SERVER_CLIENT_ID
+                buildConfigField "String", "THE_MOVIE_DB_API_KEY", THE_MOVIE_DB_API_KEY
             }
         }
     }
