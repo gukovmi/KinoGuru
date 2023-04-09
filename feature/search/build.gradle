@@ -8,6 +8,7 @@ dependencies {
     implementation project(":shared-onboarding")
     implementation libraries.androidxFragmentKtx
     implementation libraries.cicerone
+    implementation libraries.gson
     implementation libraries.datastorePreferences
     implementation libraries.dagger
     implementation libraries.daggerAndroid
