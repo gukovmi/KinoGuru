@@ -7,14 +7,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import com.shellwoo.kinoguru.core.ui.component.BaseFragment
+import com.shellwoo.kinoguru.core.ui.component.BaseDaggerFragment
 import com.shellwoo.kinoguru.core.ui.showRetryCancelErrorDialog
 import com.shellwoo.kinoguru.feature.profile.R
 import com.shellwoo.kinoguru.feature.profile.presentation.ProfileState
 import com.shellwoo.kinoguru.feature.profile.presentation.ProfileViewModel
 import kotlinx.android.synthetic.main.profile_fragment.*
 
-class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
+class ProfileFragment : BaseDaggerFragment(R.layout.profile_fragment) {
 
     private val viewModel: ProfileViewModel by viewModels(factoryProducer = ::viewModelFactory)
 

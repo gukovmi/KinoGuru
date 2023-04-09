@@ -5,7 +5,7 @@ import com.shellwoo.kinoguru.core.di.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : DaggerFragment(contentLayoutId) {
+abstract class BaseDaggerFragment(@LayoutRes contentLayoutId: Int) : DaggerFragment(contentLayoutId) {
 
     @Inject
     protected lateinit var viewModelFactory: ViewModelFactory

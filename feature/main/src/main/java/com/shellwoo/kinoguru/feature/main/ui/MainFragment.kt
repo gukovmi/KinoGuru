@@ -7,13 +7,13 @@ import androidx.fragment.app.viewModels
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.shellwoo.kinoguru.core.navigation.NavigatorFactory
 import com.shellwoo.kinoguru.core.navigation.di.MainNavigation
-import com.shellwoo.kinoguru.core.ui.component.BaseFragment
+import com.shellwoo.kinoguru.core.ui.component.BaseDaggerFragment
 import com.shellwoo.kinoguru.feature.main.R
 import com.shellwoo.kinoguru.feature.main.presentation.MainViewModel
 import kotlinx.android.synthetic.main.main_fragment.*
 import javax.inject.Inject
 
-class MainFragment : BaseFragment(R.layout.main_fragment) {
+class MainFragment : BaseDaggerFragment(R.layout.main_fragment) {
 
     @MainNavigation
     @Inject

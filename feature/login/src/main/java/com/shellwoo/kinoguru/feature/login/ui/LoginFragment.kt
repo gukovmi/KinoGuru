@@ -7,7 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.shellwoo.kinoguru.core.coroutines.launchTrying
-import com.shellwoo.kinoguru.core.ui.component.BaseFragment
+import com.shellwoo.kinoguru.core.ui.component.BaseDaggerFragment
 import com.shellwoo.kinoguru.core.ui.showToast
 import com.shellwoo.kinoguru.feature.login.GoogleAuthClient
 import com.shellwoo.kinoguru.feature.login.GoogleAuthVariant
@@ -17,7 +17,7 @@ import com.shellwoo.kinoguru.feature.login.presentation.LoginViewModel
 import kotlinx.android.synthetic.main.login_fragment.*
 import javax.inject.Inject
 
-class LoginFragment : BaseFragment(R.layout.login_fragment) {
+class LoginFragment : BaseDaggerFragment(R.layout.login_fragment) {
 
     @Inject
     lateinit var googleSignInRequestIntentProvider: GoogleSignInRequestIntentProvider
