@@ -9,6 +9,8 @@ dependencies {
     implementation libraries.androidxFragmentKtx
     implementation libraries.cicerone
     implementation libraries.gson
+    implementation libraries.retrofit
+    implementation libraries.retrofitConverterGson
     implementation libraries.datastorePreferences
     implementation libraries.dagger
     implementation libraries.daggerAndroid
