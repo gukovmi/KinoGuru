@@ -8,8 +8,6 @@ dependencies {
     implementation libraries.androidxFragmentKtx
     implementation libraries.cicerone
     implementation libraries.dagger
-    implementation libraries.daggerAndroid
-    kapt libraries.daggerAndroidProcessor
     kapt libraries.daggerCompiler
     implementation libraries.glide
     kapt libraries.glideCompiler

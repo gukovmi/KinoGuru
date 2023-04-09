@@ -1,5 +1,6 @@
 package com.shellwoo.kinoguru.feature.profile.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.net.toUri
@@ -7,18 +8,26 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import com.shellwoo.kinoguru.core.ui.component.BaseDaggerFragment
+import com.shellwoo.kinoguru.core.ui.component.BaseFragment
 import com.shellwoo.kinoguru.core.ui.showRetryCancelErrorDialog
 import com.shellwoo.kinoguru.feature.profile.R
+import com.shellwoo.kinoguru.feature.profile.di.ProfileComponentViewModel
 import com.shellwoo.kinoguru.feature.profile.presentation.ProfileState
 import com.shellwoo.kinoguru.feature.profile.presentation.ProfileViewModel
 import kotlinx.android.synthetic.main.profile_fragment.*
 
-class ProfileFragment : BaseDaggerFragment(R.layout.profile_fragment) {
+class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
+
+    private val componentViewModel: ProfileComponentViewModel by viewModels()
 
     private val viewModel: ProfileViewModel by viewModels(factoryProducer = ::viewModelFactory)
 
     private val requestManager: RequestManager by lazy { Glide.with(this) }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        componentViewModel.component.inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
