@@ -1,23 +1,22 @@
 package com.shellwoo.kinoguru.feature.main.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.github.terrakok.cicerone.NavigatorHolder
 import com.shellwoo.kinoguru.core.navigation.NavigatorFactory
-import com.shellwoo.kinoguru.core.navigation.di.MainNavigation
 import com.shellwoo.kinoguru.core.ui.component.BaseDaggerFragment
 import com.shellwoo.kinoguru.feature.main.R
+import com.shellwoo.kinoguru.feature.main.navigation.MainNavigatorHolder
 import com.shellwoo.kinoguru.feature.main.presentation.MainViewModel
 import kotlinx.android.synthetic.main.main_fragment.*
 import javax.inject.Inject
 
 class MainFragment : BaseDaggerFragment(R.layout.main_fragment) {
 
-    @MainNavigation
     @Inject
-    lateinit var navigatorHolder: NavigatorHolder
+    lateinit var navigatorHolder: MainNavigatorHolder
 
     @Inject
     lateinit var navigatorFactory: NavigatorFactory
@@ -53,11 +52,11 @@ class MainFragment : BaseDaggerFragment(R.layout.main_fragment) {
 
     override fun onResume() {
         super.onResume()
-        navigatorHolder.setNavigator(navigator)
+        navigatorHolder.holder.setNavigator(navigator)
     }
 
     override fun onPause() {
-        navigatorHolder.removeNavigator()
+        navigatorHolder.holder.removeNavigator()
         super.onPause()
     }
 }

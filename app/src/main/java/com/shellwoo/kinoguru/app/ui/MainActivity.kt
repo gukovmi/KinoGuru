@@ -3,12 +3,11 @@ package com.shellwoo.kinoguru.app.ui
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.github.terrakok.cicerone.NavigatorHolder
 import com.shellwoo.kinoguru.R
+import com.shellwoo.kinoguru.app.navigation.AppNavigatorHolder
 import com.shellwoo.kinoguru.app.presentation.MainViewModel
 import com.shellwoo.kinoguru.core.di.ViewModelFactory
 import com.shellwoo.kinoguru.core.navigation.NavigatorFactory
-import com.shellwoo.kinoguru.core.navigation.di.AppNavigation
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -23,9 +22,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), HasAndroidInject
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    @AppNavigation
     @Inject
-    lateinit var navigatorHolder: NavigatorHolder
+    lateinit var navigatorHolder: AppNavigatorHolder
 
     @Inject
     lateinit var navigatorFactory: NavigatorFactory
@@ -48,11 +46,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), HasAndroidInject
 
     override fun onResumeFragments() {
         super.onResumeFragments()
-        navigatorHolder.setNavigator(navigator)
+        navigatorHolder.holder.setNavigator(navigator)
     }
 
     override fun onPause() {
-        navigatorHolder.removeNavigator()
+        navigatorHolder.holder.removeNavigator()
         super.onPause()
     }
 }

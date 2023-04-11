@@ -1,7 +1,6 @@
 package com.shellwoo.kinoguru.app.presentation
 
-import com.github.terrakok.cicerone.Router
-import com.shellwoo.kinoguru.core.navigation.di.AppNavigation
+import com.shellwoo.kinoguru.app.navigation.AppCiceroneRouter
 import com.shellwoo.kinoguru.feature.splash.SplashDestination
 import javax.inject.Inject
 
@@ -11,7 +10,7 @@ interface MainRouter {
 }
 
 class MainRouterImpl @Inject constructor(
-    @AppNavigation private val appRouter: Router,
+    private val appRouter: AppCiceroneRouter,
 ) : MainRouter {
 
     override fun openSplashScreen() {
