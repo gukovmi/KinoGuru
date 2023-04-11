@@ -2,10 +2,9 @@ package com.shellwoo.kinoguru.core.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import javax.inject.Inject
 import javax.inject.Provider
 
-class ViewModelFactory @Inject constructor(
+class ViewModelFactory(
     private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
 

@@ -10,6 +10,7 @@ import dagger.Module
         NavigationModule::class,
         NavigationBindsModule::class,
         DataModule::class,
+        PresentationModule::class,
     ]
 )
 interface AppModule
