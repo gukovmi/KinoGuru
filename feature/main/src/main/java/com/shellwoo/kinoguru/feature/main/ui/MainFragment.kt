@@ -6,14 +6,15 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.shellwoo.kinoguru.core.navigation.NavigatorFactory
-import com.shellwoo.kinoguru.core.ui.component.BaseDaggerFragment
+import com.shellwoo.kinoguru.core.ui.component.BaseFragment
 import com.shellwoo.kinoguru.feature.main.R
+import com.shellwoo.kinoguru.feature.main.di.MainComponentViewModel
 import com.shellwoo.kinoguru.feature.main.navigation.MainNavigatorHolder
 import com.shellwoo.kinoguru.feature.main.presentation.MainViewModel
 import kotlinx.android.synthetic.main.main_fragment.*
 import javax.inject.Inject
 
-class MainFragment : BaseDaggerFragment(R.layout.main_fragment) {
+class MainFragment : BaseFragment(R.layout.main_fragment) {
 
     @Inject
     lateinit var navigatorHolder: MainNavigatorHolder
@@ -21,9 +22,16 @@ class MainFragment : BaseDaggerFragment(R.layout.main_fragment) {
     @Inject
     lateinit var navigatorFactory: NavigatorFactory
 
+    private val componentViewModel: MainComponentViewModel by viewModels()
+
     private val viewModel: MainViewModel by viewModels(factoryProducer = ::viewModelFactory)
 
     private val navigator by lazy { navigatorFactory.create(requireActivity(), R.id.container, childFragmentManager) }
+
+    override fun onAttach(context: Context) {
+        componentViewModel.component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
