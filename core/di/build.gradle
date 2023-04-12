@@ -3,4 +3,5 @@ apply from: "$rootDir/dependencies.gradle"
 dependencies {
     implementation libraries.androidxLifecycleViewModelKtx
     implementation libraries.dagger
+    kapt libraries.daggerCompiler
 }

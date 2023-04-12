@@ -1,5 +1,6 @@
 package com.shellwoo.kinoguru.app.di
 
+import com.shellwoo.kinoguru.core.di.ViewModelFactoryModule
 import dagger.Module
 
 @Module(
@@ -9,7 +10,7 @@ import dagger.Module
         NavigationCiceroneModule::class,
         NavigationBindsModule::class,
         DataModule::class,
-        PresentationModule::class,
+        ViewModelFactoryModule::class,
     ]
 )
 interface AppModule
