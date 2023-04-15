@@ -7,11 +7,8 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-internal interface LoginDataModule {
+internal class LoginDataModule {
 
-    companion object {
-
-        @Provides
-        fun provideSignInClient(context: Context): SignInClient = Identity.getSignInClient(context)
-    }
+    @Provides
+    fun provideSignInClient(context: Context): SignInClient = Identity.getSignInClient(context)
 }

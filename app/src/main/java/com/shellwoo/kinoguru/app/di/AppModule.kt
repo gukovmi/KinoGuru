@@ -9,7 +9,6 @@ import dagger.Module
         AnimationModule::class,
         NavigationCiceroneModule::class,
         NavigationBindsModule::class,
-        DataModule::class,
         ViewModelFactoryModule::class,
     ]
 )

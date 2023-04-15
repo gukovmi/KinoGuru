@@ -3,17 +3,17 @@ apply from: "$rootDir/dependencies.gradle"
 dependencies {
     implementation project(":core-coroutines")
     implementation project(":core-di")
+    implementation project(":core-firebase")
     implementation project(":core-ui")
     implementation project(":core-presentation")
+
     implementation libraries.androidxFragmentKtx
     implementation libraries.cicerone
+    implementation libraries.dagger
+    kapt libraries.daggerCompiler
     implementation libraries.firebaseAuthKtx
     implementation platform(libraries.firebaseBom)
     implementation libraries.playServicesAuth
-    implementation libraries.dagger
-    implementation libraries.daggerAndroid
-    kapt libraries.daggerAndroidProcessor
-    kapt libraries.daggerCompiler
 
     testImplementation project(":core-test-unit")
     testImplementation libraries.junitJupiter

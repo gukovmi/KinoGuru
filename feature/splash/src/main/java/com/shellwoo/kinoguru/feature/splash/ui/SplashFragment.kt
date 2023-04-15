@@ -1,17 +1,19 @@
 package com.shellwoo.kinoguru.feature.splash.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.shellwoo.kinoguru.core.ui.animateOfIncreaseAndDecrease
-import com.shellwoo.kinoguru.core.ui.component.BaseDaggerFragment
+import com.shellwoo.kinoguru.core.ui.component.BaseFragment
 import com.shellwoo.kinoguru.feature.splash.R
+import com.shellwoo.kinoguru.feature.splash.di.SplashComponentViewModel
 import com.shellwoo.kinoguru.feature.splash.presentation.SplashState
 import com.shellwoo.kinoguru.feature.splash.presentation.SplashViewModel
 import kotlinx.android.synthetic.main.splash_fragment.*
 
-class SplashFragment : BaseDaggerFragment(R.layout.splash_fragment) {
+class SplashFragment : BaseFragment(R.layout.splash_fragment) {
 
     private companion object {
 
@@ -20,7 +22,14 @@ class SplashFragment : BaseDaggerFragment(R.layout.splash_fragment) {
         const val LOGO_CYCLE_DURATION_IN_MILLIS = 2000L
     }
 
+    private val componentViewModel: SplashComponentViewModel by viewModels()
+
     private val viewModel: SplashViewModel by viewModels(factoryProducer = ::viewModelFactory)
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        componentViewModel.component.inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

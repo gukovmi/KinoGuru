@@ -1,5 +1,6 @@
 package com.shellwoo.kinoguru.feature.login.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.IntentSenderRequest
@@ -7,23 +8,26 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.shellwoo.kinoguru.core.coroutines.launchTrying
-import com.shellwoo.kinoguru.core.ui.component.BaseDaggerFragment
+import com.shellwoo.kinoguru.core.ui.component.BaseFragment
 import com.shellwoo.kinoguru.core.ui.showToast
 import com.shellwoo.kinoguru.feature.login.GoogleAuthClient
 import com.shellwoo.kinoguru.feature.login.GoogleAuthVariant
 import com.shellwoo.kinoguru.feature.login.GoogleSignInRequestIntentProvider
 import com.shellwoo.kinoguru.feature.login.R
+import com.shellwoo.kinoguru.feature.login.di.LoginComponentViewModel
 import com.shellwoo.kinoguru.feature.login.presentation.LoginViewModel
 import kotlinx.android.synthetic.main.login_fragment.*
 import javax.inject.Inject
 
-class LoginFragment : BaseDaggerFragment(R.layout.login_fragment) {
+class LoginFragment : BaseFragment(R.layout.login_fragment) {
 
     @Inject
     lateinit var googleSignInRequestIntentProvider: GoogleSignInRequestIntentProvider
 
     @Inject
     lateinit var googleAuthClient: GoogleAuthClient
+
+    private val componentViewModel: LoginComponentViewModel by viewModels()
 
     private val viewModel: LoginViewModel by viewModels(factoryProducer = ::viewModelFactory)
 
@@ -37,6 +41,11 @@ class LoginFragment : BaseDaggerFragment(R.layout.login_fragment) {
                 viewModel.openMainScreen()
             },
         )
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        componentViewModel.component.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
