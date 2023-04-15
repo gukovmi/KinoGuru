@@ -1,4 +1,4 @@
-package com.shellwoo.kinoguru.feature.login.di
+package com.shellwoo.kinoguru.core.firebase.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
