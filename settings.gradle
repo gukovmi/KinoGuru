@@ -9,19 +9,20 @@ dependencyResolutionManagement {
 rootProject.name = "KinoGuru"
 
 def modules = [
-	':app': 'app',
-	':core-coroutines': 'core/coroutines',
-	':core-di': 'core/di',
-	':core-navigation': 'core/navigation',
-	':core-test-unit': 'core/test/unit',
-	':core-ui': 'core/ui',
-	':core-presentation': 'core/presentation',
-	':feature-main': 'feature/main',
-	':feature-login': 'feature/login',
-	':feature-profile': 'feature/profile',
-	':feature-splash': 'feature/splash',
-	':feature-search': 'feature/search',
-	':shared-onboarding': 'shared/onboarding',
+		':app'              : 'app',
+		':core-coroutines'  : 'core/coroutines',
+		':core-di'          : 'core/di',
+		':core-firebase'    : 'core/firebase',
+		':core-navigation'  : 'core/navigation',
+		':core-test-unit'   : 'core/test/unit',
+		':core-ui'          : 'core/ui',
+		':core-presentation': 'core/presentation',
+		':feature-main'     : 'feature/main',
+		':feature-login'    : 'feature/login',
+		':feature-profile'  : 'feature/profile',
+		':feature-splash'   : 'feature/splash',
+		':feature-search'   : 'feature/search',
+		':shared-onboarding': 'shared/onboarding',
 	':shared-user': 'shared/user',
 ]
 
