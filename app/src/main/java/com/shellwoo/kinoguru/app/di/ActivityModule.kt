@@ -5,7 +5,7 @@ import com.shellwoo.kinoguru.core.di.ActivityScope
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
-@Module(includes = [FragmentModule::class])
+@Module
 interface ActivityModule {
 
     @ActivityScope

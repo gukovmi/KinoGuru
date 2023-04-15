@@ -21,7 +21,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
-abstract class SearchDataModule {
+internal abstract class SearchDataModule {
 
     companion object {
 

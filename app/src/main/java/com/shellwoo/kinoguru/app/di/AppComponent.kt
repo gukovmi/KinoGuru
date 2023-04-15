@@ -6,6 +6,7 @@ import com.shellwoo.kinoguru.core.di.AppScope
 import com.shellwoo.kinoguru.feature.login.di.LoginDeps
 import com.shellwoo.kinoguru.feature.main.di.MainDeps
 import com.shellwoo.kinoguru.feature.profile.di.ProfileDeps
+import com.shellwoo.kinoguru.feature.search.di.SearchDeps
 import com.shellwoo.kinoguru.feature.splash.di.SplashDeps
 import dagger.BindsInstance
 import dagger.Component
@@ -14,7 +15,7 @@ import dagger.android.AndroidInjector
 
 @AppScope
 @Component(modules = [AppModule::class, AndroidInjectionModule::class])
-interface AppComponent : AndroidInjector<App>, ProfileDeps, MainDeps, LoginDeps, SplashDeps {
+interface AppComponent : AndroidInjector<App>, ProfileDeps, MainDeps, LoginDeps, SearchDeps, SplashDeps {
 
     @Component.Builder
     interface Builder {
