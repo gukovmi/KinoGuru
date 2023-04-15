@@ -1,6 +1,8 @@
 package com.shellwoo.kinoguru.app
 
 import com.shellwoo.kinoguru.app.di.DaggerAppComponent
+import com.shellwoo.kinoguru.app.di.MainActivityDeps
+import com.shellwoo.kinoguru.app.di.MainActivityDepsProvider
 import com.shellwoo.kinoguru.feature.login.di.LoginDeps
 import com.shellwoo.kinoguru.feature.login.di.LoginDepsProvider
 import com.shellwoo.kinoguru.feature.main.di.MainDeps
@@ -14,7 +16,8 @@ import com.shellwoo.kinoguru.feature.splash.di.SplashDepsProvider
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 
-class App : DaggerApplication(), ProfileDepsProvider, SearchDepsProvider, SplashDepsProvider, LoginDepsProvider, MainDepsProvider {
+class App : DaggerApplication(),
+    ProfileDepsProvider, SearchDepsProvider, SplashDepsProvider, LoginDepsProvider, MainDepsProvider, MainActivityDepsProvider {
 
     private val applicationInjector = DaggerAppComponent.builder()
         .context(this)
@@ -28,4 +31,5 @@ class App : DaggerApplication(), ProfileDepsProvider, SearchDepsProvider, Splash
     override val profileDeps: ProfileDeps = applicationInjector
     override val splashDeps: SplashDeps = applicationInjector
     override val searchDeps: SearchDeps = applicationInjector
+    override val mainActivityDeps: MainActivityDeps = applicationInjector
 }

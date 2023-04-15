@@ -5,19 +5,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.shellwoo.kinoguru.R
 import com.shellwoo.kinoguru.app.navigation.AppNavigatorHolder
+import com.shellwoo.kinoguru.app.presentation.MainComponentViewModel
 import com.shellwoo.kinoguru.app.presentation.MainViewModel
 import com.shellwoo.kinoguru.core.di.ViewModelFactory
 import com.shellwoo.kinoguru.core.navigation.NavigatorFactory
-import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(R.layout.activity_main), HasAndroidInjector {
-
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -28,15 +22,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), HasAndroidInject
     @Inject
     lateinit var navigatorFactory: NavigatorFactory
 
+    private val componentViewModel: MainComponentViewModel by viewModels()
     private val viewModel: MainViewModel by viewModels(factoryProducer = ::viewModelFactory)
 
     private val navigator by lazy { navigatorFactory.create(this, R.id.container) }
 
-    override fun androidInjector(): AndroidInjector<Any> =
-        androidInjector
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
+        componentViewModel.component.inject(this)
         super.onCreate(savedInstanceState)
 
         if (savedInstanceState == null) {
