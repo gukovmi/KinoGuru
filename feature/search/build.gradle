@@ -13,8 +13,6 @@ dependencies {
     implementation libraries.retrofitConverterGson
     implementation libraries.datastorePreferences
     implementation libraries.dagger
-    implementation libraries.daggerAndroid
-    kapt libraries.daggerAndroidProcessor
     kapt libraries.daggerCompiler
     implementation libraries.material
 

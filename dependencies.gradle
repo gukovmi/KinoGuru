@@ -51,8 +51,6 @@ ext {
 		"retrofit": "com.squareup.retrofit2:retrofit:$versions.retrofit",
 		"retrofitConverterGson": "com.squareup.retrofit2:converter-gson:$versions.retrofit",
 		"dagger": "com.google.dagger:dagger:$versions.dagger",
-		"daggerAndroid": "com.google.dagger:dagger-android-support:$versions.dagger",
-		"daggerAndroidProcessor": "com.google.dagger:dagger-android-processor:$versions.dagger",
 		"daggerCompiler": "com.google.dagger:dagger-compiler:$versions.dagger",
 
 	    "junitJupiter": "org.junit.jupiter:junit-jupiter:$versions.junitJupiter",
