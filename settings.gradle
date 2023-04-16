@@ -23,7 +23,7 @@ def modules = [
 		':feature-splash'   : 'feature/splash',
 		':feature-search'   : 'feature/search',
 		':shared-onboarding': 'shared/onboarding',
-	':shared-user': 'shared/user',
+		':shared-user'      : 'shared/user',
 ]
 
 modules.forEach { name, path ->
