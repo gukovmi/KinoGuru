@@ -26,25 +26,19 @@ dependencies {
 	implementation project(":core-di")
 	implementation project(":core-navigation")
 	implementation project(":core-ui")
-	implementation project(":core-presentation")
 	implementation project(":feature-login")
 	implementation project(":feature-main")
 	implementation project(":feature-profile")
 	implementation project(":feature-search")
 	implementation project(":feature-splash")
-	implementation project(":shared-onboarding")
-	implementation project(":shared-user")
 
 	implementation libraries.androidxActivityKtx
 	implementation libraries.androidxCoreKtx
-	implementation libraries.firebaseAuthKtx
-	implementation libraries.material
 	implementation libraries.cicerone
-	implementation libraries.datastorePreferences
-	implementation libraries.playServicesAuth
-	implementation libraries.retrofit
 	implementation libraries.dagger
 	kapt libraries.daggerCompiler
+	implementation libraries.material
+	implementation libraries.retrofit
 
 	testImplementation libraries.junitJupiter
 	testImplementation libraries.mockitoKotlin
