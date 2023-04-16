@@ -1,5 +1,7 @@
 package com.shellwoo.kinoguru.app
 
+import android.app.Application
+import com.shellwoo.kinoguru.app.di.AppComponent
 import com.shellwoo.kinoguru.app.di.DaggerAppComponent
 import com.shellwoo.kinoguru.app.di.MainActivityDeps
 import com.shellwoo.kinoguru.app.di.MainActivityDepsProvider
@@ -13,23 +15,18 @@ import com.shellwoo.kinoguru.feature.search.di.SearchDeps
 import com.shellwoo.kinoguru.feature.search.di.SearchDepsProvider
 import com.shellwoo.kinoguru.feature.splash.di.SplashDeps
 import com.shellwoo.kinoguru.feature.splash.di.SplashDepsProvider
-import dagger.android.AndroidInjector
-import dagger.android.support.DaggerApplication
 
-class App : DaggerApplication(),
+class App : Application(),
     ProfileDepsProvider, SearchDepsProvider, SplashDepsProvider, LoginDepsProvider, MainDepsProvider, MainActivityDepsProvider {
 
-    private val applicationInjector = DaggerAppComponent.builder()
+    private val appComponent: AppComponent = DaggerAppComponent.builder()
         .context(this)
         .build()
 
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
-        applicationInjector
-
-    override val mainDeps: MainDeps = applicationInjector
-    override val loginDeps: LoginDeps = applicationInjector
-    override val profileDeps: ProfileDeps = applicationInjector
-    override val splashDeps: SplashDeps = applicationInjector
-    override val searchDeps: SearchDeps = applicationInjector
-    override val mainActivityDeps: MainActivityDeps = applicationInjector
+    override val mainDeps: MainDeps = appComponent
+    override val loginDeps: LoginDeps = appComponent
+    override val profileDeps: ProfileDeps = appComponent
+    override val splashDeps: SplashDeps = appComponent
+    override val searchDeps: SearchDeps = appComponent
+    override val mainActivityDeps: MainActivityDeps = appComponent
 }
