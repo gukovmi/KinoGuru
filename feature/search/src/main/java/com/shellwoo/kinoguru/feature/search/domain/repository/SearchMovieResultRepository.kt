@@ -4,5 +4,5 @@ import com.shellwoo.kinoguru.feature.search.domain.entity.SearchMovieResult
 
 interface SearchMovieResultRepository {
 
-    suspend fun get(query: String): SearchMovieResult
+    suspend fun get(query: String, page: Int?): SearchMovieResult
 }

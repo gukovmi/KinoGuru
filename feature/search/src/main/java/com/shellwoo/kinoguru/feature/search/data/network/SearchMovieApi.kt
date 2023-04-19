@@ -9,5 +9,6 @@ interface SearchMovieApi {
     @GET("search/movie")
     suspend fun get(
         @Query("query") query: String,
+        @Query("page") page: Int?,
     ): SearchMovieResultModel
 }

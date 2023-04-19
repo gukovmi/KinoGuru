@@ -26,9 +26,9 @@ internal class SearchMovieResultRepositoryImplTest {
         val model: SearchMovieResultModel = mock()
         val expected: SearchMovieResult = mock()
         whenever(converter.from(model)).thenReturn(expected)
-        whenever(dataSource.get(query)).thenReturn(model)
+        whenever(dataSource.get(query, null)).thenReturn(model)
 
-        val actual = repository.get(query)
+        val actual = repository.get(query, null)
 
         assertEquals(actual, expected)
     }

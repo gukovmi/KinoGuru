@@ -11,6 +11,6 @@ class SearchMovieResultRepositoryImpl @Inject constructor(
     private val converter: SearchMovieResultModelConverter,
 ) : SearchMovieResultRepository {
 
-    override suspend fun get(query: String): SearchMovieResult =
-        dataSource.get(query).let(converter::from)
+    override suspend fun get(query: String, page: Int?): SearchMovieResult =
+        dataSource.get(query, page).let(converter::from)
 }

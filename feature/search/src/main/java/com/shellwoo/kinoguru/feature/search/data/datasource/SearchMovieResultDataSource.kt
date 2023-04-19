@@ -5,6 +5,6 @@ import com.shellwoo.kinoguru.feature.search.data.network.SearchMovieApi
 
 class SearchMovieResultDataSource(private val api: SearchMovieApi) {
 
-    suspend fun get(query: String): SearchMovieResultModel =
-        api.get(query)
+    suspend fun get(query: String, page: Int?): SearchMovieResultModel =
+        api.get(query, page)
 }

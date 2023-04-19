@@ -21,7 +21,7 @@ internal class GetSearchMovieResultUseCaseTest {
     fun `invoke EXPECT search movie result`() = runTest {
         val query = "Batman"
         val expected: SearchMovieResult = mock()
-        whenever(repository.get(query)).thenReturn(expected)
+        whenever(repository.get(query, null)).thenReturn(expected)
 
         val actual = useCase(query)
 

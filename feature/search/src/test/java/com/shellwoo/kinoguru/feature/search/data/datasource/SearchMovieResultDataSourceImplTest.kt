@@ -20,9 +20,9 @@ internal class SearchMovieResultDataSourceImplTest {
     fun `get EXPECT search movie result`() = runTest {
         val query = "Batman"
         val expected: SearchMovieResultModel = mock()
-        whenever(api.get(query)).thenReturn(expected)
+        whenever(api.get(query, null)).thenReturn(expected)
 
-        val actual = dataSource.get(query)
+        val actual = dataSource.get(query, null)
 
         assertEquals(actual, expected)
     }
