@@ -4,4 +4,5 @@ dependencies {
     implementation libraries.androidxArchCoreRuntime
     implementation libraries.junitJupiter
     implementation libraries.kotlinxCoroutinesTest
+    implementation libraries.mockitoKotlin
 }
