@@ -3,10 +3,10 @@ package com.shellwoo.kinoguru.feature.search.di
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import com.shellwoo.kinoguru.feature.search.BaseUrls.THE_MOVIE_DB_API
 import com.shellwoo.kinoguru.feature.search.BuildConfig
 import com.shellwoo.kinoguru.feature.search.data.datasource.SearchOnboardingShowingDataSourceImpl
 import com.shellwoo.kinoguru.feature.search.data.datastore.onboardingShowingDataStore
-import com.shellwoo.kinoguru.feature.search.data.network.BaseUrls.THE_MOVIE_DB
 import com.shellwoo.kinoguru.feature.search.data.network.SearchMovieApi
 import com.shellwoo.kinoguru.feature.search.data.repository.SearchMovieResultRepositoryImpl
 import com.shellwoo.kinoguru.feature.search.data.repository.SearchOnboardingShowingRepositoryImpl
@@ -32,7 +32,7 @@ internal abstract class SearchDataModule {
         @Provides
         fun provideTheMovieDbRetrofit(): Retrofit =
             Retrofit.Builder()
-                .baseUrl(THE_MOVIE_DB)
+                .baseUrl(THE_MOVIE_DB_API)
                 .client(
                     OkHttpClient.Builder()
                         .addInterceptor { chain ->

@@ -10,6 +10,7 @@ dependencies {
 
     implementation libraries.androidxFragmentKtx
     implementation libraries.cicerone
+    implementation libraries.glide
     implementation libraries.gson
     implementation libraries.retrofit
     implementation libraries.retrofitConverterGson

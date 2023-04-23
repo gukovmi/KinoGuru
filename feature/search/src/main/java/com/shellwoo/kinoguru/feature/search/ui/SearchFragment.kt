@@ -2,12 +2,15 @@ package com.shellwoo.kinoguru.feature.search.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
 import com.shellwoo.kinoguru.feature.search.R
 import com.shellwoo.kinoguru.feature.search.di.SearchComponentViewModel
+import com.shellwoo.kinoguru.feature.search.presentation.ScreenState
 import com.shellwoo.kinoguru.feature.search.presentation.SearchState
 import com.shellwoo.kinoguru.feature.search.presentation.SearchViewModel
 import com.shellwoo.kinoguru.shared.onboarding.ui.OnboardingDialogFragment
@@ -26,6 +29,8 @@ class SearchFragment : BaseFragment(R.layout.search_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        movies.adapter = MovieAdapter()
+        initListeners()
         observeViewModel()
 
         if (savedInstanceState == null) {
@@ -33,15 +38,31 @@ class SearchFragment : BaseFragment(R.layout.search_fragment) {
         }
     }
 
+    private fun initListeners() {
+        searchInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                viewModel.setQuery(p0.toString())
+            }
+        })
+    }
+
     private fun observeViewModel() {
         viewModel.state.observe(viewLifecycleOwner, ::renderState)
         viewModel.onboardingEvent.observe(viewLifecycleOwner) { showOnboarding() }
     }
 
-    private fun renderState(state: SearchState) {
+    private fun renderState(state: ScreenState) {
         when (state) {
-            SearchState.Initial -> renderInitialState()
-            SearchState.Content -> renderContentState()
+            ScreenState.Initial -> renderInitialState()
+            is ScreenState.Content -> renderContentState(state)
         }
     }
 
@@ -50,9 +71,34 @@ class SearchFragment : BaseFragment(R.layout.search_fragment) {
         searchInput.isVisible = false
     }
 
-    private fun renderContentState() {
+    private fun renderContentState(state: ScreenState.Content) {
         toolbar.isVisible = true
         searchInput.isVisible = true
+        renderSearchState(state.searchState)
+    }
+
+    private fun renderSearchState(state: SearchState) {
+        when (state) {
+            SearchState.None -> renderNoneSearchState()
+            SearchState.Loading -> renderLoadingSearchState()
+            is SearchState.Successful -> renderSuccessfulSearchState(state)
+        }
+    }
+
+    private fun renderNoneSearchState() {
+        progress.isVisible = false
+        movies.isVisible = false
+    }
+
+    private fun renderLoadingSearchState() {
+        progress.isVisible = true
+        movies.isVisible = false
+    }
+
+    private fun renderSuccessfulSearchState(state: SearchState.Successful) {
+        progress.isVisible = false
+        (movies.adapter as MovieAdapter).submitList(state.result.movies)
+        movies.isVisible = true
     }
 
     private fun showOnboarding() {
