@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
-import com.shellwoo.kinoguru.core.ui.showRetryCancelErrorDialog
+import com.shellwoo.kinoguru.core.ui.ext.showRetryCancelErrorDialog
 import com.shellwoo.kinoguru.feature.profile.R
 import com.shellwoo.kinoguru.feature.profile.di.ProfileComponentViewModel
 import com.shellwoo.kinoguru.feature.profile.presentation.ProfileState

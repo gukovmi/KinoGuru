@@ -1,4 +1,4 @@
-package com.shellwoo.kinoguru.core.ui
+package com.shellwoo.kinoguru.core.ui.ext
 
 import android.view.LayoutInflater
 import android.view.View

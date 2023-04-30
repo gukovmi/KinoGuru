@@ -6,7 +6,7 @@ import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import com.shellwoo.kinoguru.core.ui.inflate
+import com.shellwoo.kinoguru.core.ui.ext.inflate
 import com.shellwoo.kinoguru.feature.search.BaseUrls
 import com.shellwoo.kinoguru.feature.search.R
 import com.shellwoo.kinoguru.feature.search.presentation.SearchMovieItem

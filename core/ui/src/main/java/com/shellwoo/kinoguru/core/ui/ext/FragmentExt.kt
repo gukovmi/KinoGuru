@@ -1,8 +1,9 @@
-package com.shellwoo.kinoguru.core.ui
+package com.shellwoo.kinoguru.core.ui.ext
 
 import android.app.AlertDialog
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.shellwoo.kinoguru.core.ui.R
 
 fun Fragment.showToast(text: String) {
     Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()

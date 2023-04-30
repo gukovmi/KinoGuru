@@ -1,4 +1,4 @@
-package com.shellwoo.kinoguru.core.ui
+package com.shellwoo.kinoguru.core.ui.ext
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator

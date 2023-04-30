@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.shellwoo.kinoguru.core.coroutines.launchTrying
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
-import com.shellwoo.kinoguru.core.ui.showToast
+import com.shellwoo.kinoguru.core.ui.ext.showToast
 import com.shellwoo.kinoguru.feature.login.GoogleAuthClient
 import com.shellwoo.kinoguru.feature.login.GoogleAuthVariant
 import com.shellwoo.kinoguru.feature.login.GoogleSignInRequestIntentProvider

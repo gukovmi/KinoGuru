@@ -15,9 +15,9 @@ import androidx.core.view.marginBottom
 import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
 import androidx.core.view.marginTop
-import com.shellwoo.kinoguru.core.ui.getLeftOnWindow
-import com.shellwoo.kinoguru.core.ui.getThemeColor
-import com.shellwoo.kinoguru.core.ui.getTopOnWindow
+import com.shellwoo.kinoguru.core.ui.ext.getLeftOnWindow
+import com.shellwoo.kinoguru.core.ui.ext.getThemeColor
+import com.shellwoo.kinoguru.core.ui.ext.getTopOnWindow
 import com.shellwoo.kinoguru.shared.onboarding.R
 
 internal class OnboardingView @JvmOverloads constructor(
