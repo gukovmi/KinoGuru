@@ -2,11 +2,10 @@ package com.shellwoo.kinoguru.feature.search.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import com.shellwoo.kinoguru.core.ui.component.AfterTextWatcher
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
 import com.shellwoo.kinoguru.feature.search.R
 import com.shellwoo.kinoguru.feature.search.di.SearchComponentViewModel
@@ -43,17 +42,7 @@ class SearchFragment : BaseFragment(R.layout.search_fragment) {
     }
 
     private fun initListeners() {
-        searchInput.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                viewModel.setQuery(p0.toString())
-            }
-        })
+        searchInput.addTextChangedListener(AfterTextWatcher(viewModel::search))
     }
 
     private fun observeViewModel() {
