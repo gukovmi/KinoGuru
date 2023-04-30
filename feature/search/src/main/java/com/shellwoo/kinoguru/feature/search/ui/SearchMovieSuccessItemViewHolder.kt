@@ -38,6 +38,8 @@ class SearchMovieSuccessItemViewHolder(parent: ViewGroup) :
 
         if (posterPath != null) {
             requestManager.load(posterUrl)
+                .placeholder(android.R.drawable.ic_menu_camera)
+                .error(android.R.drawable.ic_menu_camera)
                 .into(itemView.poster)
         }
     }

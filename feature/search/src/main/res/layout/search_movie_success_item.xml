@@ -11,9 +11,9 @@
         android:layout_height="@dimen/movie_search_result_poster_height"
         android:layout_margin="16dp"
         android:scaleType="fitCenter"
-        android:src="@android:drawable/ic_menu_camera"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@android:drawable/ic_menu_camera" />
 
     <TextView
         android:id="@+id/rating"
