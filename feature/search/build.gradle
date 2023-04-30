@@ -10,14 +10,15 @@ dependencies {
 
     implementation libraries.androidxFragmentKtx
     implementation libraries.cicerone
-    implementation libraries.glide
-    implementation libraries.gson
-    implementation libraries.retrofit
-    implementation libraries.retrofitConverterGson
     implementation libraries.datastorePreferences
     implementation libraries.dagger
     kapt libraries.daggerCompiler
+    implementation libraries.facebookShimmer
+    implementation libraries.glide
+    implementation libraries.gson
     implementation libraries.material
+    implementation libraries.retrofit
+    implementation libraries.retrofitConverterGson
 
     testImplementation project(":core-test-unit")
     testImplementation libraries.androidxArchCoreRuntime

@@ -1,19 +1,19 @@
 package com.shellwoo.kinoguru.feature.search.ui
 
 import android.graphics.Color
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
+import com.shellwoo.kinoguru.core.ui.inflate
 import com.shellwoo.kinoguru.feature.search.BaseUrls
 import com.shellwoo.kinoguru.feature.search.R
-import com.shellwoo.kinoguru.feature.search.domain.entity.SearchMovie
-import kotlinx.android.synthetic.main.movie_search_result_item.view.*
+import com.shellwoo.kinoguru.feature.search.presentation.SearchMovieItem
+import kotlinx.android.synthetic.main.search_movie_success_item.view.*
 
-class MovieViewHolder(parent: ViewGroup) :
-    RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movie_search_result_item, parent, false)) {
+class SearchMovieSuccessItemViewHolder(parent: ViewGroup) :
+    RecyclerView.ViewHolder(parent.inflate(R.layout.search_movie_success_item, false)) {
 
     private companion object {
 
@@ -23,7 +23,8 @@ class MovieViewHolder(parent: ViewGroup) :
 
     private val requestManager: RequestManager by lazy { Glide.with(itemView) }
 
-    fun bind(movie: SearchMovie) {
+    fun bind(item: SearchMovieItem.Success) {
+        val movie = item.value
         renderPoster(movie.posterPath)
         renderRating(movie.voteAverage)
         with(itemView) {
