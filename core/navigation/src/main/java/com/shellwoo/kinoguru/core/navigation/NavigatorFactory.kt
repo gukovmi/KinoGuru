@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.github.terrakok.cicerone.androidx.FragmentScreen
-import com.shellwoo.kinoguru.core.ui.FragmentTransactionAnimator
+import com.shellwoo.kinoguru.core.ui.component.FragmentTransactionAnimator
 import javax.inject.Inject
 
 class NavigatorFactory @Inject constructor(private val fragmentTransactionAnimator: FragmentTransactionAnimator) {

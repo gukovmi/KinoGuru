@@ -1,6 +1,6 @@
 package com.shellwoo.kinoguru.app.di
 
-import com.shellwoo.kinoguru.core.ui.FragmentTransactionAnimator
+import com.shellwoo.kinoguru.core.ui.component.FragmentTransactionAnimator
 import com.shellwoo.kinoguru.feature.login.ui.LoginFragment
 import com.shellwoo.kinoguru.feature.main.ui.MainFragment
 import com.shellwoo.kinoguru.feature.profile.ui.ProfileFragment

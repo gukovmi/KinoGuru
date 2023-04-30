@@ -1,7 +1,8 @@
-package com.shellwoo.kinoguru.core.ui
+package com.shellwoo.kinoguru.core.ui.component
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.shellwoo.kinoguru.core.ui.R
 import kotlin.reflect.KClass
 
 class FragmentTransactionAnimator(
