@@ -10,6 +10,7 @@ import com.shellwoo.kinoguru.feature.search.domain.usecase.GetSearchMovieResultU
 import com.shellwoo.kinoguru.feature.search.domain.usecase.IsSearchOnboardingShowedUseCase
 import com.shellwoo.kinoguru.feature.search.domain.usecase.SetSearchOnboardingShowedUseCase
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -99,7 +100,7 @@ class SearchViewModelTest {
     }
 
     @Test
-    fun `set new query EXPECT content with loading items in result search state`() = runTest {
+    fun `set new query, wait debounce, EXPECT content with loading items in result search state`() = runTest {
         val expectedSearchState = SearchState.Result(searchMovieItemsLoading)
         val expectedContentState = ScreenState.Content(query, expectedSearchState)
         whenever(isSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
@@ -108,13 +109,13 @@ class SearchViewModelTest {
         viewModel.start()
 
         viewModel.setQuery(query)
+        advanceTimeBy(510L)
 
         verify(stateObserver).onChanged(expectedContentState)
     }
 
     @Test
-    fun `set old query EXPECT content with not loading items in result search state`() = runTest {
-        val searchMovieResult: SearchMovieResult = mock()
+    fun `set old query, wait debounce EXPECT content with not loading items in result search state`() = runTest {
         val unexpectedSearchState = SearchState.Result(searchMovieItemsLoading)
         val unexpectedContentState = ScreenState.Content(query, unexpectedSearchState)
         whenever(isSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
@@ -122,15 +123,35 @@ class SearchViewModelTest {
         viewModel.state.observeForever(stateObserver)
         viewModel.start()
         viewModel.setQuery(query)
+        advanceTimeBy(510L)
         clearInvocations(stateObserver)
 
         viewModel.setQuery(query)
+        advanceTimeBy(510L)
 
         verify(stateObserver, never()).onChanged(unexpectedContentState)
     }
 
     @Test
-    fun `set query EXPECT content with loading items in result search state`() = runTest {
+    fun `set empty query, wait debounce EXPECT content with none search state`() = runTest {
+        val expectedSearchState = SearchState.None
+        val expectedContentState = ScreenState.Content("", expectedSearchState)
+        whenever(isSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
+        whenever(getSearchMovieResultUseCase(query)).thenReturn(searchMovieResult)
+        viewModel.state.observeForever(stateObserver)
+        viewModel.start()
+        viewModel.setQuery(query)
+        advanceTimeBy(510L)
+        clearInvocations(stateObserver)
+
+        viewModel.setQuery("")
+        advanceTimeBy(510L)
+
+        verify(stateObserver).onChanged(expectedContentState)
+    }
+
+    @Test
+    fun `set query, wait debounce, EXPECT content with loading items in result search state`() = runTest {
         val expectedSearchState = SearchState.Result(searchMovieItemsLoading)
         val expectedContentState = ScreenState.Content(query, expectedSearchState)
         whenever(isSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
@@ -139,12 +160,13 @@ class SearchViewModelTest {
         viewModel.start()
 
         viewModel.setQuery(query)
+        advanceTimeBy(510L)
 
         verify(stateObserver).onChanged(expectedContentState)
     }
 
     @Test
-    fun `set query, movies was found EXPECT content with success items in result search state`() = runTest {
+    fun `set query, wait debounce, movies was found EXPECT content with success items in result search state`() = runTest {
         val expectedSearchState = SearchState.Result(searchMovieItemsSuccess)
         val expectedContentState = ScreenState.Content(query, expectedSearchState)
         whenever(isSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
@@ -153,6 +175,7 @@ class SearchViewModelTest {
         viewModel.start()
 
         viewModel.setQuery(query)
+        advanceTimeBy(510L)
 
         verify(stateObserver).onChanged(expectedContentState)
     }
