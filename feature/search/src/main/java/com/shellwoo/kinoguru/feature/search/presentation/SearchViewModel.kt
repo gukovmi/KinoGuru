@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shellwoo.kinoguru.core.coroutines.launchTrying
 import com.shellwoo.kinoguru.core.presentation.SingleLiveEvent
 import com.shellwoo.kinoguru.feature.search.domain.entity.SearchMovie
 import com.shellwoo.kinoguru.feature.search.domain.usecase.GetSearchMovieResultUseCase
@@ -29,6 +30,12 @@ class SearchViewModel @Inject constructor(
     private val _onboardingEvent = SingleLiveEvent<Unit>()
     val onboardingEvent: LiveData<Unit> = _onboardingEvent
 
+    private val _searchErrorEvent = SingleLiveEvent<Unit>()
+    val searchErrorEvent: LiveData<Unit> = _searchErrorEvent
+
+    private val currentContentState: ScreenState.Content?
+        get() = _state.value as? ScreenState.Content
+
     fun start() {
         _state.value = ScreenState.Content(query = "", SearchState.None)
 
@@ -46,23 +53,33 @@ class SearchViewModel @Inject constructor(
     }
 
     fun setQuery(query: String) {
-        val content = (_state.value as? ScreenState.Content) ?: return
+        val contentState = currentContentState ?: return
 
-        val queryChanged = query != content.query
+        val queryChanged = query != contentState.query
         if (queryChanged) {
-            search(query)
+            _state.value = contentState.copy(query = query)
+            search()
         }
     }
 
-    fun search(query: String) {
-        viewModelScope.launch {
-            _state.value =
-                (_state.value as? ScreenState.Content)?.copy(query = query, searchState = SearchState.Result(SEARCH_MOVIE_ITEMS_LOADING))
+    fun search() {
+        viewModelScope.launchTrying(
+            errorHandler = { handleSearchError() },
+            block = {
+                _state.value = currentContentState?.copy(searchState = SearchState.Result(SEARCH_MOVIE_ITEMS_LOADING))
 
-            val result = getSearchMovieResultUseCase(query)
-            _state.value =
-                (_state.value as? ScreenState.Content)?.copy(searchState = SearchState.Result(result.movies.toSearchMovieSuccessItems()))
-        }
+                val query = currentContentState?.query ?: return@launchTrying
+                val searchMovieResult = getSearchMovieResultUseCase(query)
+                _state.value = currentContentState?.copy(
+                    searchState = SearchState.Result(searchMovieResult.movies.toSearchMovieSuccessItems())
+                )
+            }
+        )
+    }
+
+    private fun handleSearchError() {
+        _state.value = currentContentState?.copy(searchState = SearchState.None)
+        _searchErrorEvent(Unit)
     }
 
     private fun List<SearchMovie>.toSearchMovieSuccessItems(): List<SearchMovieItem.Success> =

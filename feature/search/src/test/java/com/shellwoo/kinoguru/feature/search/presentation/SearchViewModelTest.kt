@@ -31,7 +31,9 @@ class SearchViewModelTest {
 
     private val stateObserver: Observer<ScreenState> = mock()
     private val onboardingEventObserver: Observer<Unit> = mock()
+    private val searchErrorEventObserver: Observer<Unit> = mock()
 
+    private val query: String = "Batman"
     private val searchMovie: SearchMovie = mock()
     private val searchMovies: List<SearchMovie> = List(20) { searchMovie }
     private val searchMovieResult: SearchMovieResult = mock {
@@ -98,14 +100,13 @@ class SearchViewModelTest {
 
     @Test
     fun `set new query EXPECT content with loading items in result search state`() = runTest {
-        val query = "Batman"
         val expectedSearchState = SearchState.Result(searchMovieItemsLoading)
         val expectedContentState = ScreenState.Content(query, expectedSearchState)
         whenever(isSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getSearchMovieResultUseCase(query)).thenNeverAnswer()
         viewModel.state.observeForever(stateObserver)
-
         viewModel.start()
+
         viewModel.setQuery(query)
 
         verify(stateObserver).onChanged(expectedContentState)
@@ -114,7 +115,6 @@ class SearchViewModelTest {
     @Test
     fun `set old query EXPECT content with not loading items in result search state`() = runTest {
         val searchMovieResult: SearchMovieResult = mock()
-        val query = "Batman"
         val unexpectedSearchState = SearchState.Result(searchMovieItemsLoading)
         val unexpectedContentState = ScreenState.Content(query, unexpectedSearchState)
         whenever(isSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
@@ -130,31 +130,56 @@ class SearchViewModelTest {
     }
 
     @Test
-    fun `search EXPECT content with loading items in result search state`() = runTest {
-        val query = "Batman"
+    fun `set query EXPECT content with loading items in result search state`() = runTest {
         val expectedSearchState = SearchState.Result(searchMovieItemsLoading)
         val expectedContentState = ScreenState.Content(query, expectedSearchState)
         whenever(isSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getSearchMovieResultUseCase(query)).thenNeverAnswer()
         viewModel.state.observeForever(stateObserver)
-
         viewModel.start()
-        viewModel.search(query)
+
+        viewModel.setQuery(query)
 
         verify(stateObserver).onChanged(expectedContentState)
     }
 
     @Test
-    fun `search, movies was found EXPECT content with success items in result search state`() = runTest {
-        val query = "Batman"
+    fun `set query, movies was found EXPECT content with success items in result search state`() = runTest {
         val expectedSearchState = SearchState.Result(searchMovieItemsSuccess)
         val expectedContentState = ScreenState.Content(query, expectedSearchState)
         whenever(isSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getSearchMovieResultUseCase(query)).thenReturn(searchMovieResult)
         viewModel.state.observeForever(stateObserver)
-
         viewModel.start()
-        viewModel.search(query)
+
+        viewModel.setQuery(query)
+
+        verify(stateObserver).onChanged(expectedContentState)
+    }
+
+    @Test
+    fun `search, error EXPECT search error event`() = runTest {
+        whenever(isSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
+        whenever(getSearchMovieResultUseCase(query)).thenThrow(RuntimeException())
+        viewModel.searchErrorEvent.observeForever(searchErrorEventObserver)
+        viewModel.start()
+
+        viewModel.search()
+
+        verify(searchErrorEventObserver).onChanged(Unit)
+    }
+
+    @Test
+    fun `search, error EXPECT content with none search state`() = runTest {
+        val expectedSearchState = SearchState.None
+        val expectedContentState = ScreenState.Content(query = "", searchState = expectedSearchState)
+        whenever(isSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
+        whenever(getSearchMovieResultUseCase(query)).thenThrow(RuntimeException())
+        viewModel.state.observeForever(stateObserver)
+        viewModel.start()
+        clearInvocations(stateObserver)
+
+        viewModel.search()
 
         verify(stateObserver).onChanged(expectedContentState)
     }

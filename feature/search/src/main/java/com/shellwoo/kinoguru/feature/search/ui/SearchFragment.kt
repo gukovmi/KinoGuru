@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.shellwoo.kinoguru.core.ui.component.AfterTextWatcher
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
+import com.shellwoo.kinoguru.core.ui.ext.showRetryCancelErrorDialog
 import com.shellwoo.kinoguru.feature.search.R
 import com.shellwoo.kinoguru.feature.search.di.SearchComponentViewModel
 import com.shellwoo.kinoguru.feature.search.presentation.ScreenState
@@ -42,12 +43,13 @@ class SearchFragment : BaseFragment(R.layout.search_fragment) {
     }
 
     private fun initListeners() {
-        searchInput.addTextChangedListener(AfterTextWatcher(viewModel::search))
+        searchInput.addTextChangedListener(AfterTextWatcher(viewModel::setQuery))
     }
 
     private fun observeViewModel() {
         viewModel.state.observe(viewLifecycleOwner, ::renderState)
-        viewModel.onboardingEvent.observe(viewLifecycleOwner) { showOnboarding() }
+        viewModel.onboardingEvent.observe(viewLifecycleOwner) { renderOnboarding() }
+        viewModel.searchErrorEvent.observe(viewLifecycleOwner) { renderSearchError() }
     }
 
     private fun renderState(state: ScreenState) {
@@ -84,11 +86,15 @@ class SearchFragment : BaseFragment(R.layout.search_fragment) {
         movies.isVisible = true
     }
 
-    private fun showOnboarding() {
+    private fun renderOnboarding() {
         OnboardingDialogFragment.show(
             fragmentManager = childFragmentManager,
             targetView = searchInputLayout,
             description = getString(R.string.search_input_onboarding)
         )
+    }
+
+    private fun renderSearchError() {
+        showRetryCancelErrorDialog(onRetryAction = viewModel::search)
     }
 }
