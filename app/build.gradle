@@ -39,6 +39,7 @@ dependencies {
 	implementation project(":design-resource")
 	implementation project(":feature-login")
 	implementation project(":feature-main")
+	implementation project(":feature-notification")
 	implementation project(":feature-profile")
 	implementation project(":feature-search")
 	implementation project(":feature-splash")

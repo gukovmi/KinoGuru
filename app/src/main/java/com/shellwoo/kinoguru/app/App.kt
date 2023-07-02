@@ -9,6 +9,7 @@ import com.shellwoo.kinoguru.feature.login.di.LoginDeps
 import com.shellwoo.kinoguru.feature.login.di.LoginDepsProvider
 import com.shellwoo.kinoguru.feature.main.di.MainDeps
 import com.shellwoo.kinoguru.feature.main.di.MainDepsProvider
+import com.shellwoo.kinoguru.feature.notification.NotificationChannelFactory
 import com.shellwoo.kinoguru.feature.profile.di.ProfileDeps
 import com.shellwoo.kinoguru.feature.profile.di.ProfileDepsProvider
 import com.shellwoo.kinoguru.feature.search.di.SearchDeps
@@ -22,6 +23,12 @@ class App : Application(),
     private val appComponent: AppComponent = DaggerAppComponent.builder()
         .context(this)
         .build()
+
+    override fun onCreate() {
+        super.onCreate()
+
+        NotificationChannelFactory(this).create()
+    }
 
     override val mainDeps: MainDeps = appComponent
     override val loginDeps: LoginDeps = appComponent
