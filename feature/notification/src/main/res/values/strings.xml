@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="channel_remote_id">CHANNEL_REMOTE_ID</string>
+    <string name="channel_remote_name">Remote channel</string>
+    <string name="channel_remote_description">Channel for notifications from the server</string>
+</resources>
