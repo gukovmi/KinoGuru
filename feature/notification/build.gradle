@@ -1,0 +1,7 @@
+apply from: "$rootDir/dependencies.gradle"
+
+dependencies {
+    implementation project(":design-resource")
+
+    implementation libraries.firebaseMessaging
+}

@@ -1,33 +1,34 @@
 dependencyResolutionManagement {
-	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-	repositories {
-		google()
-		mavenCentral()
-	}
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
 
 rootProject.name = "KinoGuru"
 
 def modules = [
-		':app'              : 'app',
-		':core-coroutines'  : 'core/coroutines',
-		':core-di'          : 'core/di',
-		':core-firebase'    : 'core/firebase',
-		':core-navigation'  : 'core/navigation',
-		':core-test-unit'   : 'core/test/unit',
-		':core-ui'          : 'core/ui',
-		':core-presentation': 'core/presentation',
-		':design-resource'  : 'design/resource',
-		':feature-main'     : 'feature/main',
-		':feature-login'    : 'feature/login',
-		':feature-profile'  : 'feature/profile',
-		':feature-splash'   : 'feature/splash',
-		':feature-search'   : 'feature/search',
-		':shared-onboarding': 'shared/onboarding',
-		':shared-user'      : 'shared/user',
+        ':app'                 : 'app',
+        ':core-coroutines'     : 'core/coroutines',
+        ':core-di'             : 'core/di',
+        ':core-firebase'       : 'core/firebase',
+        ':core-navigation'     : 'core/navigation',
+        ':core-test-unit'      : 'core/test/unit',
+        ':core-ui'             : 'core/ui',
+        ':core-presentation'   : 'core/presentation',
+        ':design-resource'     : 'design/resource',
+        ':feature-main'        : 'feature/main',
+        ':feature-login'       : 'feature/login',
+        ':feature-notification': 'feature/notification',
+        ':feature-profile'     : 'feature/profile',
+        ':feature-splash'      : 'feature/splash',
+        ':feature-search'      : 'feature/search',
+        ':shared-onboarding'   : 'shared/onboarding',
+        ':shared-user'         : 'shared/user',
 ]
 
 modules.forEach { name, path ->
-	include(name)
-	project(name).projectDir = file(path)
+    include(name)
+    project(name).projectDir = file(path)
 }
