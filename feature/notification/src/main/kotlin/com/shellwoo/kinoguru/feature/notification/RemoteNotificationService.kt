@@ -18,7 +18,7 @@ class RemoteNotificationService : FirebaseMessagingService() {
 
     private fun createLocalNotification(remoteNotification: RemoteMessage.Notification): Notification =
         NotificationCompat.Builder(this, getString(R.string.channel_remote_id))
-            .setSmallIcon(com.shellwoo.kinoguru.design.resource.R.mipmap.ic_launcher_round)
+            .setSmallIcon(com.shellwoo.kinoguru.design.resource.R.drawable.glasses)
             .setContentTitle(remoteNotification.title)
             .setContentText(remoteNotification.body)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
