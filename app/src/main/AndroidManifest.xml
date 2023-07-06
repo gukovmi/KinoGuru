@@ -14,7 +14,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.KinoGuru"
-        tools:targetApi="31">
+        android:localeConfig="@xml/locale_config"
+        tools:targetApi="32">
         <activity
             android:name=".app.ui.MainActivity"
             android:exported="true"
