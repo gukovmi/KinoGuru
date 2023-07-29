@@ -1,0 +1,18 @@
+apply from: "$rootDir/dependencies.gradle"
+
+dependencies {
+    implementation project(":core-di")
+    implementation project(":core-ui")
+    implementation project(":shared-language")
+
+    implementation libraries.androidxFragmentKtx
+    implementation libraries.cicerone
+    implementation libraries.dagger
+    kapt libraries.daggerCompiler
+    implementation libraries.material
+
+    testImplementation project(":core-test-unit")
+    testImplementation libraries.junitJupiter
+    testImplementation libraries.mockitoKotlin
+    testImplementation libraries.mockitoJunit
+}

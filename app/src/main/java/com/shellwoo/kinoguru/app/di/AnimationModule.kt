@@ -1,6 +1,7 @@
 package com.shellwoo.kinoguru.app.di
 
 import com.shellwoo.kinoguru.core.ui.component.FragmentTransactionAnimator
+import com.shellwoo.kinoguru.feature.language.ui.LanguageFragment
 import com.shellwoo.kinoguru.feature.login.ui.LoginFragment
 import com.shellwoo.kinoguru.feature.main.ui.MainFragment
 import com.shellwoo.kinoguru.feature.profile.ui.ProfileFragment
@@ -16,6 +17,7 @@ class AnimationModule {
     fun provideFragmentTransactionAnimator(): FragmentTransactionAnimator =
         FragmentTransactionAnimator(
             rootFragments = setOf(
+                LanguageFragment::class,
                 LoginFragment::class,
                 MainFragment::class,
                 ProfileFragment::class,
