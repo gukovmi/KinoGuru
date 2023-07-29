@@ -15,7 +15,7 @@ android {
 		targetSdk targetSdkVer
 		versionCode 1
 		versionName "1.0"
-		resConfigs "en"
+		resConfigs "en,ru"
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
@@ -38,6 +38,7 @@ dependencies {
 	implementation project(":core-navigation")
 	implementation project(":core-ui")
 	implementation project(":design-resource")
+    implementation project(":feature-language")
 	implementation project(":feature-login")
 	implementation project(":feature-main")
 	implementation project(":feature-notification")
