@@ -5,6 +5,8 @@ dependencies {
     implementation project(":core-di")
     implementation project(":core-firebase")
     implementation project(":core-ui")
+    implementation project(":design-resource")
+    implementation project(":shared-language")
     implementation project(":shared-user")
 
     implementation libraries.androidxFragmentKtx

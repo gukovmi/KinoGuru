@@ -9,12 +9,15 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
-import com.shellwoo.kinoguru.core.ui.ext.showRetryCancelErrorDialog
+import com.shellwoo.kinoguru.core.ui.ext.setResultListener
 import com.shellwoo.kinoguru.feature.profile.R
 import com.shellwoo.kinoguru.feature.profile.di.ProfileComponentViewModel
 import com.shellwoo.kinoguru.feature.profile.presentation.ProfileState
 import com.shellwoo.kinoguru.feature.profile.presentation.ProfileViewModel
+import com.shellwoo.kinoguru.shared.language.ui.LanguageNameConverter
+import com.shellwoo.kinoguru.shared.language.ui.LanguageResultContract
 import kotlinx.android.synthetic.main.profile_fragment.*
+import javax.inject.Inject
 
 class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
@@ -24,6 +27,9 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
     private val requestManager: RequestManager by lazy { Glide.with(this) }
 
+    @Inject
+    lateinit var languageNameConverter: LanguageNameConverter
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         componentViewModel.component.inject(this)
@@ -32,8 +38,16 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initListeners()
         viewModel.state.observe(viewLifecycleOwner, ::renderState)
-        viewModel.loadInitialData()
+        if (savedInstanceState == null) {
+            viewModel.loadProfile()
+        }
+    }
+
+    private fun initListeners() {
+        setResultListener(LanguageResultContract, viewModel::selectLanguage)
+        language.setOnClickListener { viewModel.openLanguageScreen() }
     }
 
     private fun renderState(state: ProfileState) {
@@ -41,7 +55,6 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
             ProfileState.Initial -> renderInitialState()
             ProfileState.Loading -> renderLoadingState()
             is ProfileState.Content -> renderContentState(state)
-            ProfileState.InitialDataLoadingError -> renderInitialDataLoadingErrorState()
         }
     }
 
@@ -62,18 +75,13 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
         content.isVisible = true
         progressBar.isVisible = false
 
-        state.name.let { name.text = getString(R.string.profile_name, it) }
-        state.email.let { email.text = getString(R.string.profile_email, it) }
+        state.name?.let { name.setText(it) }
+        state.email?.let { email.setText(it) }
         state.photoUrl?.toUri().let { photoUri ->
             requestManager.load(photoUri)
                 .into(photo)
         }
-    }
 
-    private fun renderInitialDataLoadingErrorState() {
-        toolbar.isVisible = true
-        content.isVisible = false
-        progressBar.isVisible = false
-        showRetryCancelErrorDialog(onRetryAction = viewModel::loadInitialData)
+        language.setText(languageNameConverter.toName(state.language))
     }
 }

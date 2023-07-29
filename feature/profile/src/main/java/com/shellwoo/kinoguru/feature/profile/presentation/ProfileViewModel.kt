@@ -3,47 +3,48 @@ package com.shellwoo.kinoguru.feature.profile.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.shellwoo.kinoguru.core.coroutines.launchTrying
-import com.shellwoo.kinoguru.shared.user.domain.entity.User
-import com.shellwoo.kinoguru.shared.user.domain.usecase.GetCurrentUserUseCase
+import com.shellwoo.kinoguru.feature.profile.domain.entity.Profile
+import com.shellwoo.kinoguru.feature.profile.domain.scenario.GetProfileScenario
+import com.shellwoo.kinoguru.shared.language.domain.entity.Language
+import com.shellwoo.kinoguru.shared.language.domain.usecase.SetCurrentLanguageUseCase
 import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor(
-    private val getCurrentUserUseCase: GetCurrentUserUseCase,
+    private val setCurrentLanguageUseCase: SetCurrentLanguageUseCase,
+    private val getProfileScenario: GetProfileScenario,
     private val router: ProfileRouter,
 ) : ViewModel() {
 
     private val _state = MutableLiveData<ProfileState>(ProfileState.Initial)
     val state: LiveData<ProfileState> = _state
 
-    fun loadInitialData() {
-        _state.value = ProfileState.Loading
+    fun selectLanguage(language: Language) {
+        setCurrentLanguageUseCase(language)
 
-        viewModelScope.launchTrying(
-            errorHandler = {
-                handleUserLoadingError()
-            },
-            block = {
-                val user = getCurrentUserUseCase()
-                handleCurrentUser(user)
-            }
-        )
+        loadProfile()
     }
 
-    private fun handleCurrentUser(user: User?) {
-        if (user != null) {
+    fun loadProfile() {
+        _state.value = ProfileState.Loading
+
+        val profile = getProfileScenario()
+        handleProfile(profile)
+    }
+
+    private fun handleProfile(profile: Profile?) {
+        if (profile != null) {
             _state.value = ProfileState.Content(
-                name = user.name,
-                email = user.email,
-                photoUrl = user.photoUrl,
+                name = profile.name,
+                email = profile.email,
+                photoUrl = profile.photoUrl,
+                language = profile.language,
             )
         } else {
             router.openLoginScreen()
         }
     }
 
-    private fun handleUserLoadingError() {
-        _state.value = ProfileState.InitialDataLoadingError
+    fun openLanguageScreen() {
+        router.openLanguageScreen()
     }
 }

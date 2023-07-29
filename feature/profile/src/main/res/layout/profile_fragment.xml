@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -24,7 +25,7 @@
 
     <LinearLayout
         android:id="@+id/content"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -39,19 +40,71 @@
             android:layout_height="@dimen/profile_photo_size"
             android:layout_margin="16dp"
             android:scaleType="fitCenter"
-            app:shapeAppearanceOverlay="@style/roundedImageView" />
+            app:shapeAppearanceOverlay="@style/roundedImageView"
+            tools:src="@drawable/glasses" />
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp" />
+            android:layout_marginHorizontal="16dp"
+            android:hint="@string/profile_name_hint"
+            android:saveEnabled="false"
+            app:startIconDrawable="@drawable/person">
 
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:inputType="none"
+                tools:text="John Johns" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp" />
+            android:layout_margin="16dp"
+            android:hint="@string/profile_email_hint"
+            android:saveEnabled="false"
+            app:startIconDrawable="@drawable/email">
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:inputType="none"
+                tools:text="JohnJohns@gmail.com" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/languageLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:hint="@string/profile_language_hint"
+            android:saveEnabled="false"
+            app:startIconDrawable="@drawable/language">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:drawableEnd="@drawable/arrow_right"
+                android:editable="false"
+                android:focusable="false"
+                android:inputType="none"
+                tools:text="English" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
