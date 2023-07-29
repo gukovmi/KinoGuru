@@ -1,6 +1,7 @@
 ext {
     versions = [
             "material"               : "1.6.1",
+            "androidxAppCompat"      : "1.6.1",
             "androidxArchCoreRuntime": "2.1.0",
             "androidxCoreKtx"        : "1.8.0",
             "androidxKtx"            : "1.5.1",
@@ -35,6 +36,7 @@ ext {
 
     libraries = [
             "material"                        : "com.google.android.material:material:$versions.material",
+            "androidxAppCompat"               : "androidx.appcompat:appcompat:$versions.androidxAppCompat",
             "androidxArchCoreRuntime"         : "androidx.arch.core:core-runtime:$versions.androidxArchCoreRuntime",
             "androidxCoreKtx"                 : "androidx.core:core-ktx:$versions.androidxCoreKtx",
             "androidxActivityKtx"             : "androidx.activity:activity-ktx:$versions.androidxKtx",
