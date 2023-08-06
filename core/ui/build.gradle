@@ -4,6 +4,8 @@ dependencies {
 
     implementation project(":core-di")
     implementation project(":core-presentation")
+    implementation project(":design-resource")
+
     implementation libraries.androidxFragmentKtx
     implementation libraries.dagger
     kapt libraries.daggerCompiler

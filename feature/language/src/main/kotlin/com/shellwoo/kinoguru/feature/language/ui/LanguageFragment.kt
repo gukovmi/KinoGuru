@@ -15,6 +15,7 @@ import com.shellwoo.kinoguru.shared.language.domain.entity.Language
 import com.shellwoo.kinoguru.shared.language.ui.LanguageResultContract
 import kotlinx.android.synthetic.main.language_fragment.*
 import javax.inject.Inject
+import com.shellwoo.kinoguru.design.resource.R as designResourceR
 
 class LanguageFragment : BaseFragment(R.layout.language_fragment) {
 
@@ -43,7 +44,7 @@ class LanguageFragment : BaseFragment(R.layout.language_fragment) {
     }
 
     private fun setupToolbar() {
-        val iconColor = getThemeColor(requireContext(), com.shellwoo.kinoguru.core.ui.R.attr.colorOnPrimary)
+        val iconColor = getThemeColor(requireContext(), designResourceR.attr.colorOnPrimary)
         toolbar.setNavigationIconTint(iconColor)
         toolbar.setNavigationOnClickListener { viewModel.close() }
     }

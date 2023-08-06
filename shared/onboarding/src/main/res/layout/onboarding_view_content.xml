@@ -10,8 +10,10 @@
 
     <TextView
         android:id="@+id/description"
+        style="@style/Text.SubHeader"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="?colorOnPrimary" />
 
     <Button
         android:id="@+id/ok"

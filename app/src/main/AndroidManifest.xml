@@ -13,7 +13,7 @@
         android:icon="@drawable/glasses"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.KinoGuru.Colored"
+        android:theme="@style/Base.Colored"
         android:localeConfig="@xml/locale_config"
         tools:targetApi="32">
         <activity

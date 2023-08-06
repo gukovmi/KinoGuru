@@ -1,15 +1,12 @@
 package com.shellwoo.kinoguru.shared.onboarding.ui
 
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.shellwoo.kinoguru.shared.onboarding.R
 import kotlinx.android.synthetic.main.onboarding_dialog_fragment.*
+import com.shellwoo.kinoguru.design.resource.R as designResourceR
 
 const val DESCRIPTION_KEY = "DESCRIPTION_KEY"
 private var Bundle.description: String
@@ -39,21 +36,9 @@ class OnboardingDialogFragment : DialogFragment(R.layout.onboarding_dialog_fragm
             }
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
-        super.onCreateDialog(savedInstanceState).apply {
-            window?.attributes?.windowAnimations = com.shellwoo.kinoguru.core.ui.R.style.DialogFragmentAnimation
-        }
-
-    override fun onStart() {
-        super.onStart()
-
-        setupWindow()
-    }
-
-    private fun setupWindow() {
-        val window = dialog?.window ?: return
-        window.setLayout(MATCH_PARENT, MATCH_PARENT)
-        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NO_TITLE, designResourceR.style.Dialog_Colored_Full_Transparent)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

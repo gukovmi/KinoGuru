@@ -19,6 +19,7 @@ import com.shellwoo.kinoguru.core.ui.ext.getLeftOnWindow
 import com.shellwoo.kinoguru.core.ui.ext.getThemeColor
 import com.shellwoo.kinoguru.core.ui.ext.getTopOnWindow
 import com.shellwoo.kinoguru.shared.onboarding.R
+import com.shellwoo.kinoguru.design.resource.R as designResourceR
 
 internal class OnboardingView @JvmOverloads constructor(
     context: Context,
@@ -48,8 +49,6 @@ internal class OnboardingView @JvmOverloads constructor(
         const val LINE_TOP_KEY = "LINE_TOP_KEY"
         const val LINE_BOTTOM_KEY = "LINE_BOTTOM_KEY"
 
-        const val CONTENT_COLOR = Color.WHITE
-
         const val LINE_WIDTH = 4f
         const val LINE_DASH_INTERVAL = 20f
         const val LINE_HEIGHT = 200f
@@ -64,14 +63,14 @@ internal class OnboardingView @JvmOverloads constructor(
 
     private val linePaint = Paint().apply {
         style = Paint.Style.STROKE
-        color = CONTENT_COLOR
+        color = getThemeColor(context, designResourceR.attr.colorOnPrimary)
         strokeWidth = LINE_WIDTH
         pathEffect = DashPathEffect(floatArrayOf(LINE_DASH_INTERVAL, LINE_DASH_INTERVAL), 0f)
     }
 
     private var statusBarHeight = 0f
 
-    private val bgColor = getThemeColor(context, com.shellwoo.kinoguru.core.ui.R.attr.colorOverlayDark)
+    private val bgColor = getThemeColor(context, designResourceR.attr.colorOverlayDark)
 
     private var holeLeft = 0f
     private var holeRight = 0f
@@ -131,8 +130,8 @@ internal class OnboardingView @JvmOverloads constructor(
         holeLeft = view.getLeftOnWindow().toFloat() - view.marginStart - view.paddingStart
         val horizontalExtraSpace = view.marginStart + view.paddingStart + view.marginEnd + view.paddingEnd
         holeRight = holeLeft + view.measuredWidth + horizontalExtraSpace
-        holeTop = view.getTopOnWindow().toFloat() - statusBarHeight - view.paddingTop - view.marginTop
-        val verticalExtraSpace = view.marginBottom + view.paddingBottom + view.marginTop + view.paddingTop
+        holeTop = view.getTopOnWindow().toFloat() - statusBarHeight - view.marginTop
+        val verticalExtraSpace = view.marginBottom + view.marginTop
         holeBottom = holeTop + view.measuredHeight + verticalExtraSpace
     }
 

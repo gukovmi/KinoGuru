@@ -2,8 +2,8 @@ package com.shellwoo.kinoguru.core.ui.component
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.shellwoo.kinoguru.core.ui.R
 import kotlin.reflect.KClass
+import com.shellwoo.kinoguru.design.resource.R as designResourceR
 
 class FragmentTransactionAnimator(
     private val rootFragments: Set<KClass<out Fragment>>,
@@ -17,10 +17,10 @@ class FragmentTransactionAnimator(
 
     private fun setSlideFromBottomAnimation(fragmentTransaction: FragmentTransaction) {
         fragmentTransaction.setCustomAnimations(
-            R.anim.slide_in_up_with_show,
+            designResourceR.anim.slide_in_up_with_show,
             0,
             0,
-            R.anim.slide_out_down_with_fade,
+            designResourceR.anim.slide_out_down_with_fade,
         )
     }
 }
