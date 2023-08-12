@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_auto_time">Auto by time</string>
+    <string name="theme_follow_system">Systemic</string>
+    <string name="theme_auto_battery">Auto by battery</string>
+    <string name="theme_unspecified">Unspecified</string>
+</resources>

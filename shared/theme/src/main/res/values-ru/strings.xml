@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Темная</string>
+    <string name="theme_auto_time">В зависимости от времени</string>
+    <string name="theme_follow_system">Системная</string>
+    <string name="theme_auto_battery">В зависимости от батареи</string>
+    <string name="theme_unspecified">Неопределенная</string>
+</resources>

@@ -1,0 +1,17 @@
+apply from: "$rootDir/dependencies.gradle"
+
+dependencies {
+    implementation project(":core-ui")
+
+    implementation libraries.androidxAppCompat
+    implementation libraries.dagger
+    kapt libraries.daggerCompiler
+    implementation libraries.datastorePreferences
+    implementation libraries.gson
+
+    testImplementation libraries.junitJupiter
+    testImplementation libraries.mockitoInline
+    testImplementation libraries.mockitoJunit
+    testImplementation libraries.mockitoKotlin
+    testImplementation libraries.kotlinxCoroutinesTest
+}

@@ -27,6 +27,7 @@ def modules = [
         ':feature-search'      : 'feature/search',
         ':shared-language'     : 'shared/language',
         ':shared-onboarding'   : 'shared/onboarding',
+        ':shared-theme'        : 'shared/theme',
         ':shared-user'         : 'shared/user',
 ]
 
