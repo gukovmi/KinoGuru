@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Text" parent="android:TextAppearance">
-        <item name="android:textColor">?colorOnSecondary</item>
-    </style>
+    <style name="Text" parent="android:TextAppearance" />
 
     <style name="Text.SubHeader">
         <item name="android:textSize">20sp</item>
