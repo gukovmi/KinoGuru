@@ -7,6 +7,7 @@ import com.shellwoo.kinoguru.feature.main.ui.MainFragment
 import com.shellwoo.kinoguru.feature.profile.ui.ProfileFragment
 import com.shellwoo.kinoguru.feature.search.ui.SearchFragment
 import com.shellwoo.kinoguru.feature.splash.ui.SplashFragment
+import com.shellwoo.kinoguru.feature.theme.ui.ThemeFragment
 import dagger.Module
 import dagger.Provides
 
@@ -23,6 +24,7 @@ class AnimationModule {
                 ProfileFragment::class,
                 SplashFragment::class,
                 SearchFragment::class,
+                ThemeFragment::class,
             )
         )
 }
