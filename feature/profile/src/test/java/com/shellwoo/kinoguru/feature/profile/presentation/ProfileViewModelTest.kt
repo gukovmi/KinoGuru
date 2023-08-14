@@ -7,6 +7,9 @@ import com.shellwoo.kinoguru.feature.profile.domain.entity.Profile
 import com.shellwoo.kinoguru.feature.profile.domain.scenario.GetProfileScenario
 import com.shellwoo.kinoguru.shared.language.domain.entity.Language
 import com.shellwoo.kinoguru.shared.language.domain.usecase.SetCurrentLanguageUseCase
+import com.shellwoo.kinoguru.shared.theme.domain.entity.Theme
+import com.shellwoo.kinoguru.shared.theme.domain.usecase.SetCurrentThemeUseCase
+import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.junit.jupiter.MockitoExtension
@@ -18,10 +21,11 @@ import org.mockito.kotlin.whenever
 class ProfileViewModelTest {
 
     private val setCurrentLanguageUseCase: SetCurrentLanguageUseCase = mock()
+    private val setCurrentThemeUseCase: SetCurrentThemeUseCase = mock()
     private val getProfileScenario: GetProfileScenario = mock()
     private val router: ProfileRouter = mock()
 
-    private val viewModel = ProfileViewModel(setCurrentLanguageUseCase, getProfileScenario, router)
+    private val viewModel = ProfileViewModel(setCurrentLanguageUseCase, setCurrentThemeUseCase, getProfileScenario, router)
 
     private val stateObserver: Observer<ProfileState> = mock()
 
@@ -48,12 +52,14 @@ class ProfileViewModelTest {
             email = "max@gmail.com",
             photoUrl = "google.com/images",
             language = Language.ENGLISH,
+            theme = Theme.DARK,
         )
         val contentState = ProfileState.Content(
             name = profile.name,
             email = profile.email,
             photoUrl = profile.photoUrl,
-            language = profile.language
+            language = profile.language,
+            theme = Theme.DARK,
         )
         whenever(getProfileScenario()).thenReturn(profile)
         viewModel.state.observeForever(stateObserver)
@@ -92,6 +98,23 @@ class ProfileViewModelTest {
         viewModel.state.observeForever(stateObserver)
 
         viewModel.selectLanguage(Language.ENGLISH)
+
+        verify(stateObserver).onChanged(ProfileState.Loading)
+    }
+
+    @Test
+    fun `select theme EXPECT set current theme`() = runTest {
+        val theme = Theme.DARK
+        viewModel.selectTheme(theme)
+
+        verify(setCurrentThemeUseCase).invoke(theme)
+    }
+
+    @Test
+    fun `select theme EXPECT loading state`() {
+        viewModel.state.observeForever(stateObserver)
+
+        viewModel.selectTheme(Theme.DARK)
 
         verify(stateObserver).onChanged(ProfileState.Loading)
     }

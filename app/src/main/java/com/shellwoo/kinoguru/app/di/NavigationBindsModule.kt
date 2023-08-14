@@ -6,6 +6,7 @@ import com.shellwoo.kinoguru.feature.login.presentation.LoginRouter
 import com.shellwoo.kinoguru.feature.main.presentation.MainRouter
 import com.shellwoo.kinoguru.feature.profile.presentation.ProfileRouter
 import com.shellwoo.kinoguru.feature.splash.presentation.SplashRouter
+import com.shellwoo.kinoguru.feature.theme.presentation.ThemeRouter
 import dagger.Binds
 import dagger.Module
 
@@ -26,4 +27,7 @@ interface NavigationBindsModule {
 
     @Binds
     fun bindProfileRouter(impl: ProfileRouterImpl): ProfileRouter
+
+    @Binds
+    fun bindThemeRouter(impl: ThemeRouterImpl): ThemeRouter
 }

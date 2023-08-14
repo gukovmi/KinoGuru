@@ -4,4 +4,5 @@
     <string name="profile_name_hint">Имя</string>
     <string name="profile_email_hint">Почта</string>
     <string name="profile_language_hint">Язык</string>
+    <string name="profile_theme_hint">Тема</string>
 </resources>

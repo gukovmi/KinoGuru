@@ -5,10 +5,11 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
+import javax.inject.Inject
 
-class NotificationChannelFactory(private val context: Context) {
+class NotificationChannelInitializer @Inject constructor(private val context: Context) {
 
-    fun create() {
+    operator fun invoke() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createRemoteChannel()
         }

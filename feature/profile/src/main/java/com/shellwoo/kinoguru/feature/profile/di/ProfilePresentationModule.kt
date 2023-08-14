@@ -5,11 +5,12 @@ import com.shellwoo.kinoguru.core.di.ViewModelFactoryModule
 import com.shellwoo.kinoguru.core.di.ViewModelKey
 import com.shellwoo.kinoguru.feature.profile.presentation.ProfileViewModel
 import com.shellwoo.kinoguru.shared.language.di.LanguageDataModule
+import com.shellwoo.kinoguru.shared.theme.di.ThemeDataModule
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
-@Module(includes = [LanguageDataModule::class, ViewModelFactoryModule::class])
+@Module(includes = [LanguageDataModule::class, ThemeDataModule::class, ViewModelFactoryModule::class])
 internal interface ProfilePresentationModule {
 
     @Binds

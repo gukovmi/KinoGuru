@@ -3,6 +3,8 @@ package com.shellwoo.kinoguru.feature.profile.domain.scenario
 import com.shellwoo.kinoguru.feature.profile.domain.entity.Profile
 import com.shellwoo.kinoguru.shared.language.domain.entity.Language
 import com.shellwoo.kinoguru.shared.language.domain.usecase.GetCurrentLanguageUseCase
+import com.shellwoo.kinoguru.shared.theme.domain.entity.Theme
+import com.shellwoo.kinoguru.shared.theme.domain.usecase.GetCurrentThemeUseCase
 import com.shellwoo.kinoguru.shared.user.domain.entity.User
 import com.shellwoo.kinoguru.shared.user.domain.usecase.GetCurrentUserUseCase
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -18,8 +20,9 @@ class GetProfileScenarioTest {
 
     private val getCurrentUserUseCase: GetCurrentUserUseCase = mock()
     private val getCurrentLanguageUseCase: GetCurrentLanguageUseCase = mock()
+    private val getCurrentThemeUseCase: GetCurrentThemeUseCase = mock()
 
-    private val scenario = GetProfileScenario(getCurrentUserUseCase, getCurrentLanguageUseCase)
+    private val scenario = GetProfileScenario(getCurrentUserUseCase, getCurrentLanguageUseCase, getCurrentThemeUseCase)
 
     @Test
     fun `invoke, current user is not null EXPECT profile`() {
@@ -33,9 +36,11 @@ class GetProfileScenarioTest {
             email = "max@gmail.com",
             photoUrl = "google.com/images",
             language = Language.ENGLISH,
+            theme = Theme.DARK,
         )
         whenever(getCurrentUserUseCase()).thenReturn(user)
         whenever(getCurrentLanguageUseCase()).thenReturn(Language.ENGLISH)
+        whenever(getCurrentThemeUseCase()).thenReturn(Theme.DARK)
 
         val actual = scenario()
 
