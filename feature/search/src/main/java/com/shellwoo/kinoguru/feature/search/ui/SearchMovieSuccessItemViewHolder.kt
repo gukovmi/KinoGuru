@@ -1,16 +1,17 @@
 package com.shellwoo.kinoguru.feature.search.ui
 
-import android.graphics.Color
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
+import com.shellwoo.kinoguru.core.ui.ext.getThemeColor
 import com.shellwoo.kinoguru.core.ui.ext.inflate
 import com.shellwoo.kinoguru.feature.search.BaseUrls
 import com.shellwoo.kinoguru.feature.search.R
 import com.shellwoo.kinoguru.feature.search.presentation.SearchMovieItem
 import kotlinx.android.synthetic.main.search_movie_success_item.view.*
+import com.shellwoo.kinoguru.design.resource.R as designR
 
 class SearchMovieSuccessItemViewHolder(parent: ViewGroup) :
     RecyclerView.ViewHolder(parent.inflate(R.layout.search_movie_success_item, false)) {
@@ -54,10 +55,10 @@ class SearchMovieSuccessItemViewHolder(parent: ViewGroup) :
     @ColorInt
     private fun getRatingBackgroundColor(value: Double?): Int =
         when (value) {
-            null -> Color.GRAY
-            in 0.1..5.0 -> Color.RED
-            in 7.0..10.0 -> Color.GREEN
-            else -> Color.GRAY
+            null -> getThemeColor(itemView.context, designR.attr.colorNeutral)
+            in 0.1..5.0 -> getThemeColor(itemView.context, designR.attr.colorNegative)
+            in 7.0..10.0 -> getThemeColor(itemView.context, designR.attr.colorPositive)
+            else -> getThemeColor(itemView.context, designR.attr.colorNeutral)
         }
 
     private fun getRatingText(value: Double?): String =
