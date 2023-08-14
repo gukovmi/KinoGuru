@@ -16,6 +16,8 @@ import com.shellwoo.kinoguru.feature.profile.presentation.ProfileState
 import com.shellwoo.kinoguru.feature.profile.presentation.ProfileViewModel
 import com.shellwoo.kinoguru.shared.language.ui.LanguageNameConverter
 import com.shellwoo.kinoguru.shared.language.ui.LanguageResultContract
+import com.shellwoo.kinoguru.shared.theme.ui.ThemeNameConverter
+import com.shellwoo.kinoguru.shared.theme.ui.ThemeResultContract
 import kotlinx.android.synthetic.main.profile_fragment.*
 import javax.inject.Inject
 
@@ -29,6 +31,9 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
     @Inject
     lateinit var languageNameConverter: LanguageNameConverter
+
+    @Inject
+    lateinit var themeNameConverter: ThemeNameConverter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,7 +52,9 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
     private fun initListeners() {
         setResultListener(LanguageResultContract, viewModel::selectLanguage)
+        setResultListener(ThemeResultContract, viewModel::selectTheme)
         language.setOnClickListener { viewModel.openLanguageScreen() }
+        theme.setOnClickListener { viewModel.openThemeScreen() }
     }
 
     private fun renderState(state: ProfileState) {
@@ -83,5 +90,6 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
         }
 
         language.setText(languageNameConverter.toName(state.language))
+        theme.setText(themeNameConverter.toName(state.theme))
     }
 }

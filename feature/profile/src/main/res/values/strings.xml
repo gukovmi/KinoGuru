@@ -4,4 +4,5 @@
     <string name="profile_name_hint">Name</string>
     <string name="profile_email_hint">Email</string>
     <string name="profile_language_hint">Language</string>
+    <string name="profile_theme_hint">Theme</string>
 </resources>

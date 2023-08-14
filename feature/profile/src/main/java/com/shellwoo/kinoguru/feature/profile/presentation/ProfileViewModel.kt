@@ -3,14 +3,19 @@ package com.shellwoo.kinoguru.feature.profile.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.shellwoo.kinoguru.feature.profile.domain.entity.Profile
 import com.shellwoo.kinoguru.feature.profile.domain.scenario.GetProfileScenario
 import com.shellwoo.kinoguru.shared.language.domain.entity.Language
 import com.shellwoo.kinoguru.shared.language.domain.usecase.SetCurrentLanguageUseCase
+import com.shellwoo.kinoguru.shared.theme.domain.entity.Theme
+import com.shellwoo.kinoguru.shared.theme.domain.usecase.SetCurrentThemeUseCase
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor(
     private val setCurrentLanguageUseCase: SetCurrentLanguageUseCase,
+    private val setCurrentThemeUseCase: SetCurrentThemeUseCase,
     private val getProfileScenario: GetProfileScenario,
     private val router: ProfileRouter,
 ) : ViewModel() {
@@ -22,6 +27,14 @@ class ProfileViewModel @Inject constructor(
         setCurrentLanguageUseCase(language)
 
         loadProfile()
+    }
+
+    fun selectTheme(theme: Theme) {
+        viewModelScope.launch {
+            setCurrentThemeUseCase(theme)
+
+            loadProfile()
+        }
     }
 
     fun loadProfile() {
@@ -38,6 +51,7 @@ class ProfileViewModel @Inject constructor(
                 email = profile.email,
                 photoUrl = profile.photoUrl,
                 language = profile.language,
+                theme = profile.theme,
             )
         } else {
             router.openLoginScreen()
@@ -46,5 +60,9 @@ class ProfileViewModel @Inject constructor(
 
     fun openLanguageScreen() {
         router.openLanguageScreen()
+    }
+
+    fun openThemeScreen() {
+        router.openThemeScreen()
     }
 }

@@ -7,15 +7,18 @@ dependencies {
     implementation project(":core-ui")
     implementation project(":design-resource")
     implementation project(":shared-language")
+    implementation project(":shared-theme")
     implementation project(":shared-user")
 
     implementation libraries.androidxFragmentKtx
     implementation libraries.cicerone
     implementation libraries.dagger
     kapt libraries.daggerCompiler
+    implementation libraries.datastorePreferences
     implementation libraries.firebaseAuthKtx
     implementation libraries.glide
     kapt libraries.glideCompiler
+    implementation libraries.gson
     implementation libraries.material
 
     testImplementation project(":core-test-unit")

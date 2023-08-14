@@ -34,28 +34,32 @@ tasks.withType(Test) {
 
 dependencies {
 
-	implementation project(":core-di")
-	implementation project(":core-navigation")
-	implementation project(":core-ui")
-	implementation project(":design-resource")
+    implementation project(":core-di")
+    implementation project(":core-navigation")
+    implementation project(":core-ui")
+    implementation project(":design-resource")
     implementation project(":feature-language")
-	implementation project(":feature-login")
-	implementation project(":feature-main")
-	implementation project(":feature-notification")
-	implementation project(":feature-profile")
-	implementation project(":feature-search")
-	implementation project(":feature-splash")
+    implementation project(":feature-login")
+    implementation project(":feature-main")
+    implementation project(":feature-notification")
+    implementation project(":feature-profile")
+    implementation project(":feature-search")
+    implementation project(":feature-splash")
+    implementation project(":feature-theme")
+    implementation project(":shared-theme")
 
-	implementation libraries.androidxActivityKtx
-	implementation libraries.androidxCoreKtx
-	implementation libraries.cicerone
-	implementation libraries.dagger
-	kapt libraries.daggerCompiler
-	implementation libraries.material
-	implementation libraries.retrofit
+    implementation libraries.androidxActivityKtx
+    implementation libraries.androidxCoreKtx
+    implementation libraries.cicerone
+    implementation libraries.dagger
+    kapt libraries.daggerCompiler
+    implementation libraries.datastorePreferences
+    implementation libraries.gson
+    implementation libraries.material
+    implementation libraries.retrofit
 
-	testImplementation libraries.junitJupiter
-	testImplementation libraries.mockitoKotlin
-	androidTestImplementation libraries.androidxTestJunit
-	androidTestImplementation libraries.espresso
+    testImplementation libraries.junitJupiter
+    testImplementation libraries.mockitoKotlin
+    androidTestImplementation libraries.androidxTestJunit
+    androidTestImplementation libraries.espresso
 }

@@ -1,6 +1,7 @@
 package com.shellwoo.kinoguru.feature.profile.presentation
 
 import com.shellwoo.kinoguru.shared.language.domain.entity.Language
+import com.shellwoo.kinoguru.shared.theme.domain.entity.Theme
 
 sealed interface ProfileState {
 
@@ -13,5 +14,6 @@ sealed interface ProfileState {
         val email: String?,
         val photoUrl: String?,
         val language: Language,
+        val theme: Theme,
     ) : ProfileState
 }

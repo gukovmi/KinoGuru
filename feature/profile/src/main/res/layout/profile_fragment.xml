@@ -68,7 +68,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
             android:hint="@string/profile_email_hint"
             android:saveEnabled="false"
             app:startIconDrawable="@drawable/email">
@@ -89,6 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
             android:hint="@string/profile_language_hint"
             android:saveEnabled="false"
             app:startIconDrawable="@drawable/language">
@@ -103,6 +105,30 @@
                 android:focusable="false"
                 android:inputType="none"
                 tools:text="English" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/themeLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/profile_theme_hint"
+            android:saveEnabled="false"
+            app:startIconDrawable="@drawable/day_night">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:drawableEnd="@drawable/arrow_right"
+                android:editable="false"
+                android:focusable="false"
+                android:inputType="none"
+                tools:text="Light" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

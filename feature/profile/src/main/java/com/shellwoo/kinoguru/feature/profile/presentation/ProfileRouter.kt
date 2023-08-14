@@ -5,4 +5,6 @@ interface ProfileRouter {
     fun openLoginScreen()
 
     fun openLanguageScreen()
+
+    fun openThemeScreen()
 }

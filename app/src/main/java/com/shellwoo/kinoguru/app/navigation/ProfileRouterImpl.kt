@@ -4,6 +4,7 @@ import com.shellwoo.kinoguru.feature.language.LanguageDestination
 import com.shellwoo.kinoguru.feature.login.LoginDestination
 import com.shellwoo.kinoguru.feature.main.navigation.MainCiceroneRouter
 import com.shellwoo.kinoguru.feature.profile.presentation.ProfileRouter
+import com.shellwoo.kinoguru.feature.theme.ThemeDestination
 import javax.inject.Inject
 
 class ProfileRouterImpl @Inject constructor(
@@ -17,5 +18,9 @@ class ProfileRouterImpl @Inject constructor(
 
     override fun openLanguageScreen() {
         mainRouter.navigateTo(LanguageDestination())
+    }
+
+    override fun openThemeScreen() {
+        mainRouter.navigateTo(ThemeDestination())
     }
 }
