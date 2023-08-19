@@ -14,6 +14,7 @@ import com.shellwoo.kinoguru.feature.search.presentation.ScreenState
 import com.shellwoo.kinoguru.feature.search.presentation.SearchState
 import com.shellwoo.kinoguru.feature.search.presentation.SearchViewModel
 import com.shellwoo.kinoguru.shared.onboarding.ui.OnboardingDialogFragment
+import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import kotlinx.android.synthetic.main.search_fragment.*
 import javax.inject.Inject
 
@@ -33,13 +34,18 @@ class SearchFragment : BaseFragment(R.layout.search_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        movies.adapter = adapter
+        initRecycler()
         initListeners()
         observeViewModel()
 
         if (savedInstanceState == null) {
             viewModel.start()
         }
+    }
+
+    private fun initRecycler() {
+        movies.adapter = adapter
+        movies.itemAnimator = ScaleInAnimator()
     }
 
     private fun initListeners() {
