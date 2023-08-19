@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="colorOnPrimary" format="color|reference" />
+
     <attr name="colorOverlayDark" format="color|reference" />
-    <attr name="colorNeutral" format="color|reference" />
-    <attr name="colorNegative" format="color|reference" />
-    <attr name="colorPositive" format="color|reference" />
+
+    <attr name="colorPermanentNeutral" format="color|reference" />
+    <attr name="colorPermanentNegative" format="color|reference" />
+    <attr name="colorPermanentPositive" format="color|reference" />
+    <attr name="colorPermanentLight" format="color|reference" />
 </resources>
