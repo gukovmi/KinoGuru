@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
-import com.shellwoo.kinoguru.core.ui.ext.getThemeColor
-import com.shellwoo.kinoguru.core.ui.ext.setNavigationIconTint
 import com.shellwoo.kinoguru.core.ui.ext.setResult
 import com.shellwoo.kinoguru.feature.theme.R
 import com.shellwoo.kinoguru.feature.theme.di.ThemeComponentViewModel
@@ -15,7 +13,6 @@ import com.shellwoo.kinoguru.shared.theme.domain.entity.Theme
 import com.shellwoo.kinoguru.shared.theme.ui.ThemeResultContract
 import kotlinx.android.synthetic.main.theme_fragment.*
 import javax.inject.Inject
-import com.shellwoo.kinoguru.design.resource.R as designResourceR
 
 class ThemeFragment : BaseFragment(R.layout.theme_fragment) {
 
@@ -33,7 +30,7 @@ class ThemeFragment : BaseFragment(R.layout.theme_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupToolbar()
+        toolbar.setNavigationOnClickListener { viewModel.close() }
         themeAdapter.setOnClickListener(::selectTheme)
         viewModel.themes.observe(viewLifecycleOwner, ::renderThemes)
     }
@@ -41,12 +38,6 @@ class ThemeFragment : BaseFragment(R.layout.theme_fragment) {
     private fun selectTheme(theme: Theme) {
         setResult(ThemeResultContract, theme)
         viewModel.close()
-    }
-
-    private fun setupToolbar() {
-        val iconColor = getThemeColor(requireContext(), designResourceR.attr.colorOnPrimary)
-        toolbar.setNavigationIconTint(iconColor)
-        toolbar.setNavigationOnClickListener { viewModel.close() }
     }
 
     private fun renderThemes(values: List<Theme>) {

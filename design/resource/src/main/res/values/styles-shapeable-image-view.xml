@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ShapeableImageView" parent="ImageView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlayRounded</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlayRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10%</item>
+    </style>
+
+</resources>
