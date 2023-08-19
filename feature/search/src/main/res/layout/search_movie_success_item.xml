@@ -7,6 +7,7 @@
 
     <ImageView
         android:id="@+id/poster"
+        style="@style/ImageView"
         android:layout_width="@dimen/movie_search_result_poster_width"
         android:layout_height="@dimen/movie_search_result_poster_height"
         android:layout_margin="16dp"
@@ -15,17 +16,18 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@android:drawable/ic_menu_camera" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/rating"
         style="@style/Text.Body.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="4dp"
+        android:textColor="?attr/colorPermanentLight"
         app:layout_constraintBottom_toBottomOf="@id/poster"
         app:layout_constraintStart_toStartOf="@id/poster"
         tools:text="4.0" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
         style="@style/Text.SubHeader"
         android:layout_width="0dp"
@@ -36,7 +38,7 @@
         app:layout_constraintTop_toTopOf="@+id/poster"
         tools:text="Batman" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/description"
         style="@style/Text.Body.Normal"
         android:layout_width="0dp"

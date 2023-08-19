@@ -9,15 +9,15 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/AppBarLayout"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="?colorPrimary"
-            app:title="@string/search_title"
-            app:titleTextColor="?colorOnPrimary" />
+            style="@style/Toolbar"
+            app:title="@string/search_title" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

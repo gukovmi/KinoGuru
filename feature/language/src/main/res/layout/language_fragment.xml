@@ -9,16 +9,16 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
+        style="@style/AppBarLayout"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="?colorPrimary"
             app:navigationIcon="@drawable/close"
-            app:title="@string/language_toolbar_title"
-            app:titleTextColor="?colorOnPrimary" />
+            style="@style/Toolbar"
+            app:title="@string/language_toolbar_title" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

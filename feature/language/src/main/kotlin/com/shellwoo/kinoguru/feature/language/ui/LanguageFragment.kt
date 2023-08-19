@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
-import com.shellwoo.kinoguru.core.ui.ext.getThemeColor
-import com.shellwoo.kinoguru.core.ui.ext.setNavigationIconTint
 import com.shellwoo.kinoguru.core.ui.ext.setResult
 import com.shellwoo.kinoguru.feature.language.R
 import com.shellwoo.kinoguru.feature.language.di.LanguageComponentViewModel
@@ -15,7 +13,6 @@ import com.shellwoo.kinoguru.shared.language.domain.entity.Language
 import com.shellwoo.kinoguru.shared.language.ui.LanguageResultContract
 import kotlinx.android.synthetic.main.language_fragment.*
 import javax.inject.Inject
-import com.shellwoo.kinoguru.design.resource.R as designResourceR
 
 class LanguageFragment : BaseFragment(R.layout.language_fragment) {
 
@@ -33,7 +30,7 @@ class LanguageFragment : BaseFragment(R.layout.language_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupToolbar()
+        toolbar.setNavigationOnClickListener { viewModel.close() }
         languageAdapter.setOnClickListener(::selectLanguage)
         viewModel.languages.observe(viewLifecycleOwner, ::renderLanguages)
     }
@@ -41,12 +38,6 @@ class LanguageFragment : BaseFragment(R.layout.language_fragment) {
     private fun selectLanguage(language: Language) {
         setResult(LanguageResultContract, language)
         viewModel.close()
-    }
-
-    private fun setupToolbar() {
-        val iconColor = getThemeColor(requireContext(), designResourceR.attr.colorOnPrimary)
-        toolbar.setNavigationIconTint(iconColor)
-        toolbar.setNavigationOnClickListener { viewModel.close() }
     }
 
     private fun renderLanguages(values: List<Language>) {

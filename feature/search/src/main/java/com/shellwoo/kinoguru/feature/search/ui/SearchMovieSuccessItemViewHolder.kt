@@ -55,10 +55,10 @@ class SearchMovieSuccessItemViewHolder(parent: ViewGroup) :
     @ColorInt
     private fun getRatingBackgroundColor(value: Double?): Int =
         when (value) {
-            null -> getThemeColor(itemView.context, designR.attr.colorNeutral)
-            in 0.1..5.0 -> getThemeColor(itemView.context, designR.attr.colorNegative)
-            in 7.0..10.0 -> getThemeColor(itemView.context, designR.attr.colorPositive)
-            else -> getThemeColor(itemView.context, designR.attr.colorNeutral)
+            null -> getThemeColor(itemView.context, designR.attr.colorPermanentNeutral)
+            in 0.1..5.0 -> getThemeColor(itemView.context, designR.attr.colorPermanentNegative)
+            in 7.0..10.0 -> getThemeColor(itemView.context, designR.attr.colorPermanentPositive)
+            else -> getThemeColor(itemView.context, designR.attr.colorPermanentNeutral)
         }
 
     private fun getRatingText(value: Double?): String =

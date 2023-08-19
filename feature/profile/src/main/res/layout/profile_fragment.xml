@@ -9,17 +9,17 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/AppBarLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="?colorPrimary"
-            app:title="@string/profile_title"
-            app:titleTextColor="?colorOnPrimary" />
+            style="@style/Toolbar"
+            app:title="@string/profile_title" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -40,12 +40,12 @@
             android:layout_height="@dimen/profile_photo_size"
             android:layout_margin="16dp"
             android:scaleType="fitCenter"
-            app:shapeAppearanceOverlay="@style/roundedImageView"
+            style="@style/ShapeableImageView"
             tools:src="@drawable/glasses" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -53,7 +53,7 @@
             android:saveEnabled="false"
             app:startIconDrawable="@drawable/person">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -74,7 +74,7 @@
             android:saveEnabled="false"
             app:startIconDrawable="@drawable/email">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,13 +86,15 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/languageLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/profile_language_hint"
             android:saveEnabled="false"
+            app:endIconDrawable="@drawable/arrow_right"
+            app:endIconMode="custom"
             app:startIconDrawable="@drawable/language">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -100,7 +102,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:drawableEnd="@drawable/arrow_right"
                 android:editable="false"
                 android:focusable="false"
                 android:inputType="none"
@@ -110,13 +111,15 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/themeLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/profile_theme_hint"
             android:saveEnabled="false"
+            app:endIconDrawable="@drawable/arrow_right"
+            app:endIconMode="custom"
             app:startIconDrawable="@drawable/day_night">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -124,7 +127,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:drawableEnd="@drawable/arrow_right"
                 android:editable="false"
                 android:focusable="false"
                 android:inputType="none"
@@ -134,7 +136,7 @@
 
     </LinearLayout>
 
-    <ProgressBar
+    <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
