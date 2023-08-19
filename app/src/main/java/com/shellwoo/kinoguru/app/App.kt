@@ -1,6 +1,7 @@
 package com.shellwoo.kinoguru.app
 
 import android.app.Application
+import com.google.android.material.color.DynamicColors
 import com.shellwoo.kinoguru.app.di.AppComponent
 import com.shellwoo.kinoguru.app.di.DaggerAppComponent
 import com.shellwoo.kinoguru.app.di.MainActivityDeps
@@ -45,10 +46,9 @@ class App : Application(),
         super.onCreate()
         appComponent.inject(this)
 
-        mainScope.launch {
-            initThemeUseCase()
-            notificationChannelInitializer()
-        }
+        notificationChannelInitializer()
+        DynamicColors.applyToActivitiesIfAvailable(this)
+        mainScope.launch { initThemeUseCase() }
     }
 
     override val mainDeps: MainDeps = appComponent
