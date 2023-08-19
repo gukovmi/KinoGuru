@@ -17,6 +17,7 @@ dependencies {
     implementation libraries.glide
     implementation libraries.gson
     implementation libraries.material
+    implementation libraries.recyclerViewAnimators
     implementation libraries.retrofit
     implementation libraries.retrofitConverterGson
 
