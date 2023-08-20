@@ -1,12 +1,12 @@
 package com.shellwoo.kinoguru.feature.search.di
 
 import com.shellwoo.kinoguru.feature.search.ui.SearchFragment
-import com.shellwoo.kinoguru.shared.language.di.LanguageDataModule
+import com.shellwoo.kinoguru.shared.language.di.LanguageDataComponent
 import dagger.Component
 
 @Component(
-    dependencies = [SearchDeps::class],
-    modules = [SearchPresentationModule::class, LanguageDataModule::class]
+    dependencies = [SearchDeps::class, LanguageDataComponent::class],
+    modules = [SearchPresentationModule::class]
 )
 internal interface SearchComponent {
 
@@ -15,6 +15,7 @@ internal interface SearchComponent {
         fun create(searchDeps: SearchDeps): SearchComponent =
             DaggerSearchComponent.builder()
                 .searchDeps(searchDeps)
+                .languageDataComponent(LanguageDataComponent.create())
                 .build()
     }
 

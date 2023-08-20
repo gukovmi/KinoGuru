@@ -1,8 +1,13 @@
 package com.shellwoo.kinoguru.feature.language.di
 
+import com.shellwoo.kinoguru.feature.language.ui.LanguageFragment
+import com.shellwoo.kinoguru.shared.language.di.LanguageDataComponent
 import dagger.Component
 
-@Component(modules = [LanguagePresentationModule::class], dependencies = [LanguageDeps::class])
+@Component(
+    dependencies = [LanguageDeps::class, LanguageDataComponent::class],
+    modules = [LanguagePresentationModule::class],
+)
 interface LanguageComponent {
 
     companion object {
@@ -10,8 +15,9 @@ interface LanguageComponent {
         fun create(languageDeps: LanguageDeps): LanguageComponent =
             DaggerLanguageComponent.builder()
                 .languageDeps(languageDeps)
+                .languageDataComponent(LanguageDataComponent.create())
                 .build()
     }
 
-    fun inject(fragment: com.shellwoo.kinoguru.feature.language.ui.LanguageFragment)
+    fun inject(fragment: LanguageFragment)
 }
