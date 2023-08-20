@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.shellwoo.kinoguru.core.coroutines.launchTrying
 import com.shellwoo.kinoguru.core.presentation.SingleLiveEvent
 import com.shellwoo.kinoguru.feature.search.domain.entity.SearchMovie
-import com.shellwoo.kinoguru.feature.search.domain.usecase.GetSearchMovieResultUseCase
+import com.shellwoo.kinoguru.feature.search.domain.usecase.GetSearchMovieResultScenario
 import com.shellwoo.kinoguru.feature.search.domain.usecase.IsSearchOnboardingShowedUseCase
 import com.shellwoo.kinoguru.feature.search.domain.usecase.SetSearchOnboardingShowedUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +18,7 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val isSearchOnboardingShowedUseCase: IsSearchOnboardingShowedUseCase,
     private val setSearchOnboardingShowedUseCase: SetSearchOnboardingShowedUseCase,
-    private val getSearchMovieResultUseCase: GetSearchMovieResultUseCase,
+    private val getSearchMovieResultScenario: GetSearchMovieResultScenario,
 ) : ViewModel() {
 
     private companion object {
@@ -81,7 +81,7 @@ class SearchViewModel @Inject constructor(
                 _state.value = currentContentState?.copy(searchState = SearchState.Result(SEARCH_MOVIE_ITEMS_LOADING))
 
                 val query = currentContentState?.query ?: return@launchTrying
-                val searchMovieResult = getSearchMovieResultUseCase(query)
+                val searchMovieResult = getSearchMovieResultScenario(query)
                 _state.value = currentContentState?.copy(
                     searchState = SearchState.Result(searchMovieResult.movies.toSearchMovieSuccessItems())
                 )
