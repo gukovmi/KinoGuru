@@ -1,9 +1,13 @@
 package com.shellwoo.kinoguru.feature.theme.di
 
 import com.shellwoo.kinoguru.feature.theme.ui.ThemeFragment
+import com.shellwoo.kinoguru.shared.theme.di.ThemeDataComponent
 import dagger.Component
 
-@Component(modules = [ThemePresentationModule::class], dependencies = [ThemeDeps::class])
+@Component(
+    dependencies = [ThemeDataComponent::class, ThemeDeps::class],
+    modules = [ThemePresentationModule::class],
+)
 interface ThemeComponent {
 
     companion object {
@@ -11,6 +15,7 @@ interface ThemeComponent {
         fun create(themeDeps: ThemeDeps): ThemeComponent =
             DaggerThemeComponent.builder()
                 .themeDeps(themeDeps)
+                .themeDataComponent(ThemeDataComponent.create(themeDeps.context))
                 .build()
     }
 

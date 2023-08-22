@@ -3,7 +3,6 @@ package com.shellwoo.kinoguru.app
 import android.app.Application
 import com.google.android.material.color.DynamicColors
 import com.shellwoo.kinoguru.app.di.AppComponent
-import com.shellwoo.kinoguru.app.di.DaggerAppComponent
 import com.shellwoo.kinoguru.app.di.MainActivityDeps
 import com.shellwoo.kinoguru.app.di.MainActivityDepsProvider
 import com.shellwoo.kinoguru.feature.language.di.LanguageDeps
@@ -38,9 +37,7 @@ class App : Application(),
 
     private val mainScope = MainScope()
 
-    private val appComponent: AppComponent = DaggerAppComponent.builder()
-        .context(this)
-        .build()
+    private val appComponent = AppComponent.create(this)
 
     override fun onCreate() {
         super.onCreate()
