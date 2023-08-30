@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="movie_details_title">Details</string>
+    <string name="movie_details_rating"><![CDATA[<b>Rating:</b>]]> %1$s</string>
+    <string name="movie_details_release_date"><![CDATA[<b>Release date:</b>]]> %1$s</string>
+    <string name="movie_details_budget"><![CDATA[<b>Budget:</b>]]> %1$s $</string>
+    <string name="movie_details_revenue"><![CDATA[<b>Revenue:</b>]]> %1$s $</string>
+    <string name="movie_details_genres"><![CDATA[<b>Genres:</b>]]> %1$s</string>
+    <string name="movie_details_description"><![CDATA[<b>Description:</b>]]> %1$s</string>
+    <string name="movie_details_companies"><![CDATA[<b>Companies:</b>]]> %1$s</string>
+    <string name="movie_details_countries"><![CDATA[<b>Countries:</b>]]> %1$s</string>
+</resources>

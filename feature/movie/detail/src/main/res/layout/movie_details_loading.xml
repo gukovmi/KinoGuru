@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="android.widget.LinearLayout">
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:shimmer_auto_start="true"
+        tools:visibility="visible">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <View
+                    android:id="@+id/skeletonBackground"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?colorSurfaceContainerHighest"
+                    app:layout_constraintDimensionRatio="16:9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/skeletonTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?colorSurfaceContainerHighest"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/skeletonBackground" />
+
+                <View
+                    android:id="@+id/skeletonRating"
+                    android:layout_width="0dp"
+                    android:layout_height="22dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?colorSurfaceContainerHighest"
+                    app:layout_constraintEnd_toStartOf="@+id/skeletonReleaseDate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/skeletonTitle" />
+
+                <View
+                    android:id="@+id/skeletonReleaseDate"
+                    android:layout_width="0dp"
+                    android:layout_height="22dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:background="?colorSurfaceContainerHighest"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/skeletonRating"
+                    app:layout_constraintTop_toTopOf="@id/skeletonRating" />
+
+                <View
+                    android:id="@+id/skeletonBudget"
+                    android:layout_width="0dp"
+                    android:layout_height="22dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?colorSurfaceContainerHighest"
+                    app:layout_constraintEnd_toStartOf="@+id/skeletonRevenue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/skeletonRating" />
+
+                <View
+                    android:id="@+id/skeletonRevenue"
+                    android:layout_width="0dp"
+                    android:layout_height="22dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:background="?colorSurfaceContainerHighest"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/skeletonBudget"
+                    app:layout_constraintTop_toTopOf="@id/skeletonBudget" />
+
+                <View
+                    android:id="@+id/skeletonGenres"
+                    android:layout_width="0dp"
+                    android:layout_height="22dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?colorSurfaceContainerHighest"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/skeletonBudget" />
+
+                <View
+                    android:id="@+id/skeletonDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?colorSurfaceContainerHighest"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/skeletonGenres" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="22dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?colorSurfaceContainerHighest"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/skeletonDescription" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+</merge>

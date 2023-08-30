@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="movie_details_title">Детали</string>
+    <string name="movie_details_rating"><![CDATA[<b>Рейтинг:</b>]]> %1$s</string>
+    <string name="movie_details_release_date"><![CDATA[<b>Дата выхода:</b>]]> %1$s</string>
+    <string name="movie_details_budget"><![CDATA[<b>Бюджет:</b>]]> %1$s $</string>
+    <string name="movie_details_revenue"><![CDATA[<b>Сборы:</b>]]> %1$s $</string>
+    <string name="movie_details_genres"><![CDATA[<b>Жанры:</b>]]> %1$s</string>
+    <string name="movie_details_description"><![CDATA[<b>Описание:</b>]]> %1$s</string>
+    <string name="movie_details_companies"><![CDATA[<b>Компании:</b>]]> %1$s</string>
+    <string name="movie_details_countries"><![CDATA[<b>Страны:</b>]]> %1$s</string>
+</resources>

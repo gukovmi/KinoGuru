@@ -19,6 +19,7 @@ class MovieSearchViewModel @Inject constructor(
     private val isMovieSearchOnboardingShowedUseCase: IsMovieSearchOnboardingShowedUseCase,
     private val setMovieSearchOnboardingShowedUseCase: SetMovieSearchOnboardingShowedUseCase,
     private val getMovieSearchResultScenario: GetMovieSearchResultScenario,
+    private val router: MovieSearchRouter,
 ) : ViewModel() {
 
     private companion object {
@@ -99,5 +100,9 @@ class MovieSearchViewModel @Inject constructor(
 
     fun setQuery(query: String) {
         searchQuery.tryEmit(query)
+    }
+
+    fun selectMovieSuccessItem(item: MovieSearchItem.Success) {
+        router.openMovieDetailsScreen(item.value.id)
     }
 }

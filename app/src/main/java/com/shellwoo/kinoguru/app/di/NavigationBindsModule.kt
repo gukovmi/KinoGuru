@@ -4,6 +4,8 @@ import com.shellwoo.kinoguru.app.navigation.*
 import com.shellwoo.kinoguru.feature.language.presentation.LanguageRouter
 import com.shellwoo.kinoguru.feature.login.presentation.LoginRouter
 import com.shellwoo.kinoguru.feature.main.presentation.MainRouter
+import com.shellwoo.kinoguru.feature.movie.detail.presentation.MovieDetailsRouter
+import com.shellwoo.kinoguru.feature.movie.search.presentation.MovieSearchRouter
 import com.shellwoo.kinoguru.feature.profile.presentation.ProfileRouter
 import com.shellwoo.kinoguru.feature.splash.presentation.SplashRouter
 import com.shellwoo.kinoguru.feature.theme.presentation.ThemeRouter
@@ -24,6 +26,12 @@ interface NavigationBindsModule {
 
     @Binds
     fun bindMainRouter(impl: MainRouterImpl): MainRouter
+
+    @Binds
+    fun bindMovieDetailsRouter(impl: MovieDetailsRouterImpl): MovieDetailsRouter
+
+    @Binds
+    fun bindMovieSearchRouter(impl: MovieSearchRouterImpl): MovieSearchRouter
 
     @Binds
     fun bindProfileRouter(impl: ProfileRouterImpl): ProfileRouter
