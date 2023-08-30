@@ -29,9 +29,9 @@
                 app:shimmer_auto_start="true">
 
                 <View
+                    style="@style/Skeleton"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="?colorSurfaceContainerHighest" />
+                    android:layout_height="match_parent" />
 
             </com.facebook.shimmer.ShimmerFrameLayout>
 
