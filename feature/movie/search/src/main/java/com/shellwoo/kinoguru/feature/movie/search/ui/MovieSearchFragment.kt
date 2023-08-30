@@ -48,7 +48,7 @@ class MovieSearchFragment : BaseFragment(R.layout.movie_search_fragment) {
     }
 
     private fun initRecycler() {
-        movies.adapter = MovieSearchItemAdapter(ratingFormatter, {}, diffUtilCallback)
+        movies.adapter = MovieSearchItemAdapter(ratingFormatter, viewModel::selectMovieSuccessItem, diffUtilCallback)
         movies.itemAnimator = ScaleInAnimator()
     }
 
