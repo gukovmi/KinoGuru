@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import com.shellwoo.kinoguru.core.navigation.NavigatorFactory
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
@@ -31,6 +32,7 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
     override fun onAttach(context: Context) {
         componentViewModel.component.inject(this)
         super.onAttach(context)
+        parentFragmentManager.commit { setPrimaryNavigationFragment(this@MainFragment) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
