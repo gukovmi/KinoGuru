@@ -11,30 +11,29 @@
 
         <View
             android:id="@+id/poster"
+            style="@style/Skeleton"
             android:layout_width="@dimen/movie_search_result_poster_width"
             android:layout_height="@dimen/movie_search_result_poster_height"
             android:layout_margin="16dp"
-            android:background="?colorSurfaceContainerHighest"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/title"
+            style="@style/Skeleton.TextSubheaderOneLine"
             android:layout_width="0dp"
-            android:layout_height="30dp"
             android:layout_marginHorizontal="16dp"
-            android:background="?colorSurfaceContainerHighest"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/poster"
             app:layout_constraintTop_toTopOf="@+id/poster" />
 
         <View
             android:id="@+id/description"
+            style="@style/Skeleton"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
-            android:background="?colorSurfaceContainerHighest"
             app:layout_constraintBottom_toBottomOf="@id/poster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/poster"
