@@ -11,11 +11,11 @@ import com.shellwoo.kinoguru.feature.login.di.LoginDeps
 import com.shellwoo.kinoguru.feature.login.di.LoginDepsProvider
 import com.shellwoo.kinoguru.feature.main.di.MainDeps
 import com.shellwoo.kinoguru.feature.main.di.MainDepsProvider
+import com.shellwoo.kinoguru.feature.movie.search.di.MovieSearchDeps
+import com.shellwoo.kinoguru.feature.movie.search.di.MovieSearchDepsProvider
 import com.shellwoo.kinoguru.feature.notification.NotificationChannelInitializer
 import com.shellwoo.kinoguru.feature.profile.di.ProfileDeps
 import com.shellwoo.kinoguru.feature.profile.di.ProfileDepsProvider
-import com.shellwoo.kinoguru.feature.search.di.SearchDeps
-import com.shellwoo.kinoguru.feature.search.di.SearchDepsProvider
 import com.shellwoo.kinoguru.feature.splash.di.SplashDeps
 import com.shellwoo.kinoguru.feature.splash.di.SplashDepsProvider
 import com.shellwoo.kinoguru.feature.theme.di.ThemeDeps
@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class App : Application(),
-    ProfileDepsProvider, SearchDepsProvider, SplashDepsProvider, LanguageDepsProvider, LoginDepsProvider, ThemeDepsProvider,
+    ProfileDepsProvider, MovieSearchDepsProvider, SplashDepsProvider, LanguageDepsProvider, LoginDepsProvider, ThemeDepsProvider,
     MainDepsProvider, MainActivityDepsProvider {
 
     @Inject
@@ -53,7 +53,7 @@ class App : Application(),
     override val loginDeps: LoginDeps = appComponent
     override val profileDeps: ProfileDeps = appComponent
     override val splashDeps: SplashDeps = appComponent
-    override val searchDeps: SearchDeps = appComponent
+    override val movieSearchDeps: MovieSearchDeps = appComponent
     override val mainActivityDeps: MainActivityDeps = appComponent
     override val themeDeps: ThemeDeps = appComponent
 }

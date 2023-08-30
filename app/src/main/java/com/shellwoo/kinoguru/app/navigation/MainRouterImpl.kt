@@ -2,8 +2,8 @@ package com.shellwoo.kinoguru.app.navigation
 
 import com.shellwoo.kinoguru.feature.main.navigation.MainCiceroneRouter
 import com.shellwoo.kinoguru.feature.main.presentation.MainRouter
+import com.shellwoo.kinoguru.feature.movie.search.MovieSearchDestination
 import com.shellwoo.kinoguru.feature.profile.ProfileDestination
-import com.shellwoo.kinoguru.feature.search.SearchDestination
 import javax.inject.Inject
 
 class MainRouterImpl @Inject constructor(
@@ -15,6 +15,6 @@ class MainRouterImpl @Inject constructor(
     }
 
     override fun openSearchScreen() {
-        mainRouter.newRootScreen(SearchDestination())
+        mainRouter.newRootScreen(MovieSearchDestination())
     }
 }

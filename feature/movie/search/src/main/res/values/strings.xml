@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="movie_search_title">Search</string>
+    <string name="movie_search_input_hint">Enter movie or series title</string>
+    <string name="movie_search_input_onboarding">Use this field for searching</string>
+</resources>
