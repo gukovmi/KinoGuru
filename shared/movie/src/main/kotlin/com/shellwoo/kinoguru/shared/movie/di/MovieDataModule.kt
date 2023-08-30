@@ -5,6 +5,7 @@ import com.shellwoo.kinoguru.shared.movie.BuildConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -12,7 +13,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 internal class MovieDataModule {
 
     @Provides
-    fun provideTheMovieDbOkHttpClient(): OkHttpClient =
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
+        HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) }
+
+    @Provides
+    fun provideTheMovieDbOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val url = chain.request().url.newBuilder()
@@ -20,6 +25,7 @@ internal class MovieDataModule {
                     .build()
                 chain.proceed(chain.request().newBuilder().url(url).build())
             }
+            .addInterceptor(httpLoggingInterceptor)
             .build()
 
     @Provides
