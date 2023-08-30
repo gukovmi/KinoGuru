@@ -1,0 +1,33 @@
+apply from: "$rootDir/dependencies.gradle"
+
+dependencies {
+    implementation project(":core-coroutines")
+    implementation project(":core-di")
+    implementation project(":core-ktx")
+    implementation project(":core-presentation")
+    implementation project(":core-ui")
+    implementation project(":design-resource")
+    implementation project(":shared-movie")
+    implementation project(":shared-language")
+    implementation project(":shared-onboarding")
+
+    implementation libraries.androidxFragmentKtx
+    implementation libraries.cicerone
+    implementation libraries.datastorePreferences
+    implementation libraries.dagger
+    kapt libraries.daggerCompiler
+    implementation libraries.facebookShimmer
+    implementation libraries.glide
+    implementation libraries.gson
+    implementation libraries.material
+    implementation libraries.recyclerViewAnimators
+    implementation libraries.retrofit
+
+    testImplementation project(":core-test-unit")
+    testImplementation libraries.androidxArchCoreRuntime
+    testImplementation libraries.junitJupiter
+    testImplementation libraries.kotlinxCoroutinesTest
+    testImplementation libraries.mockitoJunit
+    testImplementation libraries.mockitoInline
+    testImplementation libraries.mockitoKotlin
+}

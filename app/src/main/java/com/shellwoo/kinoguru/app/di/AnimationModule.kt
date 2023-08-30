@@ -4,8 +4,8 @@ import com.shellwoo.kinoguru.core.ui.component.FragmentTransactionAnimator
 import com.shellwoo.kinoguru.feature.language.ui.LanguageFragment
 import com.shellwoo.kinoguru.feature.login.ui.LoginFragment
 import com.shellwoo.kinoguru.feature.main.ui.MainFragment
+import com.shellwoo.kinoguru.feature.movie.search.ui.MovieSearchFragment
 import com.shellwoo.kinoguru.feature.profile.ui.ProfileFragment
-import com.shellwoo.kinoguru.feature.search.ui.SearchFragment
 import com.shellwoo.kinoguru.feature.splash.ui.SplashFragment
 import com.shellwoo.kinoguru.feature.theme.ui.ThemeFragment
 import dagger.Module
@@ -23,7 +23,7 @@ class AnimationModule {
                 MainFragment::class,
                 ProfileFragment::class,
                 SplashFragment::class,
-                SearchFragment::class,
+                MovieSearchFragment::class,
                 ThemeFragment::class,
             )
         )
