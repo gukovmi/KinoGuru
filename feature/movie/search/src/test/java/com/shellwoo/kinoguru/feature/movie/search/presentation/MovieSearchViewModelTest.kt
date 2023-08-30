@@ -23,11 +23,13 @@ class MovieSearchViewModelTest {
     private val isMovieSearchOnboardingShowedUseCase: IsMovieSearchOnboardingShowedUseCase = mock()
     private val setMovieSearchOnboardingShowedUseCase: SetMovieSearchOnboardingShowedUseCase = mock()
     private val getMovieSearchResultScenario: GetMovieSearchResultScenario = mock()
+    private val router: MovieSearchRouter = mock()
 
     private val viewModel = MovieSearchViewModel(
         isMovieSearchOnboardingShowedUseCase,
         setMovieSearchOnboardingShowedUseCase,
         getMovieSearchResultScenario,
+        router,
     )
 
     private val stateObserver: Observer<ScreenState> = mock()
@@ -206,5 +208,12 @@ class MovieSearchViewModelTest {
         viewModel.search()
 
         verify(stateObserver).onChanged(expectedContentState)
+    }
+
+    @Test
+    fun `select movie success item EXPECT router open movie details screen`() = runTest {
+        viewModel.selectMovieSuccessItem(movieSearchItemSuccess)
+
+        verify(router).openMovieDetailsScreen(movieSearch.id)
     }
 }

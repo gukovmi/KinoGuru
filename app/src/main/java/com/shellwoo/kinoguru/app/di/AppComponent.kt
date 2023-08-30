@@ -5,6 +5,7 @@ import com.shellwoo.kinoguru.app.App
 import com.shellwoo.kinoguru.feature.language.di.LanguageDeps
 import com.shellwoo.kinoguru.feature.login.di.LoginDeps
 import com.shellwoo.kinoguru.feature.main.di.MainDeps
+import com.shellwoo.kinoguru.feature.movie.detail.di.MovieDetailsDeps
 import com.shellwoo.kinoguru.feature.movie.search.di.MovieSearchDeps
 import com.shellwoo.kinoguru.feature.profile.di.ProfileDeps
 import com.shellwoo.kinoguru.feature.splash.di.SplashDeps
@@ -16,7 +17,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(dependencies = [ThemeDataComponent::class], modules = [AppModule::class])
-interface AppComponent : ProfileDeps, MainDeps, LanguageDeps, LoginDeps, MovieSearchDeps, SplashDeps, ThemeDeps,
+interface AppComponent : ProfileDeps, MainDeps, LanguageDeps, LoginDeps, MovieDetailsDeps, MovieSearchDeps, SplashDeps, ThemeDeps,
     MainActivityDeps {
 
     companion object {
