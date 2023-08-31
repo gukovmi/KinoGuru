@@ -10,6 +10,7 @@ import com.shellwoo.kinoguru.feature.movie.search.domain.entity.MovieSearch
 import com.shellwoo.kinoguru.feature.movie.search.domain.scenario.GetMovieSearchResultScenario
 import com.shellwoo.kinoguru.feature.movie.search.domain.usecase.IsMovieSearchOnboardingShowedUseCase
 import com.shellwoo.kinoguru.feature.movie.search.domain.usecase.SetMovieSearchOnboardingShowedUseCase
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
@@ -33,6 +34,7 @@ class MovieSearchViewModel @Inject constructor(
     val state: LiveData<ScreenState> = _state
 
     private val searchQuery = MutableStateFlow(SEARCH_QUERY_EMPTY)
+    private var movieSearchingJob: Job? = null
 
     private val _onboardingEvent = SingleLiveEvent<Unit>()
     val onboardingEvent: LiveData<Unit> = _onboardingEvent
@@ -76,7 +78,8 @@ class MovieSearchViewModel @Inject constructor(
     }
 
     fun search() {
-        viewModelScope.launchTrying(
+        movieSearchingJob?.cancel()
+        movieSearchingJob = viewModelScope.launchTrying(
             errorHandler = { handleSearchError() },
             block = {
                 _state.value = currentContentState?.copy(searchState = SearchState.Result(SEARCH_MOVIE_ITEMS_LOADING))
