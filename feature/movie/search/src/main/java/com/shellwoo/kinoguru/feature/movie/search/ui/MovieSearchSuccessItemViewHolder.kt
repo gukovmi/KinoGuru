@@ -40,6 +40,8 @@ class MovieSearchSuccessItemViewHolder(
                 .placeholder(android.R.drawable.ic_menu_camera)
                 .error(android.R.drawable.ic_menu_camera)
                 .into(itemView.poster)
+        } else {
+            itemView.poster.setImageResource(android.R.drawable.ic_menu_camera)
         }
     }
 
