@@ -1,6 +1,7 @@
 apply from: "$rootDir/dependencies.gradle"
 
 dependencies {
+    implementation project(":shared-error")
 
     implementation libraries.dagger
     kapt libraries.daggerCompiler

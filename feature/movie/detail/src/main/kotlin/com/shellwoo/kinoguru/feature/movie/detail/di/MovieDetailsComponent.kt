@@ -17,7 +17,7 @@ interface MovieDetailsComponent {
             DaggerMovieDetailsComponent.builder()
                 .movieDetailsDeps(movieDetailsDeps)
                 .languageDataComponent(LanguageDataComponent.create())
-                .movieDataComponent(MovieDataComponent.create())
+                .movieDataComponent(MovieDataComponent.create(movieDetailsDeps.context))
                 .build()
     }
 

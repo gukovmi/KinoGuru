@@ -1,5 +1,6 @@
 package com.shellwoo.kinoguru.shared.movie.di
 
+import com.shellwoo.kinoguru.shared.error.ErrorInterceptor
 import com.shellwoo.kinoguru.shared.movie.BaseUrls
 import com.shellwoo.kinoguru.shared.movie.BuildConfig
 import dagger.Module
@@ -17,7 +18,10 @@ internal class MovieDataModule {
         HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) }
 
     @Provides
-    fun provideTheMovieDbOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
+    fun provideTheMovieDbOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        errorInterceptor: ErrorInterceptor,
+    ): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val url = chain.request().url.newBuilder()
@@ -26,6 +30,7 @@ internal class MovieDataModule {
                 chain.proceed(chain.request().newBuilder().url(url).build())
             }
             .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(errorInterceptor)
             .build()
 
     @Provides
