@@ -16,7 +16,7 @@ internal interface MovieSearchComponent {
         fun create(movieSearchDeps: MovieSearchDeps): MovieSearchComponent =
             DaggerMovieSearchComponent.builder()
                 .movieSearchDeps(movieSearchDeps)
-                .movieDataComponent(MovieDataComponent.create())
+                .movieDataComponent(MovieDataComponent.create(movieSearchDeps.context))
                 .languageDataComponent(LanguageDataComponent.create())
                 .build()
     }

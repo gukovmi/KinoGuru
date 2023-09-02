@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="client_connection_error_message">Нет подключения к интернету</string>
+    <string name="service_connection_error_message">Сервис недоступен</string>
+
+    <string name="unauthorized_error_message">Аутентификация не удалась</string>
+    <string name="not_found_error_message">Запрошенный ресурс не найден</string>
+    <string name="service_unavailable_error_message">Сервис недоступен</string>
+    <string name="inner_error_message">Операция не может быть выполнена</string>
+</resources>

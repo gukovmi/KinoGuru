@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="client_connection_error_message">No internet connection</string>
+    <string name="service_connection_error_message">Service is unavailable</string>
+
+    <string name="unauthorized_error_message">Authentication failed</string>
+    <string name="not_found_error_message">The resource you requested could not be found</string>
+    <string name="service_unavailable_error_message">Service unavailable</string>
+    <string name="inner_error_message">The action cannot be completed</string>
+</resources>
