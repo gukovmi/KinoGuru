@@ -60,6 +60,7 @@ ext {
             "firebaseMessaging"               : "com.google.firebase:firebase-messaging-ktx:$versions.firebaseMessaging",
             "kotlinxCoroutines"               : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlinx",
             "okhttpLoggingInterceptor"        : "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
+            "okhttp"                          : "com.squareup.okhttp3:okhttp:$versions.okhttp",
             "playServicesAuth"                : "com.google.android.gms:play-services-auth:$versions.playServices",
             "recyclerViewAnimators"           : "jp.wasabeef:recyclerview-animators:$versions.recyclerViewAnimators",
             "retrofit"                        : "com.squareup.retrofit2:retrofit:$versions.retrofit",

@@ -1,0 +1,14 @@
+apply from: "$rootDir/dependencies.gradle"
+
+dependencies {
+    implementation project(":core-ktx")
+
+    implementation libraries.dagger
+    kapt libraries.daggerCompiler
+    implementation libraries.okhttp
+
+    testImplementation libraries.junitJupiter
+    testImplementation libraries.mockitoJunit
+    testImplementation libraries.mockitoKotlin
+    testImplementation libraries.mockitoInline
+}

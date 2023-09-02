@@ -28,6 +28,7 @@ def modules = [
         ':feature-profile'     : 'feature/profile',
         ':feature-splash'      : 'feature/splash',
         ':feature-theme'       : 'feature/theme',
+        ':shared-error'        : 'shared/error',
         ':shared-movie'        : 'shared/movie',
         ':shared-language'     : 'shared/language',
         ':shared-onboarding'   : 'shared/onboarding',
