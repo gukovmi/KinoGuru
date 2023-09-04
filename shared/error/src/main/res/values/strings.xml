@@ -7,4 +7,5 @@
     <string name="not_found_error_message">The resource you requested could not be found</string>
     <string name="service_unavailable_error_message">Service unavailable</string>
     <string name="inner_error_message">The action cannot be completed</string>
+    <string name="unknown_error_message">Something went wrong, please try again later</string>
 </resources>
