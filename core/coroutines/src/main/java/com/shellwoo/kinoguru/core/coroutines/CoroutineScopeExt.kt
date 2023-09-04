@@ -6,10 +6,13 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 fun CoroutineScope.launchTrying(
-    errorHandler: ((Throwable) -> Unit),
+    errorHandler: ((Exception) -> Unit),
     block: suspend CoroutineScope.() -> Unit,
 ): Job =
     launch(
-        context = CoroutineExceptionHandler { _, throwable -> errorHandler(throwable) },
+        context = CoroutineExceptionHandler { _, throwable ->
+            val exception = throwable as? Exception ?: throw throwable
+            errorHandler(exception)
+        },
         block = block,
     )
