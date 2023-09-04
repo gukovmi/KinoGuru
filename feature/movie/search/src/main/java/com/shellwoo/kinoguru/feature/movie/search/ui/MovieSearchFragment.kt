@@ -7,12 +7,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.shellwoo.kinoguru.core.ui.component.AfterTextWatcher
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
-import com.shellwoo.kinoguru.core.ui.ext.showRetryCancelErrorDialog
 import com.shellwoo.kinoguru.feature.movie.search.R
 import com.shellwoo.kinoguru.feature.movie.search.di.MovieSearchComponentViewModel
 import com.shellwoo.kinoguru.feature.movie.search.presentation.MovieSearchViewModel
 import com.shellwoo.kinoguru.feature.movie.search.presentation.ScreenState
 import com.shellwoo.kinoguru.feature.movie.search.presentation.SearchState
+import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
+import com.shellwoo.kinoguru.shared.error.ui.showErrorDialog
 import com.shellwoo.kinoguru.shared.movie.ui.RatingFormatter
 import com.shellwoo.kinoguru.shared.onboarding.ui.OnboardingDialogFragment
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
@@ -59,7 +60,7 @@ class MovieSearchFragment : BaseFragment(R.layout.movie_search_fragment) {
     private fun observeViewModel() {
         viewModel.state.observe(viewLifecycleOwner, ::renderState)
         viewModel.onboardingEvent.observe(viewLifecycleOwner) { renderOnboarding() }
-        viewModel.searchErrorEvent.observe(viewLifecycleOwner) { renderSearchError() }
+        viewModel.searchErrorEvent.observe(viewLifecycleOwner, ::renderSearchError)
     }
 
     private fun renderState(state: ScreenState) {
@@ -104,7 +105,10 @@ class MovieSearchFragment : BaseFragment(R.layout.movie_search_fragment) {
         )
     }
 
-    private fun renderSearchError() {
-        showRetryCancelErrorDialog(onRetryAction = viewModel::search)
+    private fun renderSearchError(baseException: BaseException) {
+        showErrorDialog(
+            baseException = baseException,
+            retryAction = viewModel::search,
+        )
     }
 }

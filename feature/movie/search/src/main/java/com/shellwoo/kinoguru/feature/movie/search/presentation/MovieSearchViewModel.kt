@@ -10,6 +10,8 @@ import com.shellwoo.kinoguru.feature.movie.search.domain.entity.MovieSearch
 import com.shellwoo.kinoguru.feature.movie.search.domain.scenario.GetMovieSearchResultScenario
 import com.shellwoo.kinoguru.feature.movie.search.domain.usecase.IsMovieSearchOnboardingShowedUseCase
 import com.shellwoo.kinoguru.feature.movie.search.domain.usecase.SetMovieSearchOnboardingShowedUseCase
+import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
+import com.shellwoo.kinoguru.shared.error.domain.usecase.GetBaseExceptionUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
@@ -20,6 +22,7 @@ class MovieSearchViewModel @Inject constructor(
     private val isMovieSearchOnboardingShowedUseCase: IsMovieSearchOnboardingShowedUseCase,
     private val setMovieSearchOnboardingShowedUseCase: SetMovieSearchOnboardingShowedUseCase,
     private val getMovieSearchResultScenario: GetMovieSearchResultScenario,
+    private val getBaseExceptionUseCase: GetBaseExceptionUseCase,
     private val router: MovieSearchRouter,
 ) : ViewModel() {
 
@@ -39,8 +42,8 @@ class MovieSearchViewModel @Inject constructor(
     private val _onboardingEvent = SingleLiveEvent<Unit>()
     val onboardingEvent: LiveData<Unit> = _onboardingEvent
 
-    private val _searchErrorEvent = SingleLiveEvent<Unit>()
-    val searchErrorEvent: LiveData<Unit> = _searchErrorEvent
+    private val _searchErrorEvent = SingleLiveEvent<BaseException>()
+    val searchErrorEvent: LiveData<BaseException> = _searchErrorEvent
 
     private val currentContentState: ScreenState.Content?
         get() = _state.value as? ScreenState.Content
@@ -80,7 +83,7 @@ class MovieSearchViewModel @Inject constructor(
     fun search() {
         movieSearchingJob?.cancel()
         movieSearchingJob = viewModelScope.launchTrying(
-            errorHandler = { handleSearchError() },
+            errorHandler = ::handleSearchError,
             block = {
                 _state.value = currentContentState?.copy(searchState = SearchState.Result(SEARCH_MOVIE_ITEMS_LOADING))
 
@@ -93,9 +96,10 @@ class MovieSearchViewModel @Inject constructor(
         )
     }
 
-    private fun handleSearchError() {
+    private fun handleSearchError(exception: Exception) {
         _state.value = currentContentState?.copy(searchState = SearchState.None)
-        _searchErrorEvent(Unit)
+        val baseException = getBaseExceptionUseCase(exception)
+        _searchErrorEvent(baseException)
     }
 
     private fun List<MovieSearch>.toSearchMovieSuccessItems(): List<MovieSearchItem.Success> =
