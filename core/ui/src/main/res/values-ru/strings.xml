@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_dialog_button_retry">Повторить</string>
+    <string name="error_dialog_button_cancel">Отменить</string>
+    <string name="error_dialog_title_repeatable">Что-то пошло не так. Повторите операцию или попробуйте позже</string>
+
+    <string name="dialog_button_ok">Ок</string>
+</resources>
