@@ -9,6 +9,9 @@ import com.shellwoo.kinoguru.feature.movie.search.domain.entity.MovieSearchResul
 import com.shellwoo.kinoguru.feature.movie.search.domain.scenario.GetMovieSearchResultScenario
 import com.shellwoo.kinoguru.feature.movie.search.domain.usecase.IsMovieSearchOnboardingShowedUseCase
 import com.shellwoo.kinoguru.feature.movie.search.domain.usecase.SetMovieSearchOnboardingShowedUseCase
+import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
+import com.shellwoo.kinoguru.shared.error.domain.exception.ClientConnectException
+import com.shellwoo.kinoguru.shared.error.domain.usecase.GetBaseExceptionUseCase
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
@@ -23,18 +26,20 @@ class MovieSearchViewModelTest {
     private val isMovieSearchOnboardingShowedUseCase: IsMovieSearchOnboardingShowedUseCase = mock()
     private val setMovieSearchOnboardingShowedUseCase: SetMovieSearchOnboardingShowedUseCase = mock()
     private val getMovieSearchResultScenario: GetMovieSearchResultScenario = mock()
+    private val getBaseExceptionUseCase: GetBaseExceptionUseCase = mock()
     private val router: MovieSearchRouter = mock()
 
     private val viewModel = MovieSearchViewModel(
         isMovieSearchOnboardingShowedUseCase,
         setMovieSearchOnboardingShowedUseCase,
         getMovieSearchResultScenario,
+        getBaseExceptionUseCase,
         router,
     )
 
     private val stateObserver: Observer<ScreenState> = mock()
     private val onboardingEventObserver: Observer<Unit> = mock()
-    private val searchErrorEventObserver: Observer<Unit> = mock()
+    private val searchErrorEventObserver: Observer<BaseException> = mock()
 
     private val query: String = "Batman"
     private val movieSearch: MovieSearch = mock()
@@ -185,14 +190,17 @@ class MovieSearchViewModelTest {
 
     @Test
     fun `search, error EXPECT search error event`() = runTest {
+        val error = RuntimeException()
+        val baseException = ClientConnectException("")
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
-        whenever(getMovieSearchResultScenario(query)).thenThrow(RuntimeException())
+        whenever(getMovieSearchResultScenario("")).thenThrow(error)
+        whenever(getBaseExceptionUseCase(error)).thenReturn(baseException)
         viewModel.searchErrorEvent.observeForever(searchErrorEventObserver)
         viewModel.start()
 
         viewModel.search()
 
-        verify(searchErrorEventObserver).onChanged(Unit)
+        verify(searchErrorEventObserver).onChanged(baseException)
     }
 
     @Test
@@ -200,7 +208,7 @@ class MovieSearchViewModelTest {
         val expectedSearchState = SearchState.None
         val expectedContentState = ScreenState.Content(query = "", searchState = expectedSearchState)
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
-        whenever(getMovieSearchResultScenario(query)).thenThrow(RuntimeException())
+        whenever(getMovieSearchResultScenario("")).thenThrow(RuntimeException())
         viewModel.state.observeForever(stateObserver)
         viewModel.start()
         clearInvocations(stateObserver)
