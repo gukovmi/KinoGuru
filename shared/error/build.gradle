@@ -2,7 +2,11 @@ apply from: "$rootDir/dependencies.gradle"
 
 dependencies {
     implementation project(":core-ktx")
+    implementation project(":core-ui")
 
+    implementation project(":design-resource")
+
+    implementation libraries.androidxAppCompat
     implementation libraries.dagger
     kapt libraries.daggerCompiler
     implementation libraries.okhttp
