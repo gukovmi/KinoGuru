@@ -7,18 +7,18 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
+        style="@style/AppBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/AppBarLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            style="@style/Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            style="@style/Toolbar"
             app:title="@string/profile_title" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -36,11 +36,11 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/photo"
+            style="@style/ShapeableImageView"
             android:layout_width="@dimen/profile_photo_size"
             android:layout_height="@dimen/profile_photo_size"
             android:layout_margin="16dp"
             android:scaleType="fitCenter"
-            style="@style/ShapeableImageView"
             tools:src="@drawable/glasses" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -50,7 +50,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:hint="@string/profile_name_hint"
-            android:saveEnabled="false"
             app:startIconDrawable="@drawable/person">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -71,7 +70,6 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/profile_email_hint"
-            android:saveEnabled="false"
             app:startIconDrawable="@drawable/email">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -92,7 +90,6 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/profile_language_hint"
-            android:saveEnabled="false"
             app:endIconDrawable="@drawable/arrow_right"
             app:endIconMode="custom"
             app:startIconDrawable="@drawable/language">
@@ -102,9 +99,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:editable="false"
                 android:focusable="false"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:inputType="none"
                 tools:text="English" />
 
@@ -118,7 +115,6 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:hint="@string/profile_theme_hint"
-            android:saveEnabled="false"
             app:endIconDrawable="@drawable/arrow_right"
             app:endIconMode="custom"
             app:startIconDrawable="@drawable/day_night">
@@ -128,9 +124,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:editable="false"
                 android:focusable="false"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:inputType="none"
                 tools:text="Light" />
 
