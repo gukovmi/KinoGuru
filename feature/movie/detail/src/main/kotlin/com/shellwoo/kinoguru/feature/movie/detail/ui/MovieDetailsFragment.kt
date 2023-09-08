@@ -15,7 +15,6 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.shellwoo.kinoguru.core.ktx.fromHtml
-import com.shellwoo.kinoguru.core.ui.ext.showRetryCancelErrorDialog
 import com.shellwoo.kinoguru.feature.movie.detail.R
 import com.shellwoo.kinoguru.feature.movie.detail.data.model.GenreModel
 import com.shellwoo.kinoguru.feature.movie.detail.data.model.ProductionCompanyModel
@@ -23,6 +22,8 @@ import com.shellwoo.kinoguru.feature.movie.detail.di.MovieDetailsComponentViewMo
 import com.shellwoo.kinoguru.feature.movie.detail.di.MovieDetailsViewModelFactory
 import com.shellwoo.kinoguru.feature.movie.detail.presentation.MovieDetailsState
 import com.shellwoo.kinoguru.feature.movie.detail.presentation.MovieDetailsViewModel
+import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
+import com.shellwoo.kinoguru.shared.error.ui.showErrorDialog
 import com.shellwoo.kinoguru.shared.movie.BaseUrls
 import com.shellwoo.kinoguru.shared.movie.ui.RatingFormatter
 import jp.wasabeef.glide.transformations.BlurTransformation
@@ -101,7 +102,7 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
 
     private fun observeViewModel() {
         viewModel.state.observe(viewLifecycleOwner, ::renderState)
-        viewModel.loadMovieDetailsErrorEvent.observe(viewLifecycleOwner) { renderMovieDetailsLoadingError() }
+        viewModel.loadMovieDetailsErrorEvent.observe(viewLifecycleOwner, ::renderMovieDetailsLoadingError)
     }
 
     private fun renderState(state: MovieDetailsState) {
@@ -232,7 +233,12 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
         posterSkeleton.isVisible = false
     }
 
-    private fun renderMovieDetailsLoadingError() {
-        showRetryCancelErrorDialog(onRetryAction = viewModel::loadMovieDetails)
+    private fun renderMovieDetailsLoadingError(baseException: BaseException) {
+        showErrorDialog(
+            baseException = baseException,
+            retryAction = viewModel::loadMovieDetails,
+            cancelAction = viewModel::close,
+            okAction = viewModel::close,
+        )
     }
 }

@@ -7,8 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.shellwoo.kinoguru.core.coroutines.launchTrying
 import com.shellwoo.kinoguru.core.presentation.SingleLiveEvent
 import com.shellwoo.kinoguru.feature.movie.detail.domain.scenario.GetMovieDetailsScenario
+import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
+import com.shellwoo.kinoguru.shared.error.domain.usecase.GetBaseExceptionUseCase
 
 class MovieDetailsViewModel(
+    private val getBaseExceptionUseCase: GetBaseExceptionUseCase,
     private val getMovieDetailsScenario: GetMovieDetailsScenario,
     private val router: MovieDetailsRouter,
     private val movieId: Int,
@@ -17,8 +20,8 @@ class MovieDetailsViewModel(
     private val _state = MutableLiveData<MovieDetailsState>(MovieDetailsState.Initial)
     val state: LiveData<MovieDetailsState> = _state
 
-    private val _loadMovieDetailsErrorEvent = SingleLiveEvent<Unit>()
-    val loadMovieDetailsErrorEvent: LiveData<Unit> = _loadMovieDetailsErrorEvent
+    private val _loadMovieDetailsErrorEvent = SingleLiveEvent<BaseException>()
+    val loadMovieDetailsErrorEvent: LiveData<BaseException> = _loadMovieDetailsErrorEvent
 
     fun start() {
         if (_state.value != MovieDetailsState.Initial) return
@@ -30,15 +33,18 @@ class MovieDetailsViewModel(
         _state.value = MovieDetailsState.Loading
 
         viewModelScope.launchTrying(
-            errorHandler = {
-                _state.value = MovieDetailsState.Initial
-                _loadMovieDetailsErrorEvent(Unit)
-            },
+            errorHandler = ::handleMovieDetailsLoadingError,
             block = {
                 val movieDetails = getMovieDetailsScenario(movieId)
                 _state.value = MovieDetailsState.Content(movieDetails)
             }
         )
+    }
+
+    private fun handleMovieDetailsLoadingError(exception: Exception) {
+        _state.value = MovieDetailsState.Initial
+        val baseException = getBaseExceptionUseCase(exception)
+        _loadMovieDetailsErrorEvent(baseException)
     }
 
     fun close() {
