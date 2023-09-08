@@ -6,6 +6,9 @@ import com.shellwoo.kinoguru.core.test.unit.TestCoroutineExtension
 import com.shellwoo.kinoguru.core.test.unit.thenNeverAnswer
 import com.shellwoo.kinoguru.feature.movie.detail.domain.entity.MovieDetails
 import com.shellwoo.kinoguru.feature.movie.detail.domain.scenario.GetMovieDetailsScenario
+import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
+import com.shellwoo.kinoguru.shared.error.domain.exception.ClientConnectException
+import com.shellwoo.kinoguru.shared.error.domain.usecase.GetBaseExceptionUseCase
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -18,15 +21,17 @@ import org.mockito.kotlin.whenever
 @ExtendWith(MockitoExtension::class, InstantTaskExecutorExtension::class, TestCoroutineExtension::class)
 class MovieDetailsViewModelTest {
 
+    private val getBaseExceptionUseCase: GetBaseExceptionUseCase = mock()
     private val getMovieDetailsScenario: GetMovieDetailsScenario = mock()
     private val router: MovieDetailsRouter = mock()
     private val movieId: Int = 123
 
-    private val viewModel = MovieDetailsViewModel(getMovieDetailsScenario, router, movieId)
+    private val viewModel = MovieDetailsViewModel(getBaseExceptionUseCase, getMovieDetailsScenario, router, movieId)
 
     private val stateObserver: Observer<MovieDetailsState> = mock()
-    private val eventObserver: Observer<Unit> = mock()
+    private val loadMovieDetailsErrorEventObserver: Observer<BaseException> = mock()
     private val error = RuntimeException()
+    private val baseException = ClientConnectException("")
 
     @Test
     fun `init EXPECT initial state`() {
@@ -70,6 +75,7 @@ class MovieDetailsViewModelTest {
     @Test
     fun `load movie details with error EXPECT initial state`() = runTest {
         whenever(getMovieDetailsScenario(movieId)).thenThrow(error)
+        whenever(getBaseExceptionUseCase(error)).thenReturn(baseException)
         viewModel.state.observeForever(stateObserver)
         clearInvocations(stateObserver)
 
@@ -81,11 +87,12 @@ class MovieDetailsViewModelTest {
     @Test
     fun `load movie details with error EXPECT load movie details error event`() = runTest {
         whenever(getMovieDetailsScenario(movieId)).thenThrow(error)
-        viewModel.loadMovieDetailsErrorEvent.observeForever(eventObserver)
+        whenever(getBaseExceptionUseCase(error)).thenReturn(baseException)
+        viewModel.loadMovieDetailsErrorEvent.observeForever(loadMovieDetailsErrorEventObserver)
 
         viewModel.loadMovieDetails()
 
-        verify(eventObserver).onChanged(Unit)
+        verify(loadMovieDetailsErrorEventObserver).onChanged(baseException)
     }
 
     @Test
