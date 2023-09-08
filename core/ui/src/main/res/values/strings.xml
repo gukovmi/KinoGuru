@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_dialog_button_retry">Retry</string>
-    <string name="error_dialog_button_cancel">Cancel</string>
-    <string name="error_dialog_title_repeatable">An error has occurred! Retry the operation or try again later</string>
-
+    <string name="dialog_button_retry">Retry</string>
+    <string name="dialog_button_cancel">Cancel</string>
     <string name="dialog_button_ok">Ok</string>
 </resources>

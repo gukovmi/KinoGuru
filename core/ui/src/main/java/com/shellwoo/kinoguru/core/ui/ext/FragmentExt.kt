@@ -9,25 +9,9 @@ import androidx.fragment.app.setFragmentResultListener
 import com.shellwoo.kinoguru.core.ui.FragmentResultContract
 import com.shellwoo.kinoguru.core.ui.R
 import java.io.Serializable
-import com.shellwoo.kinoguru.design.resource.R as designResourceR
 
 fun Fragment.showToast(text: String) {
     Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
-}
-
-fun Fragment.showRetryCancelErrorDialog(
-    onRetryAction: (() -> Unit)? = null,
-    onCancelAction: (() -> Unit)? = null,
-) {
-    AlertDialog.Builder(requireContext())
-        .setPositiveButton(R.string.error_dialog_button_retry) { _, _ -> onRetryAction?.invoke() }
-        .setNegativeButton(R.string.error_dialog_button_cancel) { _, _ -> onCancelAction?.invoke() }
-        .setOnDismissListener { onCancelAction?.invoke() }
-        .setTitle(R.string.error_dialog_title_repeatable)
-        .setIcon(designResourceR.drawable.error)
-        .setIconAttribute(android.R.attr.alertDialogIcon)
-        .create()
-        .show()
 }
 
 fun Fragment.showRetryCancelDialog(
@@ -37,8 +21,8 @@ fun Fragment.showRetryCancelDialog(
     @DrawableRes iconRes: Int,
 ) {
     AlertDialog.Builder(requireContext())
-        .setPositiveButton(R.string.error_dialog_button_retry) { _, _ -> retryAction() }
-        .setNegativeButton(R.string.error_dialog_button_cancel) { _, _ -> cancelAction?.invoke() }
+        .setPositiveButton(R.string.dialog_button_retry) { _, _ -> retryAction() }
+        .setNegativeButton(R.string.dialog_button_cancel) { _, _ -> cancelAction?.invoke() }
         .setOnDismissListener { cancelAction?.invoke() }
         .setTitle(message)
         .setIcon(iconRes)
