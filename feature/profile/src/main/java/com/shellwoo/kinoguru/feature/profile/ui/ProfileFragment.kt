@@ -28,9 +28,7 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
     private val viewModel: ProfileViewModel by viewModels(factoryProducer = ::viewModelFactory)
 
     private val requestManager: RequestManager by lazy { Glide.with(this) }
-
-    @Inject
-    lateinit var languageNameConverter: LanguageNameConverter
+    private val languageNameConverter by lazy { LanguageNameConverter(requireContext()) }
 
     @Inject
     lateinit var themeNameConverter: ThemeNameConverter
