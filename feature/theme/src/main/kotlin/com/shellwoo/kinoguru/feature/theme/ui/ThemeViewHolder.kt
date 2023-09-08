@@ -9,11 +9,12 @@ import com.shellwoo.kinoguru.shared.theme.ui.ThemeNameConverter
 import kotlinx.android.synthetic.main.theme_item.view.*
 
 class ThemeViewHolder(
-    private val themeNameConverter: ThemeNameConverter,
     private val themeIconConverter: ThemeIconConverter,
     private val onClickListener: ((Theme) -> Unit)?,
     parent: ViewGroup
 ) : RecyclerView.ViewHolder(parent.inflate(R.layout.theme_item, false)) {
+
+    private val themeNameConverter = ThemeNameConverter(parent.context)
 
     fun bind(theme: Theme) {
         with(itemView) {
