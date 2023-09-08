@@ -19,7 +19,6 @@ import com.shellwoo.kinoguru.shared.language.ui.LanguageResultContract
 import com.shellwoo.kinoguru.shared.theme.ui.ThemeNameConverter
 import com.shellwoo.kinoguru.shared.theme.ui.ThemeResultContract
 import kotlinx.android.synthetic.main.profile_fragment.*
-import javax.inject.Inject
 
 class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
@@ -29,9 +28,7 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
     private val requestManager: RequestManager by lazy { Glide.with(this) }
     private val languageNameConverter by lazy { LanguageNameConverter(requireContext()) }
-
-    @Inject
-    lateinit var themeNameConverter: ThemeNameConverter
+    private val themeNameConverter by lazy { ThemeNameConverter(requireContext()) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
