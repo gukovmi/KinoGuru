@@ -9,11 +9,12 @@ import com.shellwoo.kinoguru.shared.language.ui.LanguageNameConverter
 import kotlinx.android.synthetic.main.language_item.view.*
 
 class LanguageViewHolder(
-    private val languageNameConverter: LanguageNameConverter,
     private val languageFlagConverter: LanguageFlagConverter,
     private val onClickListener: ((Language) -> Unit)?,
     parent: ViewGroup
 ) : RecyclerView.ViewHolder(parent.inflate(R.layout.language_item, false)) {
+
+    private val languageNameConverter = LanguageNameConverter(parent.context)
 
     fun bind(language: Language) {
         with(itemView) {
