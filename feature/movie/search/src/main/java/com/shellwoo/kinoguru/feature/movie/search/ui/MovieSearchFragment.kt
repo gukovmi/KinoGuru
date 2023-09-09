@@ -84,17 +84,25 @@ class MovieSearchFragment : BaseFragment(R.layout.movie_search_fragment) {
     private fun renderSearchState(state: SearchState) {
         when (state) {
             SearchState.None -> renderNoneSearchState()
-            is SearchState.Result -> renderSuccessfulSearchState(state)
+            is SearchState.Items -> renderSuccessSearchState(state)
+            SearchState.NotFound -> renderNotFoundSearchState()
         }
     }
 
     private fun renderNoneSearchState() {
         movies.isVisible = false
+        notFound.isVisible = false
     }
 
-    private fun renderSuccessfulSearchState(state: SearchState.Result) {
-        (movies.adapter as MovieSearchItemAdapter).submitList(state.items)
+    private fun renderSuccessSearchState(state: SearchState.Items) {
+        (movies.adapter as MovieSearchItemAdapter).submitList(state.value)
         movies.isVisible = true
+        notFound.isVisible = false
+    }
+
+    private fun renderNotFoundSearchState() {
+        movies.isVisible = false
+        notFound.isVisible = true
     }
 
     private fun renderOnboarding() {

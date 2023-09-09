@@ -15,7 +15,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
 @ExtendWith(MockitoExtension::class)
-internal class MovieSearchResultRepositoryImplTest {
+internal class MovieSearchItemsRepositoryImplTest {
 
     private val api: MovieSearchApi = mock()
     private val movieSearchResultModelConverter: MovieSearchResultModelConverter = mock()
