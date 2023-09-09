@@ -7,7 +7,7 @@ import com.shellwoo.kinoguru.core.test.unit.thenNeverAnswer
 import com.shellwoo.kinoguru.feature.movie.detail.domain.entity.MovieDetails
 import com.shellwoo.kinoguru.feature.movie.detail.domain.scenario.GetMovieDetailsScenario
 import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
-import com.shellwoo.kinoguru.shared.error.domain.exception.ClientConnectException
+import com.shellwoo.kinoguru.shared.error.domain.exception.ConnectException
 import com.shellwoo.kinoguru.shared.error.domain.usecase.GetBaseExceptionUseCase
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
@@ -31,7 +31,7 @@ class MovieDetailsViewModelTest {
     private val stateObserver: Observer<MovieDetailsState> = mock()
     private val loadMovieDetailsErrorEventObserver: Observer<BaseException> = mock()
     private val error = RuntimeException()
-    private val baseException = ClientConnectException("")
+    private val baseException = ConnectException.ClientConnectException
 
     @Test
     fun `init EXPECT initial state`() {
