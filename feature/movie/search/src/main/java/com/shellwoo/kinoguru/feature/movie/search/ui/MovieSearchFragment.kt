@@ -5,8 +5,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
 import com.shellwoo.kinoguru.core.ui.component.AfterTextWatcher
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
+import com.shellwoo.kinoguru.core.ui.ext.hideKeyboard
 import com.shellwoo.kinoguru.feature.movie.search.R
 import com.shellwoo.kinoguru.feature.movie.search.di.MovieSearchComponentViewModel
 import com.shellwoo.kinoguru.feature.movie.search.presentation.MovieSearchViewModel
@@ -30,6 +34,12 @@ class MovieSearchFragment : BaseFragment(R.layout.movie_search_fragment) {
 
     private val componentViewModel: MovieSearchComponentViewModel by viewModels()
     private val viewModel: MovieSearchViewModel by viewModels(factoryProducer = ::viewModelFactory)
+
+    private val moviesOnScrollListener = object : OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            if (newState == SCROLL_STATE_DRAGGING) hideKeyboard()
+        }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -55,6 +65,7 @@ class MovieSearchFragment : BaseFragment(R.layout.movie_search_fragment) {
 
     private fun initListeners() {
         searchInput.addTextChangedListener(AfterTextWatcher(viewModel::setQuery))
+        movies.addOnScrollListener(moviesOnScrollListener)
     }
 
     private fun observeViewModel() {
