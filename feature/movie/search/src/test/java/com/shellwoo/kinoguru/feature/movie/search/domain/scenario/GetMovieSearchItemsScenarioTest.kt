@@ -13,7 +13,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
 @ExtendWith(MockitoExtension::class)
-internal class GetMovieSearchResultScenarioTest {
+internal class GetMovieSearchItemsScenarioTest {
 
     private val movieSearchResultRepository: MovieSearchResultRepository = mock()
     private val getCurrentLanguageUseCase: GetCurrentLanguageUseCase = mock()

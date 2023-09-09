@@ -7,16 +7,16 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
+        style="@style/AppBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/AppBarLayout"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            style="@style/Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            style="@style/Toolbar"
             app:title="@string/movie_search_title" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -49,5 +49,33 @@
         tools:itemCount="20"
         tools:listitem="@layout/movie_search_success_item"
         tools:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/notFound"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchInputLayout"
+        tools:visibility="visible">
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/Text.SubHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="@string/movie_search_not_found"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/not_found" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

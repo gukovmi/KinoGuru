@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shellwoo.kinoguru.core.coroutines.launchTrying
 import com.shellwoo.kinoguru.core.presentation.SingleLiveEvent
-import com.shellwoo.kinoguru.feature.movie.search.domain.entity.MovieSearch
+import com.shellwoo.kinoguru.feature.movie.search.domain.entity.MovieSearchResult
 import com.shellwoo.kinoguru.feature.movie.search.domain.scenario.GetMovieSearchResultScenario
 import com.shellwoo.kinoguru.feature.movie.search.domain.usecase.IsMovieSearchOnboardingShowedUseCase
 import com.shellwoo.kinoguru.feature.movie.search.domain.usecase.SetMovieSearchOnboardingShowedUseCase
@@ -85,13 +85,12 @@ class MovieSearchViewModel @Inject constructor(
         movieSearchingJob = viewModelScope.launchTrying(
             errorHandler = ::handleSearchError,
             block = {
-                _state.value = currentContentState?.copy(searchState = SearchState.Result(SEARCH_MOVIE_ITEMS_LOADING))
+                _state.value = currentContentState?.copy(searchState = SearchState.Items(SEARCH_MOVIE_ITEMS_LOADING))
 
                 val query = currentContentState?.query ?: return@launchTrying
                 val searchMovieResult = getMovieSearchResultScenario(query)
-                _state.value = currentContentState?.copy(
-                    searchState = SearchState.Result(searchMovieResult.movies.toSearchMovieSuccessItems())
-                )
+
+                _state.value = currentContentState?.copy(searchState = searchMovieResult.toSearchState())
             }
         )
     }
@@ -102,8 +101,12 @@ class MovieSearchViewModel @Inject constructor(
         _searchErrorEvent(baseException)
     }
 
-    private fun List<MovieSearch>.toSearchMovieSuccessItems(): List<MovieSearchItem.Success> =
-        map(MovieSearchItem::Success)
+    private fun MovieSearchResult.toSearchState(): SearchState =
+        if (movies.isEmpty()) {
+            SearchState.NotFound
+        } else {
+            SearchState.Items(movies.map(MovieSearchItem::Success))
+        }
 
     fun setQuery(query: String) {
         searchQuery.tryEmit(query)

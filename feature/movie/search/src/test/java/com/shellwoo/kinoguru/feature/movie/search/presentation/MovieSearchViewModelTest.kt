@@ -109,7 +109,7 @@ class MovieSearchViewModelTest {
 
     @Test
     fun `set new query, wait debounce, EXPECT content with loading items in result search state`() = runTest {
-        val expectedSearchState = SearchState.Result(movieSearchItemsLoading)
+        val expectedSearchState = SearchState.Items(movieSearchItemsLoading)
         val expectedContentState = ScreenState.Content(query, expectedSearchState)
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getMovieSearchResultScenario(query)).thenNeverAnswer()
@@ -124,7 +124,7 @@ class MovieSearchViewModelTest {
 
     @Test
     fun `set old query, wait debounce EXPECT content with not loading items in result search state`() = runTest {
-        val unexpectedSearchState = SearchState.Result(movieSearchItemsLoading)
+        val unexpectedSearchState = SearchState.Items(movieSearchItemsLoading)
         val unexpectedContentState = ScreenState.Content(query, unexpectedSearchState)
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getMovieSearchResultScenario(query)).thenReturn(movieSearchResult)
@@ -159,8 +159,8 @@ class MovieSearchViewModelTest {
     }
 
     @Test
-    fun `set query, wait debounce, EXPECT content with loading items in result search state`() = runTest {
-        val expectedSearchState = SearchState.Result(movieSearchItemsLoading)
+    fun `set query, wait debounce, EXPECT content with loading items in search state`() = runTest {
+        val expectedSearchState = SearchState.Items(movieSearchItemsLoading)
         val expectedContentState = ScreenState.Content(query, expectedSearchState)
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getMovieSearchResultScenario(query)).thenNeverAnswer()
@@ -174,11 +174,27 @@ class MovieSearchViewModelTest {
     }
 
     @Test
-    fun `set query, wait debounce, movies was found EXPECT content with success items in result search state`() = runTest {
-        val expectedSearchState = SearchState.Result(movieSearchItemsSuccess)
+    fun `set query, wait debounce, movies was found EXPECT content with success items in search state`() = runTest {
+        val expectedSearchState = SearchState.Items(movieSearchItemsSuccess)
         val expectedContentState = ScreenState.Content(query, expectedSearchState)
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getMovieSearchResultScenario(query)).thenReturn(movieSearchResult)
+        viewModel.state.observeForever(stateObserver)
+        viewModel.start()
+
+        viewModel.setQuery(query)
+        advanceTimeBy(510L)
+
+        verify(stateObserver).onChanged(expectedContentState)
+    }
+
+    @Test
+    fun `set query, wait debounce, movies was not found EXPECT content with empty search state`() = runTest {
+        val expectedSearchState = SearchState.NotFound
+        val expectedContentState = ScreenState.Content(query, expectedSearchState)
+        val emptyMovieSearchResult = MovieSearchResult(1, emptyList())
+        whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
+        whenever(getMovieSearchResultScenario(query)).thenReturn(emptyMovieSearchResult)
         viewModel.state.observeForever(stateObserver)
         viewModel.start()
 

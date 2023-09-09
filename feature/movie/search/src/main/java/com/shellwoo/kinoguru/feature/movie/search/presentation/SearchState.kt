@@ -4,5 +4,7 @@ sealed interface SearchState {
 
     object None : SearchState
 
-    data class Result(val items: List<MovieSearchItem>) : SearchState
+    data class Items(val value: List<MovieSearchItem>) : SearchState
+
+    object NotFound : SearchState
 }
