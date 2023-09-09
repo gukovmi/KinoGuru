@@ -4,8 +4,6 @@ import com.shellwoo.kinoguru.shared.error.data.converter.ConnectExceptionConvert
 import com.shellwoo.kinoguru.shared.error.data.converter.HttpCodeExceptionConverter
 import com.shellwoo.kinoguru.shared.error.domain.exception.ConnectException
 import com.shellwoo.kinoguru.shared.error.domain.exception.DomainException
-import com.shellwoo.kinoguru.shared.error.domain.exception.NotFoundException
-import com.shellwoo.kinoguru.shared.error.domain.exception.ServiceConnectException
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -64,7 +62,7 @@ class ErrorInterceptorTest {
             on { it.request() } doReturn request
             on { it.proceed(request) } doThrow requestException
         }
-        val connectException = ServiceConnectException("")
+        val connectException = ConnectException.ServiceConnectException
         whenever(connectExceptionConverter.convert(requestException)).thenReturn(connectException)
 
         assertThrows<ConnectException> { interceptor.intercept(chain) }
@@ -81,7 +79,7 @@ class ErrorInterceptorTest {
             on { it.request() } doReturn request
             on { it.proceed(request) } doReturn response
         }
-        val domainException = NotFoundException("")
+        val domainException = DomainException.NotFoundException
         whenever(httpCodeExceptionConverter.convert(httpNotFoundCode)).thenReturn(domainException)
 
         assertThrows<DomainException> { interceptor.intercept(chain) }

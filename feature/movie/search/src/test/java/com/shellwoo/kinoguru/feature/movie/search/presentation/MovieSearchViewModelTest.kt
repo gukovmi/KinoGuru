@@ -10,7 +10,7 @@ import com.shellwoo.kinoguru.feature.movie.search.domain.scenario.GetMovieSearch
 import com.shellwoo.kinoguru.feature.movie.search.domain.usecase.IsMovieSearchOnboardingShowedUseCase
 import com.shellwoo.kinoguru.feature.movie.search.domain.usecase.SetMovieSearchOnboardingShowedUseCase
 import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
-import com.shellwoo.kinoguru.shared.error.domain.exception.ClientConnectException
+import com.shellwoo.kinoguru.shared.error.domain.exception.ConnectException
 import com.shellwoo.kinoguru.shared.error.domain.usecase.GetBaseExceptionUseCase
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.advanceTimeBy
@@ -191,7 +191,7 @@ class MovieSearchViewModelTest {
     @Test
     fun `search, error EXPECT search error event`() = runTest {
         val error = RuntimeException()
-        val baseException = ClientConnectException("")
+        val baseException = ConnectException.ClientConnectException
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getMovieSearchResultScenario("")).thenThrow(error)
         whenever(getBaseExceptionUseCase(error)).thenReturn(baseException)

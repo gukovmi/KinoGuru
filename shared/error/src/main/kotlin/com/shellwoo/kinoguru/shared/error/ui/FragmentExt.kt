@@ -3,7 +3,10 @@ package com.shellwoo.kinoguru.shared.error.ui
 import androidx.fragment.app.Fragment
 import com.shellwoo.kinoguru.core.ui.ext.showOkDialog
 import com.shellwoo.kinoguru.core.ui.ext.showRetryCancelDialog
-import com.shellwoo.kinoguru.shared.error.domain.exception.*
+import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
+import com.shellwoo.kinoguru.shared.error.domain.exception.ConnectException
+import com.shellwoo.kinoguru.shared.error.domain.exception.DomainException
+import com.shellwoo.kinoguru.shared.error.domain.exception.UnknownException
 import com.shellwoo.kinoguru.design.resource.R as designResourceR
 
 fun Fragment.showErrorDialog(
@@ -12,7 +15,9 @@ fun Fragment.showErrorDialog(
     cancelAction: (() -> Unit)? = null,
     okAction: (() -> Unit)? = null,
 ) {
-    val errorMessage = baseException.message
+    val baseExceptionMessageConverter = BaseExceptionMessageConverter(requireContext())
+
+    val errorMessage = baseExceptionMessageConverter.toMessage(baseException)
     val errorIconRes = designResourceR.drawable.error
 
     when (baseException) {
@@ -49,15 +54,15 @@ private fun Fragment.showDomainErrorDialog(
     errorIconRes: Int,
 ) {
     when (domainException) {
-        is UnauthorizedException,
-        is InnerException -> showOkDialog(
+        is DomainException.UnauthorizedException,
+        is DomainException.InnerException -> showOkDialog(
             okAction = okAction,
             message = errorMessage,
             iconRes = errorIconRes,
         )
 
-        is NotFoundException,
-        is ServiceUnavailableException -> showRetryCancelDialog(
+        is DomainException.NotFoundException,
+        is DomainException.ServiceUnavailableException -> showRetryCancelDialog(
             retryAction = retryAction,
             cancelAction = cancelAction,
             message = errorMessage,
