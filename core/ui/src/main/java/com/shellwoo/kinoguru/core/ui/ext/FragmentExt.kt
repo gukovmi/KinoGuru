@@ -1,8 +1,10 @@
 package com.shellwoo.kinoguru.core.ui.ext
 
 import android.app.AlertDialog
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
@@ -56,4 +58,9 @@ fun <T : Serializable> Fragment.setResultListener(contract: FragmentResultContra
         val result = bundle.getSerializable(contract.key) as T
         listener(result)
     }
+}
+
+fun Fragment.hideKeyboard() {
+    val inputMethodManager = ContextCompat.getSystemService(requireContext(), InputMethodManager::class.java)
+    inputMethodManager?.hideSoftInputFromWindow(view?.windowToken, 0)
 }
