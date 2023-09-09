@@ -3,4 +3,5 @@
     <string name="movie_search_title">Search</string>
     <string name="movie_search_input_hint">Enter movie or series title</string>
     <string name="movie_search_input_onboarding">Use this field for searching</string>
+    <string name="movie_search_not_found">Nothing was found for your request, try changing your request</string>
 </resources>
