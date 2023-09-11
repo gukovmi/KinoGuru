@@ -17,7 +17,7 @@ interface ProfileComponent {
         fun create(profileDeps: ProfileDeps): ProfileComponent =
             DaggerProfileComponent.builder()
                 .profileDeps(profileDeps)
-                .languageDataComponent(LanguageDataComponent.create())
+                .languageDataComponent(LanguageDataComponent.create(profileDeps.context))
                 .themeDataComponent(ThemeDataComponent.create(profileDeps.context))
                 .userComponent(UserComponent.create())
                 .build()
