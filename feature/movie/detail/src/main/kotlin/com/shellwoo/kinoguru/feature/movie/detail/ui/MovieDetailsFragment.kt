@@ -23,6 +23,7 @@ import com.shellwoo.kinoguru.feature.movie.detail.di.MovieDetailsViewModelFactor
 import com.shellwoo.kinoguru.feature.movie.detail.presentation.MovieDetailsState
 import com.shellwoo.kinoguru.feature.movie.detail.presentation.MovieDetailsViewModel
 import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
+import com.shellwoo.kinoguru.shared.error.ui.BaseExceptionMessageConverter
 import com.shellwoo.kinoguru.shared.error.ui.showErrorDialog
 import com.shellwoo.kinoguru.shared.movie.BaseUrls
 import com.shellwoo.kinoguru.shared.movie.ui.RatingFormatter
@@ -55,6 +56,9 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
 
     @Inject
     lateinit var rattingFormatter: RatingFormatter
+
+    @Inject
+    lateinit var baseExceptionMessageConverter: BaseExceptionMessageConverter
 
     private val requestManager: RequestManager by lazy { Glide.with(this) }
     private val backgroundRequestListener = object : RequestListener<Drawable> {
@@ -235,6 +239,7 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
 
     private fun renderMovieDetailsLoadingError(baseException: BaseException) {
         showErrorDialog(
+            baseExceptionMessageConverter = baseExceptionMessageConverter,
             baseException = baseException,
             retryAction = viewModel::loadMovieDetails,
             cancelAction = viewModel::close,

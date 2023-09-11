@@ -1,10 +1,11 @@
 package com.shellwoo.kinoguru.shared.theme.ui
 
-import android.content.Context
+import com.shellwoo.kinoguru.core.base.LocalizedContext
 import com.shellwoo.kinoguru.shared.theme.R
 import com.shellwoo.kinoguru.shared.theme.domain.entity.Theme
+import javax.inject.Inject
 
-class ThemeNameConverter(private val context: Context) {
+class ThemeNameConverter @Inject constructor(private val context: LocalizedContext) {
 
     fun toName(theme: Theme): String =
         when (theme) {

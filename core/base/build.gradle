@@ -1,0 +1,7 @@
+apply from: "$rootDir/dependencies.gradle"
+
+dependencies {
+    implementation libraries.androidxAppCompat
+    implementation libraries.dagger
+    kapt libraries.daggerCompiler
+}

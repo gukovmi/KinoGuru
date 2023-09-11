@@ -1,16 +1,16 @@
 package com.shellwoo.kinoguru.shared.error.ui
 
-import android.content.Context
 import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
 import com.shellwoo.kinoguru.shared.error.domain.exception.ConnectException
 import com.shellwoo.kinoguru.shared.error.domain.exception.DomainException
 import com.shellwoo.kinoguru.shared.error.domain.exception.UnknownException
+import javax.inject.Inject
 
-class BaseExceptionMessageConverter(context: Context) {
-
-    private val connectExceptionMessageConverter = ConnectExceptionMessageConverter(context)
-    private val domainExceptionMessageConverter = DomainExceptionMessageConverter(context)
-    private val unknownExceptionMessageConverter = UnknownExceptionMessageConverter(context)
+class BaseExceptionMessageConverter @Inject constructor(
+    private val connectExceptionMessageConverter: ConnectExceptionMessageConverter,
+    private val domainExceptionMessageConverter: DomainExceptionMessageConverter,
+    private val unknownExceptionMessageConverter: UnknownExceptionMessageConverter,
+) {
 
     fun toMessage(baseException: BaseException): String =
         when (baseException) {

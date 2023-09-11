@@ -1,10 +1,11 @@
 package com.shellwoo.kinoguru.shared.error.ui
 
-import android.content.Context
+import com.shellwoo.kinoguru.core.base.LocalizedContext
 import com.shellwoo.kinoguru.shared.error.R
 import com.shellwoo.kinoguru.shared.error.domain.exception.DomainException
+import javax.inject.Inject
 
-class DomainExceptionMessageConverter(private val context: Context) {
+class DomainExceptionMessageConverter @Inject constructor(private val context: LocalizedContext) {
 
     fun toMessage(domainException: DomainException): String =
         when (domainException) {
