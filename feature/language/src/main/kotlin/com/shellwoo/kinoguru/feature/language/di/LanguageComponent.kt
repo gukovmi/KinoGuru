@@ -15,7 +15,7 @@ interface LanguageComponent {
         fun create(languageDeps: LanguageDeps): LanguageComponent =
             DaggerLanguageComponent.builder()
                 .languageDeps(languageDeps)
-                .languageDataComponent(LanguageDataComponent.create())
+                .languageDataComponent(LanguageDataComponent.create(languageDeps.context))
                 .build()
     }
 

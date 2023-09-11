@@ -17,6 +17,7 @@ import com.shellwoo.kinoguru.feature.movie.search.presentation.MovieSearchViewMo
 import com.shellwoo.kinoguru.feature.movie.search.presentation.ScreenState
 import com.shellwoo.kinoguru.feature.movie.search.presentation.SearchState
 import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
+import com.shellwoo.kinoguru.shared.error.ui.BaseExceptionMessageConverter
 import com.shellwoo.kinoguru.shared.error.ui.showErrorDialog
 import com.shellwoo.kinoguru.shared.movie.ui.RatingFormatter
 import com.shellwoo.kinoguru.shared.onboarding.ui.OnboardingDialogFragment
@@ -31,6 +32,9 @@ class MovieSearchFragment : BaseFragment(R.layout.movie_search_fragment) {
 
     @Inject
     lateinit var diffUtilCallback: MovieSearchItemDiffUtilCallback
+
+    @Inject
+    lateinit var baseExceptionMessageConverter: BaseExceptionMessageConverter
 
     private val componentViewModel: MovieSearchComponentViewModel by viewModels()
     private val viewModel: MovieSearchViewModel by viewModels(factoryProducer = ::viewModelFactory)
@@ -126,6 +130,7 @@ class MovieSearchFragment : BaseFragment(R.layout.movie_search_fragment) {
 
     private fun renderSearchError(baseException: BaseException) {
         showErrorDialog(
+            baseExceptionMessageConverter = baseExceptionMessageConverter,
             baseException = baseException,
             retryAction = viewModel::search,
         )

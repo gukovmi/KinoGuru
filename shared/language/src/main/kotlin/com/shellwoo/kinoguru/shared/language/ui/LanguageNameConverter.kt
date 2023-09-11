@@ -1,10 +1,11 @@
 package com.shellwoo.kinoguru.shared.language.ui
 
-import android.content.Context
+import com.shellwoo.kinoguru.core.base.LocalizedContext
 import com.shellwoo.kinoguru.shared.language.R
 import com.shellwoo.kinoguru.shared.language.domain.entity.Language
+import javax.inject.Inject
 
-class LanguageNameConverter(private val context: Context) {
+class LanguageNameConverter @Inject constructor(private val context: LocalizedContext) {
 
     fun toName(language: Language): String =
         when (language) {

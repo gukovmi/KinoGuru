@@ -11,12 +11,11 @@ import com.shellwoo.kinoguru.design.resource.R as designResourceR
 
 fun Fragment.showErrorDialog(
     baseException: BaseException,
+    baseExceptionMessageConverter: BaseExceptionMessageConverter,
     retryAction: (() -> Unit),
     cancelAction: (() -> Unit)? = null,
     okAction: (() -> Unit)? = null,
 ) {
-    val baseExceptionMessageConverter = BaseExceptionMessageConverter(requireContext())
-
     val errorMessage = baseExceptionMessageConverter.toMessage(baseException)
     val errorIconRes = designResourceR.drawable.error
 

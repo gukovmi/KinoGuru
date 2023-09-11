@@ -19,7 +19,7 @@ internal interface MovieSearchComponent {
                 .errorComponent(ErrorComponent.create())
                 .movieSearchDeps(movieSearchDeps)
                 .movieDataComponent(MovieDataComponent.create(movieSearchDeps.context))
-                .languageDataComponent(LanguageDataComponent.create())
+                .languageDataComponent(LanguageDataComponent.create(movieSearchDeps.context))
                 .build()
     }
 

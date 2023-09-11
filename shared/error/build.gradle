@@ -1,6 +1,7 @@
 apply from: "$rootDir/dependencies.gradle"
 
 dependencies {
+    implementation project(":core-base")
     implementation project(":core-ktx")
     implementation project(":core-ui")
 
