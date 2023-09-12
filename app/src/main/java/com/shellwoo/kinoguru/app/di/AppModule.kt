@@ -7,6 +7,7 @@ import dagger.Module
         AnimationModule::class,
         NavigationCiceroneModule::class,
         NavigationBindsModule::class,
+        SharedModule::class,
     ]
 )
 interface AppModule

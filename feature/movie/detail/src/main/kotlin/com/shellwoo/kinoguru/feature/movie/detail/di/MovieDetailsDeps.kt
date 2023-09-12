@@ -2,9 +2,13 @@ package com.shellwoo.kinoguru.feature.movie.detail.di
 
 import android.content.Context
 import com.shellwoo.kinoguru.feature.movie.detail.presentation.MovieDetailsRouter
+import com.shellwoo.kinoguru.shared.error.domain.usecase.GetBaseExceptionUseCase
+import com.shellwoo.kinoguru.shared.error.ui.BaseExceptionMessageConverter
 
 interface MovieDetailsDeps {
 
-    val context: Context
+    val getBaseExceptionUseCase: GetBaseExceptionUseCase
     val movieDetailsRouter: MovieDetailsRouter
+    val baseExceptionMessageConverter: BaseExceptionMessageConverter
+    val context: Context
 }
