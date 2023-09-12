@@ -10,13 +10,12 @@ import com.shellwoo.kinoguru.feature.movie.search.di.MovieSearchDeps
 import com.shellwoo.kinoguru.feature.profile.di.ProfileDeps
 import com.shellwoo.kinoguru.feature.splash.di.SplashDeps
 import com.shellwoo.kinoguru.feature.theme.di.ThemeDeps
-import com.shellwoo.kinoguru.shared.theme.di.ThemeDataComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(dependencies = [ThemeDataComponent::class], modules = [AppModule::class])
+@Component(modules = [AppModule::class])
 interface AppComponent : ProfileDeps, MainDeps, LanguageDeps, LoginDeps, MovieDetailsDeps, MovieSearchDeps, SplashDeps, ThemeDeps,
     MainActivityDeps {
 
@@ -24,7 +23,6 @@ interface AppComponent : ProfileDeps, MainDeps, LanguageDeps, LoginDeps, MovieDe
 
         fun create(context: Context): AppComponent = DaggerAppComponent.builder()
             .context(context)
-            .themeDataComponent(ThemeDataComponent.create(context))
             .build()
     }
 
@@ -35,8 +33,6 @@ interface AppComponent : ProfileDeps, MainDeps, LanguageDeps, LoginDeps, MovieDe
 
         @BindsInstance
         fun context(context: Context): Builder
-
-        fun themeDataComponent(themeDataComponent: ThemeDataComponent): Builder
     }
 
     fun inject(app: App)
