@@ -50,6 +50,7 @@ dependencies {
     implementation project(":feature-theme")
     implementation project(":shared-error")
     implementation project(":shared-theme")
+    implementation project(":shared-user")
 
     implementation libraries.androidxActivityKtx
     implementation libraries.androidxCoreKtx
@@ -57,9 +58,12 @@ dependencies {
     implementation libraries.dagger
     kapt libraries.daggerCompiler
     implementation libraries.datastorePreferences
+    implementation libraries.firebaseAuthKtx
     implementation libraries.gson
     implementation libraries.material
+    implementation libraries.playServicesAuth
     implementation libraries.retrofit
+    implementation platform(libraries.firebaseBom)
 
     testImplementation libraries.junitJupiter
     testImplementation libraries.mockitoKotlin

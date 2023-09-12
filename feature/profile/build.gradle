@@ -4,7 +4,6 @@ dependencies {
     implementation project(":core-base")
     implementation project(":core-coroutines")
     implementation project(":core-di")
-    implementation project(":core-firebase")
     implementation project(":core-ui")
     implementation project(":design-resource")
     implementation project(":shared-language")
