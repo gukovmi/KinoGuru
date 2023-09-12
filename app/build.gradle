@@ -34,6 +34,7 @@ tasks.withType(Test) {
 
 dependencies {
 
+    implementation project(":core-base")
     implementation project(":core-di")
     implementation project(":core-navigation")
     implementation project(":core-ui")
@@ -47,6 +48,7 @@ dependencies {
     implementation project(":feature-profile")
     implementation project(":feature-splash")
     implementation project(":feature-theme")
+    implementation project(":shared-error")
     implementation project(":shared-theme")
 
     implementation libraries.androidxActivityKtx
