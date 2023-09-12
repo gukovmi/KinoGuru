@@ -19,7 +19,6 @@ dependencies {
     implementation libraries.firebaseAuthKtx
     implementation libraries.glide
     kapt libraries.glideCompiler
-    implementation libraries.gson
     implementation libraries.material
 
     testImplementation project(":core-test-unit")
