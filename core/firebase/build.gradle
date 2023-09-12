@@ -1,9 +1,0 @@
-apply from: "$rootDir/dependencies.gradle"
-
-dependencies {
-
-    implementation libraries.dagger
-    kapt libraries.daggerCompiler
-    implementation libraries.firebaseAuthKtx
-    implementation platform(libraries.firebaseBom)
-}

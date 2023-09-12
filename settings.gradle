@@ -13,7 +13,6 @@ def modules = [
         ':core-base'           : 'core/base',
         ':core-coroutines'     : 'core/coroutines',
         ':core-di'             : 'core/di',
-        ':core-firebase'       : 'core/firebase',
         ':core-ktx'            : 'core/ktx',
         ':core-navigation'     : 'core/navigation',
         ':core-test-unit'      : 'core/test/unit',

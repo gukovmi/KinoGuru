@@ -1,8 +1,6 @@
 apply from: "$rootDir/dependencies.gradle"
 
 dependencies {
-    implementation project(":core-firebase")
-
     implementation libraries.firebaseAuthKtx
     implementation platform(libraries.firebaseBom)
     implementation libraries.playServicesAuth

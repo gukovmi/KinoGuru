@@ -1,11 +1,10 @@
 package com.shellwoo.kinoguru.feature.login.di
 
-import com.shellwoo.kinoguru.core.firebase.di.FirebaseComponent
 import com.shellwoo.kinoguru.feature.login.ui.LoginFragment
 import dagger.Component
 
 @Component(
-    dependencies = [LoginDeps::class, FirebaseComponent::class],
+    dependencies = [LoginDeps::class],
     modules = [LoginPresentationModule::class]
 )
 interface LoginComponent {
@@ -15,7 +14,6 @@ interface LoginComponent {
         fun create(loginDeps: LoginDeps): LoginComponent =
             DaggerLoginComponent.builder()
                 .loginDeps(loginDeps)
-                .firebaseComponent(FirebaseComponent.create())
                 .build()
     }
 
