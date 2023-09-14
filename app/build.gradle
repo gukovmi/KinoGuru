@@ -49,6 +49,7 @@ dependencies {
     implementation project(":feature-splash")
     implementation project(":feature-theme")
     implementation project(":shared-error")
+    implementation project(":shared-language")
     implementation project(":shared-theme")
     implementation project(":shared-user")
 
