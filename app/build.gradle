@@ -49,6 +49,7 @@ dependencies {
     implementation project(":feature-splash")
     implementation project(":feature-theme")
     implementation project(":shared-error")
+    implementation project(":shared-movie")
     implementation project(":shared-language")
     implementation project(":shared-theme")
     implementation project(":shared-user")
@@ -62,6 +63,7 @@ dependencies {
     implementation libraries.firebaseAuthKtx
     implementation libraries.gson
     implementation libraries.material
+    implementation libraries.okhttpLoggingInterceptor
     implementation libraries.playServicesAuth
     implementation libraries.retrofit
     implementation platform(libraries.firebaseBom)
