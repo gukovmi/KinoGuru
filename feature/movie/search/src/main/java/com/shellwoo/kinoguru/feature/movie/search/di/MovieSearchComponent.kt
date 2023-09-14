@@ -1,11 +1,10 @@
 package com.shellwoo.kinoguru.feature.movie.search.di
 
 import com.shellwoo.kinoguru.feature.movie.search.ui.MovieSearchFragment
-import com.shellwoo.kinoguru.shared.movie.di.MovieDataComponent
 import dagger.Component
 
 @Component(
-    dependencies = [MovieSearchDeps::class, MovieDataComponent::class],
+    dependencies = [MovieSearchDeps::class],
     modules = [MovieSearchPresentationModule::class]
 )
 internal interface MovieSearchComponent {
@@ -15,7 +14,6 @@ internal interface MovieSearchComponent {
         fun create(movieSearchDeps: MovieSearchDeps): MovieSearchComponent =
             DaggerMovieSearchComponent.builder()
                 .movieSearchDeps(movieSearchDeps)
-                .movieDataComponent(MovieDataComponent.create(movieSearchDeps.context))
                 .build()
     }
 
