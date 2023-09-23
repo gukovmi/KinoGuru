@@ -5,7 +5,9 @@ import com.shellwoo.kinoguru.core.test.unit.InstantTaskExecutorExtension
 import com.shellwoo.kinoguru.core.test.unit.TestCoroutineExtension
 import com.shellwoo.kinoguru.core.test.unit.thenNeverAnswer
 import com.shellwoo.kinoguru.feature.movie.detail.domain.entity.MovieDetails
+import com.shellwoo.kinoguru.feature.movie.detail.domain.entity.MovieVideo
 import com.shellwoo.kinoguru.feature.movie.detail.domain.scenario.GetMovieDetailsScenario
+import com.shellwoo.kinoguru.feature.movie.detail.domain.scenario.GetMovieVideosScenario
 import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
 import com.shellwoo.kinoguru.shared.error.domain.exception.ConnectException
 import com.shellwoo.kinoguru.shared.error.domain.usecase.GetBaseExceptionUseCase
@@ -23,10 +25,19 @@ class MovieDetailsViewModelTest {
 
     private val getBaseExceptionUseCase: GetBaseExceptionUseCase = mock()
     private val getMovieDetailsScenario: GetMovieDetailsScenario = mock()
+    private val getMovieVideosScenario: GetMovieVideosScenario = mock()
+    private val movieVideoItemConverter: MovieVideoItemConverter = mock()
     private val router: MovieDetailsRouter = mock()
     private val movieId: Int = 123
 
-    private val viewModel = MovieDetailsViewModel(getBaseExceptionUseCase, getMovieDetailsScenario, router, movieId)
+    private val viewModel = MovieDetailsViewModel(
+        getBaseExceptionUseCase,
+        getMovieDetailsScenario,
+        getMovieVideosScenario,
+        movieVideoItemConverter,
+        router,
+        movieId,
+    )
 
     private val stateObserver: Observer<MovieDetailsState> = mock()
     private val loadMovieDetailsErrorEventObserver: Observer<BaseException> = mock()
@@ -61,10 +72,17 @@ class MovieDetailsViewModelTest {
     }
 
     @Test
-    fun `load movie details without error EXPECT content state`() = runTest {
+    fun `load movie details EXPECT content state`() = runTest {
         val movieDetails: MovieDetails = mock()
-        val contentState = MovieDetailsState.Content(movieDetails)
+        val movieVideo: MovieVideo = mock()
+        val movieVideos = listOf(movieVideo)
+        val movieVideoItem: MovieVideoItem.YouTube = mock()
+        val movieVideoItems = listOf(movieVideoItem)
+        val contentState = MovieDetailsState.Content(movieDetails, movieVideoItems)
         whenever(getMovieDetailsScenario(movieId)).thenReturn(movieDetails)
+        whenever(getMovieVideosScenario(movieId)).thenReturn(movieVideos)
+        whenever(movieVideoItemConverter.fromEntities(movieVideos)).thenReturn(movieVideoItems)
+
         viewModel.state.observeForever(stateObserver)
 
         viewModel.loadMovieDetails()

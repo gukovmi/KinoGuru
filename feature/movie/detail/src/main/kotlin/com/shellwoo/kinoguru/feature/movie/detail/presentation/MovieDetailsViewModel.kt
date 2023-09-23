@@ -7,12 +7,15 @@ import androidx.lifecycle.viewModelScope
 import com.shellwoo.kinoguru.core.coroutines.launchTrying
 import com.shellwoo.kinoguru.core.presentation.SingleLiveEvent
 import com.shellwoo.kinoguru.feature.movie.detail.domain.scenario.GetMovieDetailsScenario
+import com.shellwoo.kinoguru.feature.movie.detail.domain.scenario.GetMovieVideosScenario
 import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
 import com.shellwoo.kinoguru.shared.error.domain.usecase.GetBaseExceptionUseCase
 
 class MovieDetailsViewModel(
     private val getBaseExceptionUseCase: GetBaseExceptionUseCase,
     private val getMovieDetailsScenario: GetMovieDetailsScenario,
+    private val getMovieVideosScenario: GetMovieVideosScenario,
+    private val movieVideoItemConverter: MovieVideoItemConverter,
     private val router: MovieDetailsRouter,
     private val movieId: Int,
 ) : ViewModel() {
@@ -36,7 +39,9 @@ class MovieDetailsViewModel(
             errorHandler = ::handleMovieDetailsLoadingError,
             block = {
                 val movieDetails = getMovieDetailsScenario(movieId)
-                _state.value = MovieDetailsState.Content(movieDetails)
+                val movieVideos = getMovieVideosScenario(movieId)
+                val movieVideoItems = movieVideoItemConverter.fromEntities(movieVideos)
+                _state.value = MovieDetailsState.Content(movieDetails, movieVideoItems)
             }
         )
     }
