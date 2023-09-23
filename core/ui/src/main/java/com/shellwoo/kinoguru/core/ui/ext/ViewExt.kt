@@ -17,3 +17,11 @@ fun View.getLeftOnWindow(): Int {
     getLocationInWindow(point)
     return point[X_POSITION]
 }
+
+fun View.onPause(action: () -> Unit) {
+    viewTreeObserver.addOnWindowFocusChangeListener { hasFocus ->
+        if (!hasFocus) {
+            action()
+        }
+    }
+}
