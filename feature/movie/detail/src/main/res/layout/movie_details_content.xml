@@ -13,14 +13,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="16dp">
+            android:layout_height="match_parent">
 
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/backgroundSkeleton"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
                 android:visibility="gone"
                 app:layout_constraintDimensionRatio="16:9"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +38,6 @@
                 style="@style/ImageView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
                 android:scaleType="centerCrop"
                 android:visibility="invisible"
                 app:layout_constraintDimensionRatio="16:9"
@@ -179,9 +176,25 @@ facing a serial killer known as the Riddler." />
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/description"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toTopOf="@id/videos"
                 tools:text="Production companies: Warner brothers, Paramount" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/videos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/companies"
+                tools:listitem="@layout/movie_video_item_you_tube"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
 </merge>

@@ -12,6 +12,8 @@ dependencies {
     implementation project(":shared-movie")
     implementation project(":shared-language")
 
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
     implementation libraries.androidxFragmentKtx
     implementation libraries.cicerone
     implementation libraries.dagger
@@ -22,6 +24,7 @@ dependencies {
     implementation libraries.material
     implementation libraries.retrofit
     implementation libraries.facebookShimmer
+    implementation libraries.youtubePlayer
 
     testImplementation project(":core-test-unit")
     testImplementation libraries.androidxArchCoreRuntime

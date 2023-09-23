@@ -22,6 +22,7 @@ import com.shellwoo.kinoguru.feature.movie.detail.di.MovieDetailsComponentViewMo
 import com.shellwoo.kinoguru.feature.movie.detail.di.MovieDetailsViewModelFactory
 import com.shellwoo.kinoguru.feature.movie.detail.presentation.MovieDetailsState
 import com.shellwoo.kinoguru.feature.movie.detail.presentation.MovieDetailsViewModel
+import com.shellwoo.kinoguru.feature.movie.detail.presentation.MovieVideoItem
 import com.shellwoo.kinoguru.shared.error.domain.exception.BaseException
 import com.shellwoo.kinoguru.shared.error.ui.BaseExceptionMessageConverter
 import com.shellwoo.kinoguru.shared.error.ui.showErrorDialog
@@ -59,6 +60,9 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
 
     @Inject
     lateinit var baseExceptionMessageConverter: BaseExceptionMessageConverter
+
+    @Inject
+    lateinit var movieVideoItemAdapter: MovieVideoItemAdapter
 
     private val requestManager: RequestManager by lazy { Glide.with(this) }
     private val backgroundRequestListener = object : RequestListener<Drawable> {
@@ -99,6 +103,7 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         toolbar.setNavigationOnClickListener { viewModel.close() }
+        videos.adapter = movieVideoItemAdapter
         observeViewModel()
 
         viewModel.start()
@@ -143,6 +148,7 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
             renderDescription(overview)
             renderCompanies(productionCompanies)
         }
+        renderVideos(contentState.movieVideoItems)
     }
 
     private fun renderBackground(backdropPath: String?) {
@@ -245,5 +251,20 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
             cancelAction = viewModel::close,
             okAction = viewModel::close,
         )
+    }
+
+    private fun renderVideos(movieVideoItems: List<MovieVideoItem>) {
+        if (movieVideoItems.isEmpty()) {
+            videos.isVisible = false
+        } else {
+            videos.isVisible = true
+            movieVideoItemAdapter.submitList(movieVideoItems)
+        }
+    }
+
+    override fun onDestroyView() {
+        videos.adapter = null
+        movieVideoItemAdapter.submitList(emptyList())
+        super.onDestroyView()
     }
 }

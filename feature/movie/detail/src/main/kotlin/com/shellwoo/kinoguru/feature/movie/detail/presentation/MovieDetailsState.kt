@@ -8,5 +8,5 @@ sealed interface MovieDetailsState {
 
     object Loading : MovieDetailsState
 
-    data class Content(val movieDetails: MovieDetails) : MovieDetailsState
+    data class Content(val movieDetails: MovieDetails, val movieVideoItems: List<MovieVideoItem>) : MovieDetailsState
 }
