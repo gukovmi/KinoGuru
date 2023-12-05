@@ -1,8 +1,10 @@
 package com.shellwoo.kinoguru.feature.login.ui
 
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
@@ -31,7 +33,12 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
 
     private val viewModel: LoginViewModel by viewModels(factoryProducer = ::viewModelFactory)
 
-    private val requestSignInLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { activityResult ->
+    private val requestSignInLauncher =
+        registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult(), ::handleSignInResult)
+
+    private fun handleSignInResult(activityResult: ActivityResult) {
+        if (activityResult.resultCode != RESULT_OK) return
+
         viewLifecycleOwner.lifecycleScope.launchTrying(
             errorHandler = {
                 viewModel.handleSignInError()
