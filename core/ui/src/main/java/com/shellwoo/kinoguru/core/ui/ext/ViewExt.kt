@@ -1,6 +1,8 @@
 package com.shellwoo.kinoguru.core.ui.ext
 
+import android.os.Build
 import android.view.View
+import android.view.WindowInsets
 
 const val POINT_ARGS_NUMBER = 2
 const val X_POSITION = 0
@@ -17,6 +19,13 @@ fun View.getLeftOnWindow(): Int {
     getLocationInWindow(point)
     return point[X_POSITION]
 }
+
+fun View.getInsetTop(): Int =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        rootWindowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars()).top
+    } else {
+        rootWindowInsets.systemWindowInsetTop
+    }
 
 fun View.onPause(action: () -> Unit) {
     viewTreeObserver.addOnWindowFocusChangeListener { hasFocus ->
