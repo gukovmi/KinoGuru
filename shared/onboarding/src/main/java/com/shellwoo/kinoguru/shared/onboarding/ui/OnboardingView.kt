@@ -15,6 +15,7 @@ import androidx.core.view.marginBottom
 import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
 import androidx.core.view.marginTop
+import com.shellwoo.kinoguru.core.ui.ext.getInsetTop
 import com.shellwoo.kinoguru.core.ui.ext.getLeftOnWindow
 import com.shellwoo.kinoguru.core.ui.ext.getThemeColor
 import com.shellwoo.kinoguru.core.ui.ext.getTopOnWindow
@@ -36,8 +37,6 @@ internal class OnboardingView @JvmOverloads constructor(
         const val SUPER_STATE_KEY = "SUPER_STATE_KEY"
 
         const val DESCRIPTION = "DESCRIPTION"
-
-        const val STATUS_BAR_HEIGHT = "STATUS_BAR_HEIGHT"
 
         const val HOLE_LEFT_KEY = "HOLE_LEFT_KEY"
         const val HOLE_RIGHT_KEY = "HOLE_RIGHT_KEY"
@@ -67,8 +66,6 @@ internal class OnboardingView @JvmOverloads constructor(
         strokeWidth = LINE_WIDTH
         pathEffect = DashPathEffect(floatArrayOf(LINE_DASH_INTERVAL, LINE_DASH_INTERVAL), 0f)
     }
-
-    private var statusBarHeight = 0f
 
     private val bgColor = getThemeColor(context, designResourceR.attr.colorOverlayDark)
 
@@ -114,23 +111,15 @@ internal class OnboardingView @JvmOverloads constructor(
 
         val targetView = targetView ?: return
 
-        measureStatusBar()
         measureHole(targetView)
         measureLine()
-    }
-
-    private fun measureStatusBar() {
-        val statusBarHeightId = resources.getIdentifier("status_bar_height", "dimen", "android")
-        if (statusBarHeightId != 0) {
-            statusBarHeight = resources.getDimension(statusBarHeightId)
-        }
     }
 
     private fun measureHole(view: View) {
         holeLeft = view.getLeftOnWindow().toFloat() - view.marginStart - view.paddingStart
         val horizontalExtraSpace = view.marginStart + view.paddingStart + view.marginEnd + view.paddingEnd
         holeRight = holeLeft + view.measuredWidth + horizontalExtraSpace
-        holeTop = view.getTopOnWindow().toFloat() - statusBarHeight - view.marginTop
+        holeTop = view.getTopOnWindow().toFloat() - view.getInsetTop() - view.marginTop
         val verticalExtraSpace = view.marginBottom + view.marginTop
         holeBottom = holeTop + view.measuredHeight + verticalExtraSpace
     }
@@ -160,7 +149,6 @@ internal class OnboardingView @JvmOverloads constructor(
         Bundle().apply {
             putParcelable(SUPER_STATE_KEY, super.onSaveInstanceState())
             putString(DESCRIPTION, descriptionTextView.text.toString())
-            putFloat(STATUS_BAR_HEIGHT, statusBarHeight)
             putFloat(HOLE_LEFT_KEY, holeLeft)
             putFloat(HOLE_RIGHT_KEY, holeRight)
             putFloat(HOLE_TOP_KEY, holeTop)
@@ -174,7 +162,6 @@ internal class OnboardingView @JvmOverloads constructor(
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is Bundle) {
             descriptionTextView.text = state.getString(DESCRIPTION)
-            statusBarHeight = state.getFloat(STATUS_BAR_HEIGHT)
             holeLeft = state.getFloat(HOLE_LEFT_KEY)
             holeRight = state.getFloat(HOLE_RIGHT_KEY)
             holeTop = state.getFloat(HOLE_TOP_KEY)
