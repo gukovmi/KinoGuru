@@ -66,20 +66,20 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
 
     private val requestManager: RequestManager by lazy { Glide.with(this) }
     private val backgroundRequestListener = object : RequestListener<Drawable> {
-        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean =
+        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean =
             onBackgroundImageFinishLoading()
 
         override fun onResourceReady(
-            resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean
+            resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean
         ): Boolean =
             onBackgroundImageFinishLoading()
     }
     private val posterRequestListener = object : RequestListener<Drawable> {
-        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean =
+        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean =
             onPosterImageFinishLoading()
 
         override fun onResourceReady(
-            resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean
+            resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean
         ): Boolean =
             onPosterImageFinishLoading()
     }

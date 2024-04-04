@@ -29,15 +29,11 @@ class MovieSearchSuccessItemViewHolder(
     private val requestManager: RequestManager by lazy { Glide.with(itemView) }
 
     private val posterRequestListener = object : RequestListener<Drawable> {
-        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean =
+        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean =
             onPosterLoaded()
 
         override fun onResourceReady(
-            resource: Drawable?,
-            model: Any?,
-            target: Target<Drawable>?,
-            dataSource: DataSource?,
-            isFirstResource: Boolean
+            resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean,
         ): Boolean =
             onPosterLoaded()
     }
