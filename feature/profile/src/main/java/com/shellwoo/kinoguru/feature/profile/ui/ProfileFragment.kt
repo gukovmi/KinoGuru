@@ -1,8 +1,11 @@
 package com.shellwoo.kinoguru.feature.profile.ui
 
 import android.content.Context
+import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -29,6 +32,13 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
     private val requestManager: RequestManager by lazy { Glide.with(this) }
 
+    private val pickPhotoLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri != null) {
+            context?.contentResolver?.takePersistableUriPermission(uri, FLAG_GRANT_READ_URI_PERMISSION)
+            viewModel.updateUserPhoto(uri.toString())
+        }
+    }
+
     @Inject
     lateinit var languageNameConverter: LanguageNameConverter
 
@@ -54,6 +64,7 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
         setResultListener(LanguageResultContract, viewModel::selectLanguage)
         setResultListener(ThemeResultContract, viewModel::selectTheme)
         language.setOnClickListener { viewModel.openLanguageScreen() }
+        photo.setOnClickListener { pickPhotoLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }
         theme.setOnClickListener { viewModel.openThemeScreen() }
     }
 
@@ -84,10 +95,11 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
         state.name?.let { name.setText(it) }
         state.email?.let { email.setText(it) }
-        state.photoUrl?.toUri().let { photoUri ->
+        state.photoUrl?.toUri()?.let { photoUri ->
             requestManager.load(photoUri)
+                .error(R.drawable.person)
                 .into(photo)
-        }
+        } ?: photo.setImageResource(R.drawable.person)
 
         language.setText(languageNameConverter.toName(state.language))
         theme.setText(themeNameConverter.toName(state.theme))

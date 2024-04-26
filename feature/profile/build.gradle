@@ -11,6 +11,7 @@ dependencies {
     implementation project(":shared-user")
 
     implementation libraries.androidxFragmentKtx
+    implementation libraries.androidxLifecycleViewModelKtx
     implementation libraries.cicerone
     implementation libraries.dagger
     kapt libraries.daggerCompiler

@@ -7,6 +7,7 @@ import com.shellwoo.kinoguru.shared.language.domain.usecase.SetCurrentLanguageUs
 import com.shellwoo.kinoguru.shared.theme.domain.usecase.GetCurrentThemeUseCase
 import com.shellwoo.kinoguru.shared.theme.domain.usecase.SetCurrentThemeUseCase
 import com.shellwoo.kinoguru.shared.user.domain.usecase.GetCurrentUserUseCase
+import com.shellwoo.kinoguru.shared.user.domain.usecase.UpdateUserPhotoUseCase
 
 interface ProfileDeps {
 
@@ -15,6 +16,7 @@ interface ProfileDeps {
     val getCurrentUserUseCase: GetCurrentUserUseCase
     val setCurrentLanguageUseCase: SetCurrentLanguageUseCase
     val setCurrentThemeUseCase: SetCurrentThemeUseCase
+    val updateUserPhotoUseCase: UpdateUserPhotoUseCase
     val profileRouter: ProfileRouter
     val context: Context
 }

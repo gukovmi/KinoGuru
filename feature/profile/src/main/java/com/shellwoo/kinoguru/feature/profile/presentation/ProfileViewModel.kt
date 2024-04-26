@@ -10,12 +10,14 @@ import com.shellwoo.kinoguru.shared.language.domain.entity.Language
 import com.shellwoo.kinoguru.shared.language.domain.usecase.SetCurrentLanguageUseCase
 import com.shellwoo.kinoguru.shared.theme.domain.entity.Theme
 import com.shellwoo.kinoguru.shared.theme.domain.usecase.SetCurrentThemeUseCase
+import com.shellwoo.kinoguru.shared.user.domain.usecase.UpdateUserPhotoUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor(
     private val setCurrentLanguageUseCase: SetCurrentLanguageUseCase,
     private val setCurrentThemeUseCase: SetCurrentThemeUseCase,
+    private val updateUserPhotoUseCase: UpdateUserPhotoUseCase,
     private val getProfileScenario: GetProfileScenario,
     private val router: ProfileRouter,
 ) : ViewModel() {
@@ -55,6 +57,14 @@ class ProfileViewModel @Inject constructor(
             )
         } else {
             router.openLoginScreen()
+        }
+    }
+
+    fun updateUserPhoto(url: String) {
+        viewModelScope.launch {
+            updateUserPhotoUseCase(url)
+
+            loadProfile()
         }
     }
 
