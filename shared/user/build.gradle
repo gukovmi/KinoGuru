@@ -6,4 +6,10 @@ dependencies {
     implementation libraries.playServicesAuth
     implementation libraries.dagger
     kapt libraries.daggerCompiler
+
+    testImplementation project(":core-test-unit")
+    testImplementation libraries.junitJupiter
+    testImplementation libraries.kotlinxCoroutinesTest
+    testImplementation libraries.mockitoJunit
+    testImplementation libraries.mockitoKotlin
 }
