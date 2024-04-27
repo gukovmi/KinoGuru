@@ -6,13 +6,14 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shellwoo.kinoguru.core.navigation.NavigatorFactory
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
 import com.shellwoo.kinoguru.feature.main.R
+import com.shellwoo.kinoguru.feature.main.databinding.MainFragmentBinding
 import com.shellwoo.kinoguru.feature.main.di.MainComponentViewModel
 import com.shellwoo.kinoguru.feature.main.navigation.MainNavigatorHolder
 import com.shellwoo.kinoguru.feature.main.presentation.MainViewModel
-import kotlinx.android.synthetic.main.main_fragment.*
 import javax.inject.Inject
 
 class MainFragment : BaseFragment(R.layout.main_fragment) {
@@ -26,6 +27,8 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
     private val componentViewModel: MainComponentViewModel by viewModels()
 
     private val viewModel: MainViewModel by viewModels(factoryProducer = ::viewModelFactory)
+
+    private val binding by viewBinding(MainFragmentBinding::bind)
 
     private val navigator by lazy { navigatorFactory.create(requireActivity(), R.id.container, childFragmentManager) }
 
@@ -41,16 +44,16 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         initListeners()
 
         if (savedInstanceState == null) {
-            bottomNavigationBar.selectedItemId = R.id.search
+            binding.bottomNavigationBar.selectedItemId = R.id.search
         }
     }
 
     private fun initListeners() {
-        bottomNavigationBar.setOnItemSelectedListener(::handleSelectedMenuItem)
+        binding.bottomNavigationBar.setOnItemSelectedListener(::handleSelectedMenuItem)
     }
 
     private fun handleSelectedMenuItem(menuItem: MenuItem): Boolean {
-        val selectedItemNotChanged = bottomNavigationBar.selectedItemId == menuItem.itemId
+        val selectedItemNotChanged = binding.bottomNavigationBar.selectedItemId == menuItem.itemId
         if (selectedItemNotChanged) return false
 
         when (menuItem.itemId) {
