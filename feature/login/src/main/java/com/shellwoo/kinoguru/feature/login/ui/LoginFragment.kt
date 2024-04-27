@@ -9,6 +9,7 @@ import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shellwoo.kinoguru.core.coroutines.launchTrying
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
 import com.shellwoo.kinoguru.core.ui.ext.showToast
@@ -16,9 +17,9 @@ import com.shellwoo.kinoguru.feature.login.GoogleAuthClient
 import com.shellwoo.kinoguru.feature.login.GoogleAuthVariant
 import com.shellwoo.kinoguru.feature.login.GoogleSignInRequestIntentProvider
 import com.shellwoo.kinoguru.feature.login.R
+import com.shellwoo.kinoguru.feature.login.databinding.LoginFragmentBinding
 import com.shellwoo.kinoguru.feature.login.di.LoginComponentViewModel
 import com.shellwoo.kinoguru.feature.login.presentation.LoginViewModel
-import kotlinx.android.synthetic.main.login_fragment.*
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment(R.layout.login_fragment) {
@@ -32,6 +33,8 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     private val componentViewModel: LoginComponentViewModel by viewModels()
 
     private val viewModel: LoginViewModel by viewModels(factoryProducer = ::viewModelFactory)
+
+    private val binding by viewBinding(LoginFragmentBinding::bind)
 
     private val requestSignInLauncher =
         registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult(), ::handleSignInResult)
@@ -58,7 +61,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        googleSignIn.setOnClickListener { viewModel.requestGoogleStandardSignIn() }
+        binding.googleSignIn.setOnClickListener { viewModel.requestGoogleStandardSignIn() }
         observeViewModel()
 
         viewModel.requestGoogleOneTapSignIn()
