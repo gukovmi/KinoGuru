@@ -8,6 +8,7 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.DataSource
@@ -18,6 +19,7 @@ import com.shellwoo.kinoguru.core.ktx.fromHtml
 import com.shellwoo.kinoguru.feature.movie.detail.R
 import com.shellwoo.kinoguru.feature.movie.detail.data.model.GenreModel
 import com.shellwoo.kinoguru.feature.movie.detail.data.model.ProductionCompanyModel
+import com.shellwoo.kinoguru.feature.movie.detail.databinding.MovieDetailsFragmentBinding
 import com.shellwoo.kinoguru.feature.movie.detail.di.MovieDetailsComponentViewModel
 import com.shellwoo.kinoguru.feature.movie.detail.di.MovieDetailsViewModelFactory
 import com.shellwoo.kinoguru.feature.movie.detail.presentation.MovieDetailsState
@@ -29,9 +31,6 @@ import com.shellwoo.kinoguru.shared.error.ui.showErrorDialog
 import com.shellwoo.kinoguru.shared.movie.BaseUrls
 import com.shellwoo.kinoguru.shared.movie.ui.RatingFormatter
 import jp.wasabeef.glide.transformations.BlurTransformation
-import kotlinx.android.synthetic.main.movie_details_content.*
-import kotlinx.android.synthetic.main.movie_details_fragment.*
-import kotlinx.android.synthetic.main.movie_details_loading.*
 import javax.inject.Inject
 
 class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
@@ -48,6 +47,8 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
     }
 
     private val componentViewModel: MovieDetailsComponentViewModel by viewModels()
+
+    private val binding by viewBinding(MovieDetailsFragmentBinding::bind)
 
     @Inject
     lateinit var movieDetailsViewModelFactory: MovieDetailsViewModelFactory.Factory
@@ -102,8 +103,8 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        toolbar.setNavigationOnClickListener { viewModel.close() }
-        videos.adapter = movieVideoItemAdapter
+        binding.toolbar.setNavigationOnClickListener { viewModel.close() }
+        binding.content.videos.adapter = movieVideoItemAdapter
         observeViewModel()
 
         viewModel.start()
@@ -123,18 +124,18 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
     }
 
     private fun renderInitialState() {
-        loading.isVisible = false
-        content.isVisible = false
+        binding.loading.root.isVisible = false
+        binding.content.root.isVisible = false
     }
 
     private fun renderLoadingState() {
-        loading.isVisible = true
-        content.isVisible = false
+        binding.loading.root.isVisible = true
+        binding.content.root.isVisible = false
     }
 
     private fun renderContentState(contentState: MovieDetailsState.Content) {
-        loading.isVisible = false
-        content.isVisible = true
+        binding.loading.root.isVisible = false
+        binding.content.root.isVisible = true
 
         with(contentState.movieDetails) {
             renderBackground(backdropPath)
@@ -159,7 +160,7 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
             requestManager.load(backgroundUrl)
                 .transform(BlurTransformation())
                 .listener(backgroundRequestListener)
-                .into(background)
+                .into(binding.content.background)
         } else {
             renderBackgroundLoaded()
         }
@@ -173,74 +174,74 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
             requestManager.load(posterUrl)
                 .listener(posterRequestListener)
                 .error(android.R.drawable.ic_menu_camera)
-                .into(poster)
+                .into(binding.content.poster)
         } else {
             renderPosterLoaded()
-            poster.setImageResource(android.R.drawable.ic_menu_camera)
+            binding.content.poster.setImageResource(android.R.drawable.ic_menu_camera)
         }
     }
 
     private fun renderRating(voteAverage: Double?) {
         val formattedRating = rattingFormatter.format(voteAverage)
-        rating.text = getString(R.string.movie_details_rating, formattedRating).fromHtml()
+        binding.content.rating.text = getString(R.string.movie_details_rating, formattedRating).fromHtml()
     }
 
     private fun renderReleaseDate(releaseDateValue: String?) {
         val formattedReleaseDate = releaseDateValue ?: NOT_FOUND_DATA
-        releaseDate.text = getString(R.string.movie_details_release_date, formattedReleaseDate).fromHtml()
+        binding.content.releaseDate.text = getString(R.string.movie_details_release_date, formattedReleaseDate).fromHtml()
     }
 
     private fun renderTitle(titleValue: String?) {
         val formattedTitle = titleValue ?: NOT_FOUND_DATA
-        title.text = formattedTitle
+        binding.content.title.text = formattedTitle
     }
 
     private fun renderBudget(budgetValue: Int?) {
         val formattedBudget = budgetValue ?: NOT_FOUND_DATA
-        budget.text = getString(R.string.movie_details_budget, formattedBudget).fromHtml()
+        binding.content.budget.text = getString(R.string.movie_details_budget, formattedBudget).fromHtml()
     }
 
     private fun renderRevenue(revenueValue: Int?) {
         val formattedRevenue = revenueValue ?: NOT_FOUND_DATA
-        revenue.text = getString(R.string.movie_details_revenue, formattedRevenue).fromHtml()
+        binding.content.revenue.text = getString(R.string.movie_details_revenue, formattedRevenue).fromHtml()
     }
 
     private fun renderGenres(genresValue: ArrayList<GenreModel>) {
         val formattedGenres = genresValue.mapNotNull { it.name }.formatWithSeparator()
-        genres.text = getString(R.string.movie_details_genres, formattedGenres).fromHtml()
+        binding.content.genres.text = getString(R.string.movie_details_genres, formattedGenres).fromHtml()
     }
 
     private fun renderDescription(overview: String?) {
         val formattedDescription = overview ?: NOT_FOUND_DATA
-        description.text = getString(R.string.movie_details_description, formattedDescription).fromHtml()
+        binding.content.description.text = getString(R.string.movie_details_description, formattedDescription).fromHtml()
     }
 
     private fun renderCompanies(productionCompanies: ArrayList<ProductionCompanyModel>) {
         val formattedCompanies = productionCompanies.mapNotNull { it.name }.formatWithSeparator()
-        companies.text = getString(R.string.movie_details_companies, formattedCompanies).fromHtml()
+        binding.content.companies.text = getString(R.string.movie_details_companies, formattedCompanies).fromHtml()
     }
 
     private fun List<*>.formatWithSeparator(): String =
         joinToString(separator = ", ").ifEmpty { NOT_FOUND_DATA }
 
     private fun renderBackgroundLoading() {
-        background.isInvisible = true
-        backgroundSkeleton.isVisible = true
+        binding.content.background.isInvisible = true
+        binding.content.backgroundSkeleton.isVisible = true
     }
 
     private fun renderBackgroundLoaded() {
-        background.isInvisible = false
-        backgroundSkeleton.isVisible = false
+        binding.content.background.isInvisible = false
+        binding.content.backgroundSkeleton.isVisible = false
     }
 
     private fun renderPosterLoading() {
-        poster.isInvisible = true
-        posterSkeleton.isVisible = true
+        binding.content.poster.isInvisible = true
+        binding.content.posterSkeleton.isVisible = true
     }
 
     private fun renderPosterLoaded() {
-        poster.isInvisible = false
-        posterSkeleton.isVisible = false
+        binding.content.poster.isInvisible = false
+        binding.content.posterSkeleton.isVisible = false
     }
 
     private fun renderMovieDetailsLoadingError(baseException: BaseException) {
@@ -255,15 +256,15 @@ class MovieDetailsFragment : Fragment(R.layout.movie_details_fragment) {
 
     private fun renderVideos(movieVideoItems: List<MovieVideoItem>) {
         if (movieVideoItems.isEmpty()) {
-            videos.isVisible = false
+            binding.content.videos.isVisible = false
         } else {
-            videos.isVisible = true
+            binding.content.videos.isVisible = true
             movieVideoItemAdapter.submitList(movieVideoItems)
         }
     }
 
     override fun onDestroyView() {
-        videos.adapter = null
+        binding.content.videos.adapter = null
         movieVideoItemAdapter.submitList(emptyList())
         super.onDestroyView()
     }
