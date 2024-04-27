@@ -4,20 +4,22 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
 import com.shellwoo.kinoguru.core.ui.ext.setResult
 import com.shellwoo.kinoguru.feature.language.R
+import com.shellwoo.kinoguru.feature.language.databinding.LanguageFragmentBinding
 import com.shellwoo.kinoguru.feature.language.di.LanguageComponentViewModel
 import com.shellwoo.kinoguru.feature.language.presentation.LanguageViewModel
 import com.shellwoo.kinoguru.shared.language.domain.entity.Language
 import com.shellwoo.kinoguru.shared.language.ui.LanguageResultContract
-import kotlinx.android.synthetic.main.language_fragment.*
 import javax.inject.Inject
 
 class LanguageFragment : BaseFragment(R.layout.language_fragment) {
 
     private val componentViewModel: LanguageComponentViewModel by viewModels()
     private val viewModel: LanguageViewModel by viewModels(factoryProducer = { viewModelFactory })
+    private val binding by viewBinding(LanguageFragmentBinding::bind)
 
     @Inject
     lateinit var languageAdapter: LanguageAdapter
@@ -30,7 +32,7 @@ class LanguageFragment : BaseFragment(R.layout.language_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        toolbar.setNavigationOnClickListener { viewModel.close() }
+        binding.toolbar.setNavigationOnClickListener { viewModel.close() }
         languageAdapter.setOnClickListener(::selectLanguage)
         viewModel.languages.observe(viewLifecycleOwner, ::renderLanguages)
     }
@@ -42,6 +44,6 @@ class LanguageFragment : BaseFragment(R.layout.language_fragment) {
 
     private fun renderLanguages(values: List<Language>) {
         languageAdapter.submitList(values)
-        languages.adapter = languageAdapter
+        binding.languages.adapter = languageAdapter
     }
 }
