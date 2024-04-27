@@ -1,0 +1,11 @@
+apply from: "$rootDir/dependencies.gradle"
+
+dependencies {
+    implementation libraries.viewBindingDelegate
+}
+
+android {
+    buildFeatures {
+        viewBinding true
+    }
+}
