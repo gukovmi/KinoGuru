@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -11,13 +12,15 @@ import com.shellwoo.kinoguru.core.ktx.fromHtml
 import com.shellwoo.kinoguru.core.ui.ext.inflate
 import com.shellwoo.kinoguru.core.ui.ext.onPause
 import com.shellwoo.kinoguru.feature.movie.detail.R
+import com.shellwoo.kinoguru.feature.movie.detail.databinding.MovieVideoItemYouTubeBinding
 import com.shellwoo.kinoguru.feature.movie.detail.presentation.MovieVideoItem
-import kotlinx.android.synthetic.main.movie_video_item_you_tube.view.*
 import javax.inject.Inject
 
 class MovieVideoItemYouTubeViewHolder @Inject constructor(
     parent: ViewGroup,
 ) : RecyclerView.ViewHolder(parent.inflate(R.layout.movie_video_item_you_tube, false)) {
+
+    private val binding by viewBinding(MovieVideoItemYouTubeBinding::bind)
 
     private var youTubePlayerListener: AbstractYouTubePlayerListener? = null
     private var youTubePlayer: YouTubePlayer? = null
@@ -34,13 +37,13 @@ class MovieVideoItemYouTubeViewHolder @Inject constructor(
     private fun renderDescription(itemName: String, itemNumber: Int, itemCount: Int) {
         val description = itemView.context.getString(R.string.movie_details_video_description, itemNumber + 1, itemCount, itemName)
             .fromHtml()
-        itemView.description.text = description
+        binding.description.text = description
     }
 
     private fun renderPlayer(itemKey: String) {
         renderVideoLoading()
         resetYouTubePlayer(itemKey)
-        youTubePlayerListener?.let(itemView.player::addYouTubePlayerListener)
+        youTubePlayerListener?.let(binding.player::addYouTubePlayerListener)
     }
 
     private fun resetYouTubePlayer(videoKey: String) {
@@ -64,14 +67,14 @@ class MovieVideoItemYouTubeViewHolder @Inject constructor(
     }
 
     private fun renderVideoLoading() {
-        with(itemView) {
+        with(binding) {
             playerSkeleton.isVisible = true
             player.isInvisible = true
         }
     }
 
     private fun renderVideoLoaded() {
-        with(itemView) {
+        with(binding) {
             playerSkeleton.isVisible = false
             player.isInvisible = false
         }

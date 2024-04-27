@@ -1,200 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:parentTag="android.widget.LinearLayout">
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    tools:parentTag="android.widget.LinearLayout"
+    tools:visibility="visible">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/content"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        tools:visibility="visible">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/backgroundSkeleton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shimmer_auto_start="true">
 
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/backgroundSkeleton"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:visibility="gone"
-                app:layout_constraintDimensionRatio="16:9"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shimmer_auto_start="true">
+            <View
+                style="@style/Skeleton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-                <View
-                    style="@style/Skeleton"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
-            </com.facebook.shimmer.ShimmerFrameLayout>
+        <ImageView
+            android:id="@+id/background"
+            style="@style/ImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:visibility="invisible"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@android:drawable/ic_menu_camera"
+            tools:visibility="visible" />
 
-            <ImageView
-                android:id="@+id/background"
-                style="@style/ImageView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                android:visibility="invisible"
-                app:layout_constraintDimensionRatio="16:9"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@android:drawable/ic_menu_camera"
-                tools:visibility="visible" />
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/posterSkeleton"
+            android:layout_width="@dimen/movie_details_poster_width"
+            android:layout_height="@dimen/movie_details_poster_height"
+            android:layout_margin="16dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/background"
+            app:shimmer_auto_start="true">
 
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/posterSkeleton"
-                android:layout_width="@dimen/movie_details_poster_width"
-                android:layout_height="@dimen/movie_details_poster_height"
-                android:layout_margin="16dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/background"
-                app:shimmer_auto_start="true">
+            <View
+                style="@style/Skeleton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-                <View
-                    style="@style/Skeleton"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
-            </com.facebook.shimmer.ShimmerFrameLayout>
+        <ImageView
+            android:id="@+id/poster"
+            style="@style/ImageView.Bordered"
+            android:layout_width="@dimen/movie_details_poster_width"
+            android:layout_height="@dimen/movie_details_poster_height"
+            android:layout_margin="16dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@id/background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/background"
+            tools:src="@android:drawable/ic_menu_camera" />
 
-            <ImageView
-                android:id="@+id/poster"
-                style="@style/ImageView.Bordered"
-                android:layout_width="@dimen/movie_details_poster_width"
-                android:layout_height="@dimen/movie_details_poster_height"
-                android:layout_margin="16dp"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="@id/background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/background"
-                tools:src="@android:drawable/ic_menu_camera" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            style="@style/Text.SubHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/background"
+            tools:text="Batman" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/title"
-                style="@style/Text.SubHeader"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/background"
-                tools:text="Batman" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/rating"
+            style="@style/Text.Body.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/releaseDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="Rating: 8.4" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/rating"
-                style="@style/Text.Body.Normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/releaseDate"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title"
-                tools:text="Rating: 8.4" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/releaseDate"
+            style="@style/Text.Body.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/rating"
+            app:layout_constraintTop_toTopOf="@id/rating"
+            tools:text="Release date: 1999-10-15" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/releaseDate"
-                style="@style/Text.Body.Normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/rating"
-                app:layout_constraintTop_toTopOf="@id/rating"
-                tools:text="Release date: 1999-10-15" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/budget"
+            style="@style/Text.Body.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/revenue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rating"
+            tools:text="Budget: 12000000 $" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/budget"
-                style="@style/Text.Body.Normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/revenue"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rating"
-                tools:text="Budget: 12000000 $" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/revenue"
+            style="@style/Text.Body.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/budget"
+            app:layout_constraintTop_toTopOf="@id/budget"
+            tools:text="Revenue: 24000000 $" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/revenue"
-                style="@style/Text.Body.Normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/budget"
-                app:layout_constraintTop_toTopOf="@id/budget"
-                tools:text="Revenue: 24000000 $" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/genres"
+            style="@style/Text.Body.Normal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/budget"
+            tools:text="Genres: Drama, Thriller, Comedy" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/genres"
-                style="@style/Text.Body.Normal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/budget"
-                tools:text="Genres: Drama, Thriller, Comedy" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/description"
-                style="@style/Text.Body.Normal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/genres"
-                tools:text="Description: In his second year of fighting crime, Batman uncovers corruption in Gotham City that connects to his own family while
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/description"
+            style="@style/Text.Body.Normal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/genres"
+            tools:text="Description: In his second year of fighting crime, Batman uncovers corruption in Gotham City that connects to his own family while
 facing a serial killer known as the Riddler." />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/companies"
-                style="@style/Text.Body.Normal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/description"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@id/videos"
-                tools:text="Production companies: Warner brothers, Paramount" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/companies"
+            style="@style/Text.Body.Normal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@id/videos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description"
+            tools:text="Production companies: Warner brothers, Paramount" />
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/videos"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/companies"
-                tools:listitem="@layout/movie_video_item_you_tube"
-                tools:visibility="visible" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/videos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/companies"
+            tools:listitem="@layout/movie_video_item_you_tube"
+            tools:visibility="visible" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.core.widget.NestedScrollView>
-
-</merge>
+</androidx.core.widget.NestedScrollView>

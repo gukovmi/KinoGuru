@@ -22,8 +22,12 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/movie_details_content" />
+    <include
+        android:id="@+id/content"
+        layout="@layout/movie_details_content" />
 
-    <include layout="@layout/movie_details_loading" />
+    <include
+        android:id="@+id/loading"
+        layout="@layout/movie_details_loading" />
 
 </LinearLayout>
