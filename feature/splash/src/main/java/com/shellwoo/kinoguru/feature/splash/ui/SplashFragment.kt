@@ -5,13 +5,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
 import com.shellwoo.kinoguru.core.ui.ext.animateOfIncreaseAndDecrease
 import com.shellwoo.kinoguru.feature.splash.R
+import com.shellwoo.kinoguru.feature.splash.databinding.SplashFragmentBinding
 import com.shellwoo.kinoguru.feature.splash.di.SplashComponentViewModel
 import com.shellwoo.kinoguru.feature.splash.presentation.SplashState
 import com.shellwoo.kinoguru.feature.splash.presentation.SplashViewModel
-import kotlinx.android.synthetic.main.splash_fragment.*
 
 class SplashFragment : BaseFragment(R.layout.splash_fragment) {
 
@@ -25,6 +26,7 @@ class SplashFragment : BaseFragment(R.layout.splash_fragment) {
     private val componentViewModel: SplashComponentViewModel by viewModels()
 
     private val viewModel: SplashViewModel by viewModels(factoryProducer = ::viewModelFactory)
+    private val binding by viewBinding(SplashFragmentBinding::bind)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -46,12 +48,12 @@ class SplashFragment : BaseFragment(R.layout.splash_fragment) {
     }
 
     private fun renderInitialState() {
-        logo.isVisible = false
+        binding.logo.isVisible = false
     }
 
     private fun renderContentState() {
-        logo.isVisible = true
-        logo.animateOfIncreaseAndDecrease(
+        binding.logo.isVisible = true
+        binding.logo.animateOfIncreaseAndDecrease(
             minRelativeSize = LOGO_MIN_RELATIVE_SIZE,
             maxRelativeSize = LOGO_MAX_RELATIVE_SIZE,
             cycleDuration = LOGO_CYCLE_DURATION_IN_MILLIS
