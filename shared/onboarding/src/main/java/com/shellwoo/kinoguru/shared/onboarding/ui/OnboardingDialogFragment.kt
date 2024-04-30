@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shellwoo.kinoguru.shared.onboarding.R
-import kotlinx.android.synthetic.main.onboarding_dialog_fragment.*
+import com.shellwoo.kinoguru.shared.onboarding.databinding.OnboardingDialogFragmentBinding
 import com.shellwoo.kinoguru.design.resource.R as designResourceR
 
 const val DESCRIPTION_KEY = "DESCRIPTION_KEY"
@@ -16,6 +17,7 @@ private var Bundle.description: String
 class OnboardingDialogFragment : DialogFragment(R.layout.onboarding_dialog_fragment) {
 
     private var targetView: View? = null
+    private val binding by viewBinding(OnboardingDialogFragmentBinding::bind)
 
     companion object {
 
@@ -48,8 +50,8 @@ class OnboardingDialogFragment : DialogFragment(R.layout.onboarding_dialog_fragm
             val targetView = targetView
             val description = arguments?.description
             if (targetView != null && description != null) {
-                onboarding.setup(targetView, description) { close() }
-                onboarding.setOnClickListener {
+                binding.onboarding.setup(targetView, description) { close() }
+                binding.onboarding.setOnClickListener {
                     close()
                 }
             }
