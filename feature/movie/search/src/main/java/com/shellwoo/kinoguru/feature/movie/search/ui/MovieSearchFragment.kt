@@ -8,10 +8,12 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shellwoo.kinoguru.core.ui.component.AfterTextWatcher
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
 import com.shellwoo.kinoguru.core.ui.ext.hideKeyboard
 import com.shellwoo.kinoguru.feature.movie.search.R
+import com.shellwoo.kinoguru.feature.movie.search.databinding.MovieSearchFragmentBinding
 import com.shellwoo.kinoguru.feature.movie.search.di.MovieSearchComponentViewModel
 import com.shellwoo.kinoguru.feature.movie.search.presentation.MovieSearchViewModel
 import com.shellwoo.kinoguru.feature.movie.search.presentation.ScreenState
@@ -22,7 +24,6 @@ import com.shellwoo.kinoguru.shared.error.ui.showErrorDialog
 import com.shellwoo.kinoguru.shared.movie.ui.RatingFormatter
 import com.shellwoo.kinoguru.shared.onboarding.ui.OnboardingDialogFragment
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
-import kotlinx.android.synthetic.main.movie_search_fragment.*
 import javax.inject.Inject
 
 class MovieSearchFragment : BaseFragment(R.layout.movie_search_fragment) {
@@ -38,6 +39,7 @@ class MovieSearchFragment : BaseFragment(R.layout.movie_search_fragment) {
 
     private val componentViewModel: MovieSearchComponentViewModel by viewModels()
     private val viewModel: MovieSearchViewModel by viewModels(factoryProducer = ::viewModelFactory)
+    private val binding by viewBinding(MovieSearchFragmentBinding::bind)
 
     private val moviesOnScrollListener = object : OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -63,13 +65,13 @@ class MovieSearchFragment : BaseFragment(R.layout.movie_search_fragment) {
     }
 
     private fun initRecycler() {
-        movies.adapter = MovieSearchItemAdapter(ratingFormatter, viewModel::selectMovieSuccessItem, diffUtilCallback)
-        movies.itemAnimator = ScaleInAnimator()
+        binding.movies.adapter = MovieSearchItemAdapter(ratingFormatter, viewModel::selectMovieSuccessItem, diffUtilCallback)
+        binding.movies.itemAnimator = ScaleInAnimator()
     }
 
     private fun initListeners() {
-        searchInput.addTextChangedListener(AfterTextWatcher(viewModel::setQuery))
-        movies.addOnScrollListener(moviesOnScrollListener)
+        binding.searchInput.addTextChangedListener(AfterTextWatcher(viewModel::setQuery))
+        binding.movies.addOnScrollListener(moviesOnScrollListener)
     }
 
     private fun observeViewModel() {
@@ -86,13 +88,13 @@ class MovieSearchFragment : BaseFragment(R.layout.movie_search_fragment) {
     }
 
     private fun renderInitialState() {
-        toolbar.isVisible = false
-        searchInput.isVisible = false
+        binding.toolbar.isVisible = false
+        binding.searchInput.isVisible = false
     }
 
     private fun renderContentState(state: ScreenState.Content) {
-        toolbar.isVisible = true
-        searchInput.isVisible = true
+        binding.toolbar.isVisible = true
+        binding.searchInput.isVisible = true
         renderSearchState(state.searchState)
     }
 
@@ -105,25 +107,25 @@ class MovieSearchFragment : BaseFragment(R.layout.movie_search_fragment) {
     }
 
     private fun renderNoneSearchState() {
-        movies.isVisible = false
-        notFound.isVisible = false
+        binding.movies.isVisible = false
+        binding.notFound.isVisible = false
     }
 
     private fun renderSuccessSearchState(state: SearchState.Items) {
-        (movies.adapter as MovieSearchItemAdapter).submitList(state.value)
-        movies.isVisible = true
-        notFound.isVisible = false
+        (binding.movies.adapter as MovieSearchItemAdapter).submitList(state.value)
+        binding.movies.isVisible = true
+        binding.notFound.isVisible = false
     }
 
     private fun renderNotFoundSearchState() {
-        movies.isVisible = false
-        notFound.isVisible = true
+        binding.movies.isVisible = false
+        binding.notFound.isVisible = true
     }
 
     private fun renderOnboarding() {
         OnboardingDialogFragment.show(
             fragmentManager = childFragmentManager,
-            targetView = searchInputLayout,
+            targetView = binding.searchInputLayout,
             description = getString(R.string.movie_search_input_onboarding)
         )
     }
