@@ -2,11 +2,12 @@ package com.shellwoo.kinoguru.feature.theme.ui
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shellwoo.kinoguru.core.ui.ext.inflate
 import com.shellwoo.kinoguru.feature.theme.R
+import com.shellwoo.kinoguru.feature.theme.databinding.ThemeItemBinding
 import com.shellwoo.kinoguru.shared.theme.domain.entity.Theme
 import com.shellwoo.kinoguru.shared.theme.ui.ThemeNameConverter
-import kotlinx.android.synthetic.main.theme_item.view.*
 
 class ThemeViewHolder(
     private val themeNameConverter: ThemeNameConverter,
@@ -15,8 +16,10 @@ class ThemeViewHolder(
     parent: ViewGroup
 ) : RecyclerView.ViewHolder(parent.inflate(R.layout.theme_item, false)) {
 
+    private val binding by viewBinding(ThemeItemBinding::bind)
+
     fun bind(theme: Theme) {
-        with(itemView) {
+        with(binding) {
             val themeName = themeNameConverter.toName(theme)
             name.text = themeName
 
