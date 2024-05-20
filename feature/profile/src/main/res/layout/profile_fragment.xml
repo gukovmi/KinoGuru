@@ -38,7 +38,7 @@
             android:id="@+id/photo"
             style="@style/ShapeableImageView"
             android:layout_width="@dimen/profile_photo_size"
-            android:layout_height="@dimen/profile_photo_size"
+            android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:scaleType="fitCenter"
             tools:src="@drawable/glasses" />
