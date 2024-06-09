@@ -12,6 +12,7 @@ dependencies {
     implementation project(":shared-movie")
     implementation project(":shared-language")
     implementation project(":shared-onboarding")
+    implementation project(":shared-permission")
 
     implementation libraries.androidxFragmentKtx
     implementation libraries.cicerone

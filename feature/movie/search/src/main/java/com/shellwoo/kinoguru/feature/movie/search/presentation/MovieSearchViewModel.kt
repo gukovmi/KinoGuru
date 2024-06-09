@@ -50,7 +50,12 @@ class MovieSearchViewModel @Inject constructor(
 
     fun start() {
         viewModelScope.launch { observeQuery() }
-        _state.value = ScreenState.Content(query = SEARCH_QUERY_EMPTY, searchState = SearchState.None)
+
+        _state.value = ScreenState.Content(
+            query = SEARCH_QUERY_EMPTY,
+            microAvailable = false,
+            searchState = SearchState.None,
+        )
 
         viewModelScope.launch { showSearchOnboardingIfNeeded() }
     }
@@ -63,7 +68,10 @@ class MovieSearchViewModel @Inject constructor(
 
     private fun handleSearchQuery(value: String) {
         if (value == SEARCH_QUERY_EMPTY) {
-            _state.value = ScreenState.Content(query = SEARCH_QUERY_EMPTY, SearchState.None)
+            _state.value = currentContentState?.copy(
+                query = SEARCH_QUERY_EMPTY,
+                searchState = SearchState.None,
+            )
         } else {
             _state.value = currentContentState?.copy(query = value)
             search()
@@ -85,12 +93,15 @@ class MovieSearchViewModel @Inject constructor(
         movieSearchingJob = viewModelScope.launchTrying(
             errorHandler = ::handleSearchError,
             block = {
-                _state.value = currentContentState?.copy(searchState = SearchState.Items(SEARCH_MOVIE_ITEMS_LOADING))
+                _state.value = currentContentState?.copy(
+                    searchState = SearchState.Items(SEARCH_MOVIE_ITEMS_LOADING)
+                )
 
                 val query = currentContentState?.query ?: return@launchTrying
                 val searchMovieResult = getMovieSearchResultScenario(query)
 
-                _state.value = currentContentState?.copy(searchState = searchMovieResult.toSearchState())
+                _state.value =
+                    currentContentState?.copy(searchState = searchMovieResult.toSearchState())
             }
         )
     }
@@ -114,5 +125,9 @@ class MovieSearchViewModel @Inject constructor(
 
     fun selectMovieSuccessItem(item: MovieSearchItem.Success) {
         router.openMovieDetailsScreen(item.value.id)
+    }
+
+    fun handleMicroPermissionResult(granted: Boolean) {
+        _state.value = currentContentState?.copy(microAvailable = granted)
     }
 }
