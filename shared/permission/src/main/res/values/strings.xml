@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="explanation_permission_dialog_message_micro">Record audio permission is needed only for voice input</string>
+    <string name="explanation_permission_dialog_continue">Continue</string>
+    <string name="permission_dialog_cancel">Cancel</string>
+    <string name="permission_micro_name">Microphone</string>
+    <string name="permission_dialog_title">Permission "%1$s"</string>
+    <string name="settings_permission_dialog_message">Permission "%1$s" can only be granted manually in settings in tab "Permissions"</string>
+    <string name="settings_permission_dialog_settings">Settings</string>
+</resources>

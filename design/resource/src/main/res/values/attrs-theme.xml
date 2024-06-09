@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="colorPrimary" format="color|reference" />
     <attr name="colorOnPrimary" format="color|reference" />
 
     <attr name="colorOverlayDark" format="color|reference" />

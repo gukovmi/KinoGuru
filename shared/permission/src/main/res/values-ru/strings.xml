@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="explanation_permission_dialog_message_micro">Разрешение на запись звука необходимо только для голосового ввода</string>
+    <string name="explanation_permission_dialog_continue">Продолжить</string>
+    <string name="permission_dialog_cancel">Отменить</string>
+    <string name="permission_micro_name">Микрофон</string>
+    <string name="permission_dialog_title">Разрешение "%1$s"</string>
+    <string name="settings_permission_dialog_message">Разрешение "%1$s" можно выдать только вручную в настройках во вкладке "Разрешения"</string>
+    <string name="settings_permission_dialog_settings">Настройки</string>
+</resources>
