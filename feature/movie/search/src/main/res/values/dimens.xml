@@ -2,4 +2,5 @@
 <resources>
     <dimen name="movie_search_result_poster_height">100dp</dimen>
     <dimen name="movie_search_result_poster_width">67dp</dimen>
+    <dimen name="movie_search_micro_size">56dp</dimen>
 </resources>

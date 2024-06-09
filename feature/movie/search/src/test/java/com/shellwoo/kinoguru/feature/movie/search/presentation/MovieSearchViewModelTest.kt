@@ -15,16 +15,29 @@ import com.shellwoo.kinoguru.shared.error.domain.usecase.GetBaseExceptionUseCase
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 import org.mockito.junit.jupiter.MockitoExtension
-import org.mockito.kotlin.*
+import org.mockito.kotlin.clearInvocations
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
-@ExtendWith(MockitoExtension::class, InstantTaskExecutorExtension::class, TestCoroutineExtension::class)
+@ExtendWith(
+    MockitoExtension::class,
+    InstantTaskExecutorExtension::class,
+    TestCoroutineExtension::class
+)
 class MovieSearchViewModelTest {
 
     private val isMovieSearchOnboardingShowedUseCase: IsMovieSearchOnboardingShowedUseCase = mock()
-    private val setMovieSearchOnboardingShowedUseCase: SetMovieSearchOnboardingShowedUseCase = mock()
+    private val setMovieSearchOnboardingShowedUseCase: SetMovieSearchOnboardingShowedUseCase =
+        mock()
     private val getMovieSearchResultScenario: GetMovieSearchResultScenario = mock()
     private val getBaseExceptionUseCase: GetBaseExceptionUseCase = mock()
     private val router: MovieSearchRouter = mock()
@@ -61,7 +74,11 @@ class MovieSearchViewModelTest {
     @Test
     fun `start EXPECT content state with none search movie state`() = runTest {
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
-        val expectedContent = ScreenState.Content("", SearchState.None)
+        val expectedContent = ScreenState.Content(
+            query = "",
+            microAvailable = false,
+            searchState = SearchState.None,
+        )
         viewModel.state.observeForever(stateObserver)
 
         viewModel.start()
@@ -110,7 +127,11 @@ class MovieSearchViewModelTest {
     @Test
     fun `set new query, wait debounce, EXPECT content with loading items in result search state`() = runTest {
         val expectedSearchState = SearchState.Items(movieSearchItemsLoading)
-        val expectedContentState = ScreenState.Content(query, expectedSearchState)
+        val expectedContentState = ScreenState.Content(
+            query = query,
+            microAvailable = false,
+            searchState = expectedSearchState
+        )
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getMovieSearchResultScenario(query)).thenNeverAnswer()
         viewModel.state.observeForever(stateObserver)
@@ -125,7 +146,11 @@ class MovieSearchViewModelTest {
     @Test
     fun `set old query, wait debounce EXPECT content with not loading items in result search state`() = runTest {
         val unexpectedSearchState = SearchState.Items(movieSearchItemsLoading)
-        val unexpectedContentState = ScreenState.Content(query, unexpectedSearchState)
+        val unexpectedContentState = ScreenState.Content(
+            query = query,
+            microAvailable = false,
+            searchState = unexpectedSearchState
+        )
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getMovieSearchResultScenario(query)).thenReturn(movieSearchResult)
         viewModel.state.observeForever(stateObserver)
@@ -143,7 +168,11 @@ class MovieSearchViewModelTest {
     @Test
     fun `set empty query, wait debounce EXPECT content with none search state`() = runTest {
         val expectedSearchState = SearchState.None
-        val expectedContentState = ScreenState.Content("", expectedSearchState)
+        val expectedContentState = ScreenState.Content(
+            query = "",
+            microAvailable = false,
+            searchState = expectedSearchState
+        )
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getMovieSearchResultScenario(query)).thenReturn(movieSearchResult)
         viewModel.state.observeForever(stateObserver)
@@ -161,7 +190,11 @@ class MovieSearchViewModelTest {
     @Test
     fun `set query, wait debounce, EXPECT content with loading items in search state`() = runTest {
         val expectedSearchState = SearchState.Items(movieSearchItemsLoading)
-        val expectedContentState = ScreenState.Content(query, expectedSearchState)
+        val expectedContentState = ScreenState.Content(
+            query = query,
+            microAvailable = false,
+            searchState = expectedSearchState
+        )
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getMovieSearchResultScenario(query)).thenNeverAnswer()
         viewModel.state.observeForever(stateObserver)
@@ -176,7 +209,11 @@ class MovieSearchViewModelTest {
     @Test
     fun `set query, wait debounce, movies was found EXPECT content with success items in search state`() = runTest {
         val expectedSearchState = SearchState.Items(movieSearchItemsSuccess)
-        val expectedContentState = ScreenState.Content(query, expectedSearchState)
+        val expectedContentState = ScreenState.Content(
+            query = query,
+            microAvailable = false,
+            searchState = expectedSearchState
+        )
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getMovieSearchResultScenario(query)).thenReturn(movieSearchResult)
         viewModel.state.observeForever(stateObserver)
@@ -191,7 +228,11 @@ class MovieSearchViewModelTest {
     @Test
     fun `set query, wait debounce, movies was not found EXPECT content with empty search state`() = runTest {
         val expectedSearchState = SearchState.NotFound
-        val expectedContentState = ScreenState.Content(query, expectedSearchState)
+        val expectedContentState = ScreenState.Content(
+            query = query,
+            microAvailable = false,
+            searchState = expectedSearchState
+        )
         val emptyMovieSearchResult = MovieSearchResult(1, emptyList())
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getMovieSearchResultScenario(query)).thenReturn(emptyMovieSearchResult)
@@ -222,7 +263,11 @@ class MovieSearchViewModelTest {
     @Test
     fun `search, error EXPECT content with none search state`() = runTest {
         val expectedSearchState = SearchState.None
-        val expectedContentState = ScreenState.Content(query = "", searchState = expectedSearchState)
+        val expectedContentState = ScreenState.Content(
+            query = "",
+            microAvailable = false,
+            searchState = expectedSearchState
+        )
         whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
         whenever(getMovieSearchResultScenario("")).thenThrow(RuntimeException())
         viewModel.state.observeForever(stateObserver)
@@ -239,5 +284,19 @@ class MovieSearchViewModelTest {
         viewModel.selectMovieSuccessItem(movieSearchItemSuccess)
 
         verify(router).openMovieDetailsScreen(movieSearch.id)
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = [true, false])
+    fun `handle micro permission result EXPECT micro available with permission result value`(
+        expected: Boolean
+    ) {
+        whenever(isMovieSearchOnboardingShowedUseCase()).thenReturn(flowOf(true))
+        viewModel.start()
+
+        viewModel.handleMicroPermissionResult(expected)
+
+        val actual = (viewModel.state.value as? ScreenState.Content)?.microAvailable
+        Assertions.assertEquals(expected, actual)
     }
 }

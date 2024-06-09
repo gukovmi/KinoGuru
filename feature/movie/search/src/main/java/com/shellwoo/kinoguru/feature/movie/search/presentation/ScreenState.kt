@@ -4,5 +4,9 @@ sealed interface ScreenState {
 
     object Initial : ScreenState
 
-    data class Content(val query: String, val searchState: SearchState) : ScreenState
+    data class Content(
+        val query: String,
+        val microAvailable: Boolean,
+        val searchState: SearchState,
+    ) : ScreenState
 }

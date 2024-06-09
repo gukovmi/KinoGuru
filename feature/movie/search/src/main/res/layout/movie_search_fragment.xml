@@ -78,4 +78,18 @@
 
     </LinearLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/micro"
+        android:layout_width="@dimen/movie_search_micro_size"
+        android:layout_height="@dimen/movie_search_micro_size"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="48dp"
+        android:background="?colorPrimaryContainer"
+        android:contentDescription="null"
+        android:scaleType="fitCenter"
+        android:tint="?colorOnPrimaryContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:src="@drawable/micro_on" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
