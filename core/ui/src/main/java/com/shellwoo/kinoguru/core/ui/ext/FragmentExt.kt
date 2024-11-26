@@ -4,13 +4,31 @@ import android.app.AlertDialog
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.DrawableRes
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import com.shellwoo.kinoguru.core.ui.FragmentResultContract
 import com.shellwoo.kinoguru.core.ui.R
+import com.shellwoo.kinoguru.design.resource.AppTheme
 import java.io.Serializable
+
+fun Fragment.createComposeView(content: @Composable () -> Unit): ComposeView =
+    ComposeView(requireContext()).apply {
+        setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+
+        setContent {
+            AppTheme {
+                Surface {
+                    content()
+                }
+            }
+        }
+    }
 
 fun Fragment.showToast(text: String) {
     Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
