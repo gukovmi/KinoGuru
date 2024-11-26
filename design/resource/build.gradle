@@ -1,5 +1,7 @@
 apply from: "$rootDir/dependencies.gradle"
+apply from: "$rootDir/compose.gradle"
 
 dependencies {
+    implementation libraries.composeMaterial
     implementation libraries.material
 }
