@@ -13,7 +13,7 @@ ext {
             "kotlinx"                : "1.8.0",
             "glide"                  : "4.16.0",
             "glideTransformations"   : "4.3.0",
-            "gradle"                 : '7.4.2',
+            "gradle"                 : '8.4.0',
             "googleServicesPlugin"   : "4.3.13",
             "gson"                   : "2.10.1",
             "facebookShimmer"        : "0.5.0",

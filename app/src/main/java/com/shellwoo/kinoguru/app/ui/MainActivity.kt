@@ -3,7 +3,7 @@ package com.shellwoo.kinoguru.app.ui
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.shellwoo.kinoguru.R
+import com.shellwoo.kinoguru.app.R
 import com.shellwoo.kinoguru.app.navigation.AppNavigatorHolder
 import com.shellwoo.kinoguru.app.presentation.MainComponentViewModel
 import com.shellwoo.kinoguru.app.presentation.MainViewModel
