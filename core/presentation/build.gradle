@@ -1,7 +1,9 @@
 apply from: "$rootDir/dependencies.gradle"
+apply from: "$rootDir/compose.gradle"
 
 dependencies {
     implementation libraries.androidxLifecycleLivedataCoreKtx
     implementation libraries.androidxLifecycleViewModelKtx
+    implementation libraries.composeRuntimeLiveData
     implementation libraries.dagger
 }

@@ -53,6 +53,7 @@ ext {
             "composeBom"                      : "androidx.compose:compose-bom:2024.10.00",
             "composeFoundation"               : "androidx.compose.foundation:foundation",
             "composeMaterial"                 : "androidx.compose.material3:material3",
+            "composeRuntimeLiveData"          : "androidx.compose.runtime:runtime-livedata",
             "dagger"                          : "com.google.dagger:dagger:$versions.dagger",
             "daggerCompiler"                  : "com.google.dagger:dagger-compiler:$versions.dagger",
             "datastorePreferences"            : "androidx.datastore:datastore-preferences:$versions.datastore",
