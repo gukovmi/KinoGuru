@@ -1,0 +1,14 @@
+android {
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.4"
+    }
+}
+
+dependencies {
+    def composeBom = platform libraries.composeBom
+    implementation composeBom
+}
