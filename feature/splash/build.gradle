@@ -1,5 +1,5 @@
 apply from: "$rootDir/dependencies.gradle"
-apply from: "$rootDir/viewBinding.gradle"
+apply from: "$rootDir/compose.gradle"
 
 dependencies {
     implementation project(":core-di")
@@ -10,6 +10,8 @@ dependencies {
 
     implementation libraries.androidxFragmentKtx
     implementation libraries.cicerone
+    implementation libraries.composeFoundation
+    implementation libraries.composeUiTooling
     implementation libraries.dagger
     kapt libraries.daggerCompiler
 

@@ -54,6 +54,7 @@ ext {
             "composeFoundation"               : "androidx.compose.foundation:foundation",
             "composeMaterial"                 : "androidx.compose.material3:material3",
             "composeRuntimeLiveData"          : "androidx.compose.runtime:runtime-livedata",
+            "composeUiTooling"                : "androidx.compose.ui:ui-tooling",
             "dagger"                          : "com.google.dagger:dagger:$versions.dagger",
             "daggerCompiler"                  : "com.google.dagger:dagger-compiler:$versions.dagger",
             "datastorePreferences"            : "androidx.datastore:datastore-preferences:$versions.datastore",
