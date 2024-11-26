@@ -50,6 +50,7 @@ ext {
             "androidxLifecycleLivedataCoreKtx": "androidx.lifecycle:lifecycle-livedata-core-ktx:$versions.androidxLifecycleKtx",
             "androidxLifecycleViewModelKtx"   : "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidxLifecycleKtx",
             "cicerone"                        : "com.github.terrakok:cicerone:$versions.cicerone",
+            "composeBom"                      : "androidx.compose:compose-bom:2024.10.00",
             "dagger"                          : "com.google.dagger:dagger:$versions.dagger",
             "daggerCompiler"                  : "com.google.dagger:dagger-compiler:$versions.dagger",
             "datastorePreferences"            : "androidx.datastore:datastore-preferences:$versions.datastore",
