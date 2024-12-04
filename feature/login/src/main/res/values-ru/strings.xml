@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="login_sign_in_error">При авторизации произошла ошибка! Попробуйте другой метод или повторите попытку позже</string>
+    <string name="login_google_button">Войти через Google</string>
 </resources>
