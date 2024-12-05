@@ -2,48 +2,50 @@ package com.shellwoo.kinoguru.feature.language.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.compose.runtime.getValue
 import androidx.fragment.app.viewModels
-import by.kirich1409.viewbindingdelegate.viewBinding
+import com.shellwoo.kinoguru.core.presentation.observeAsNotNullableState
 import com.shellwoo.kinoguru.core.ui.component.BaseFragment
+import com.shellwoo.kinoguru.core.ui.component.NO_CONTENT_LAYOUT_ID
+import com.shellwoo.kinoguru.core.ui.ext.createComposeView
 import com.shellwoo.kinoguru.core.ui.ext.setResult
-import com.shellwoo.kinoguru.feature.language.R
-import com.shellwoo.kinoguru.feature.language.databinding.LanguageFragmentBinding
 import com.shellwoo.kinoguru.feature.language.di.LanguageComponentViewModel
 import com.shellwoo.kinoguru.feature.language.presentation.LanguageViewModel
 import com.shellwoo.kinoguru.shared.language.domain.entity.Language
+import com.shellwoo.kinoguru.shared.language.ui.LanguageNameConverter
 import com.shellwoo.kinoguru.shared.language.ui.LanguageResultContract
 import javax.inject.Inject
 
-class LanguageFragment : BaseFragment(R.layout.language_fragment) {
+class LanguageFragment : BaseFragment(NO_CONTENT_LAYOUT_ID) {
 
     private val componentViewModel: LanguageComponentViewModel by viewModels()
     private val viewModel: LanguageViewModel by viewModels(factoryProducer = { viewModelFactory })
-    private val binding by viewBinding(LanguageFragmentBinding::bind)
 
     @Inject
-    lateinit var languageAdapter: LanguageAdapter
+    lateinit var languageNameConverter: LanguageNameConverter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         componentViewModel.component.inject(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+        createComposeView {
+            val languages by viewModel.languages.observeAsNotNullableState()
 
-        binding.toolbar.setNavigationOnClickListener { viewModel.close() }
-        languageAdapter.setOnClickListener(::selectLanguage)
-        viewModel.languages.observe(viewLifecycleOwner, ::renderLanguages)
-    }
+            LanguageScreen(
+                languages = languages,
+                languageNameConverter = languageNameConverter::toName,
+                onLanguageClick = ::selectLanguage,
+                onNavigationIconClick = viewModel::close,
+            )
+        }
 
     private fun selectLanguage(language: Language) {
         setResult(LanguageResultContract, language)
         viewModel.close()
-    }
-
-    private fun renderLanguages(values: List<Language>) {
-        languageAdapter.submitList(values)
-        binding.languages.adapter = languageAdapter
     }
 }
