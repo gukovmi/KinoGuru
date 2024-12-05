@@ -19,6 +19,7 @@ def modules = [
         ':core-ui'             : 'core/ui',
         ':core-presentation'   : 'core/presentation',
         ':design-resource'     : 'design/resource',
+        ':design-uikit': 'design/uikit',
         ':feature-main'        : 'feature/main',
         ':feature-movie-detail': 'feature/movie/detail',
         ':feature-movie-search': 'feature/movie/search',
