@@ -60,6 +60,7 @@ ext {
             "datastorePreferences"            : "androidx.datastore:datastore-preferences:$versions.datastore",
             "glide"                           : "com.github.bumptech.glide:glide:$versions.glide",
             "glideCompiler"                   : "com.github.bumptech.glide:compiler:$versions.glide",
+            "glideCompose"                    : "com.github.bumptech.glide:compose:1.0.0-beta01",
             "glideTransformations"            : "jp.wasabeef:glide-transformations:$versions.glideTransformations",
             "gson"                            : "com.google.code.gson:gson:$versions.gson",
             "facebookShimmer"                 : "com.facebook.shimmer:shimmer:$versions.facebookShimmer",
