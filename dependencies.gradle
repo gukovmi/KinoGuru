@@ -25,7 +25,6 @@ ext {
             "recyclerViewAnimators"  : "4.0.2",
             "retrofit"               : "2.9.0",
             "viewBindingDelegate"    : "1.5.9",
-            "youtubePlayer"          : "11.0.1",
 
             "androidxTestJunit"      : "1.1.3",
             "espresso"               : "3.4.0",
@@ -76,7 +75,7 @@ ext {
             "retrofit"                        : "com.squareup.retrofit2:retrofit:$versions.retrofit",
             "retrofitConverterGson"           : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
             "viewBindingDelegate"             : "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$versions.viewBindingDelegate",
-            "youtubePlayer"                   : "com.pierfrancescosoffritti.androidyoutubeplayer:core:$versions.youtubePlayer",
+            "youtubePlayer"                   : "com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.1",
 
             "androidxTestJunit"               : "androidx.test.ext:junit:$versions.androidxTestJunit",
             "espresso"                        : "androidx.test.espresso:espresso-core:$versions.espresso",
