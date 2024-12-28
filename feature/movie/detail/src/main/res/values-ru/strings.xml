@@ -6,8 +6,8 @@
     <string name="movie_details_budget"><![CDATA[<b>Бюджет:</b>]]> %1$s $</string>
     <string name="movie_details_revenue"><![CDATA[<b>Сборы:</b>]]> %1$s $</string>
     <string name="movie_details_genres"><![CDATA[<b>Жанры:</b>]]> %1$s</string>
-    <string name="movie_details_description"><![CDATA[<b>Описание:</b>]]> %1$s</string>
     <string name="movie_details_companies"><![CDATA[<b>Компании:</b>]]> %1$s</string>
     <string name="movie_details_countries"><![CDATA[<b>Страны:</b>]]> %1$s</string>
     <string name="movie_details_video_description"><![CDATA[<b>Видео № %1$d/%2$d:</b><br/>%3$s]]></string>
+    <string name="movie_details_video_error">Видео недоступно</string>
 </resources>

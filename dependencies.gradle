@@ -74,7 +74,9 @@ ext {
             "recyclerViewAnimators"           : "jp.wasabeef:recyclerview-animators:$versions.recyclerViewAnimators",
             "retrofit"                        : "com.squareup.retrofit2:retrofit:$versions.retrofit",
             "retrofitConverterGson"           : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+            "shimmerCompose"                  : "com.valentinilk.shimmer:compose-shimmer:1.3.1",
             "viewBindingDelegate"             : "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$versions.viewBindingDelegate",
+            "viewPager2"                      : "androidx.viewpager2:viewpager2:1.0.0",
             "youtubePlayer"                   : "com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.1",
 
             "androidxTestJunit"               : "androidx.test.ext:junit:$versions.androidxTestJunit",

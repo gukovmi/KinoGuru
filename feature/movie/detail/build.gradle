@@ -1,3 +1,4 @@
+apply from: "$rootDir/compose.gradle"
 apply from: "$rootDir/dependencies.gradle"
 apply from: "$rootDir/viewBinding.gradle"
 
@@ -9,22 +10,27 @@ dependencies {
     implementation project(":core-presentation")
     implementation project(":core-ui")
     implementation project(":design-resource")
+    implementation project(":design-uikit")
     implementation project(":shared-error")
     implementation project(":shared-movie")
     implementation project(":shared-language")
 
-    implementation "androidx.viewpager2:viewpager2:1.0.0"
-
     implementation libraries.androidxFragmentKtx
     implementation libraries.cicerone
+    implementation libraries.composeMaterial
+    implementation libraries.composeFoundation
+    implementation libraries.composeUiTooling
     implementation libraries.dagger
     kapt libraries.daggerCompiler
     implementation libraries.glide
+    implementation libraries.glideCompose
     implementation libraries.glideTransformations
     implementation libraries.gson
     implementation libraries.material
     implementation libraries.retrofit
     implementation libraries.facebookShimmer
+    implementation libraries.shimmerCompose
+    implementation libraries.viewPager2
     implementation libraries.youtubePlayer
 
     testImplementation project(":core-test-unit")
